@@ -4,20 +4,21 @@ using System.Collections.Generic;
 
 namespace PackageDelivery.Repository.Implementation.Mappers.Parameters
 {
-    public class DocumentTypeRepositoryMapper: DbModelMapperBase<DocumentTypeDbModel, tipoDocumento>
+    public class DepartmentRepositoryMapper : DbModelMapperBase<DepartmentDbModel, departamento>
     {
-        public override DocumentTypeDbModel DatabaseToDbModelMapper(tipoDocumento input)
+        public override DepartmentDbModel DatabaseToDbModelMapper(departamento input)
         {
-            return new DocumentTypeDbModel()
+            return new DepartmentDbModel()
             {
                 Id = input.id,
                 name = input.nombre
+               
             };
         }
 
-        public override IEnumerable<DocumentTypeDbModel> DatabaseToDbModelMapper(IEnumerable<tipoDocumento> input)
+        public override IEnumerable<DepartmentDbModel> DatabaseToDbModelMapper(IEnumerable<departamento> input)
         {
-            IList<DocumentTypeDbModel> list = new List<DocumentTypeDbModel>();
+            IList<DepartmentDbModel> list = new List<DepartmentDbModel>();
             foreach (var item in input)
             {
                 list.Add(this.DatabaseToDbModelMapper(item));
@@ -25,18 +26,18 @@ namespace PackageDelivery.Repository.Implementation.Mappers.Parameters
             return list;
         }
 
-        public override tipoDocumento DbModelToDatabaseMapper(DocumentTypeDbModel input)
+        public override departamento DbModelToDatabaseMapper(DepartmentDbModel input)
         {
-            return new tipoDocumento()
+            return new departamento()
             {
                 id = input.Id,
                 nombre = input.name
             };
         }
 
-        public override IEnumerable<tipoDocumento> DbModelToDatabaseMapper(IEnumerable<DocumentTypeDbModel> input)
+        public override IEnumerable<departamento> DbModelToDatabaseMapper(IEnumerable<DepartmentDbModel> input)
         {
-            IList<tipoDocumento> list = new List<tipoDocumento>();
+            IList<departamento> list = new List<departamento>();
             foreach (var item in input)
             {
                 list.Add(this.DbModelToDatabaseMapper(item));

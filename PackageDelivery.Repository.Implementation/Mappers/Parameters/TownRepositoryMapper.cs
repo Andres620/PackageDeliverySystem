@@ -4,20 +4,21 @@ using System.Collections.Generic;
 
 namespace PackageDelivery.Repository.Implementation.Mappers.Parameters
 {
-    public class DocumentTypeRepositoryMapper: DbModelMapperBase<DocumentTypeDbModel, tipoDocumento>
+    public class TowmRepositoryMapper : DbModelMapperBase<TownDbModel, municipio>
     {
-        public override DocumentTypeDbModel DatabaseToDbModelMapper(tipoDocumento input)
+        public override TownDbModel DatabaseToDbModelMapper(municipio input)
         {
-            return new DocumentTypeDbModel()
+            return new TownDbModel()
             {
                 Id = input.id,
-                name = input.nombre
+                name = input.nombre,
+                IdDepartment = (int)input.idDepartamento               
             };
         }
 
-        public override IEnumerable<DocumentTypeDbModel> DatabaseToDbModelMapper(IEnumerable<tipoDocumento> input)
+        public override IEnumerable<TownDbModel> DatabaseToDbModelMapper(IEnumerable<municipio> input)
         {
-            IList<DocumentTypeDbModel> list = new List<DocumentTypeDbModel>();
+            IList<TownDbModel> list = new List<TownDbModel>();
             foreach (var item in input)
             {
                 list.Add(this.DatabaseToDbModelMapper(item));
@@ -25,18 +26,19 @@ namespace PackageDelivery.Repository.Implementation.Mappers.Parameters
             return list;
         }
 
-        public override tipoDocumento DbModelToDatabaseMapper(DocumentTypeDbModel input)
+        public override municipio DbModelToDatabaseMapper(TownDbModel input)
         {
-            return new tipoDocumento()
+            return new municipio()
             {
                 id = input.Id,
-                nombre = input.name
+                nombre = input.name,
+                idDepartamento = input.IdDepartment
             };
         }
 
-        public override IEnumerable<tipoDocumento> DbModelToDatabaseMapper(IEnumerable<DocumentTypeDbModel> input)
+        public override IEnumerable<municipio> DbModelToDatabaseMapper(IEnumerable<TownDbModel> input)
         {
-            IList<tipoDocumento> list = new List<tipoDocumento>();
+            IList<municipio> list = new List<municipio>();
             foreach (var item in input)
             {
                 list.Add(this.DbModelToDatabaseMapper(item));

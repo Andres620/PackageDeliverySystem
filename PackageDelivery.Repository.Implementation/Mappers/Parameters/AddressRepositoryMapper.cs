@@ -4,20 +4,27 @@ using System.Collections.Generic;
 
 namespace PackageDelivery.Repository.Implementation.Mappers.Parameters
 {
-    public class DocumentTypeRepositoryMapper: DbModelMapperBase<DocumentTypeDbModel, tipoDocumento>
+    public class AddressRepositoryMapper : DbModelMapperBase<AddressDbModel, direccion>
     {
-        public override DocumentTypeDbModel DatabaseToDbModelMapper(tipoDocumento input)
+        public override AddressDbModel DatabaseToDbModelMapper(direccion input)
         {
-            return new DocumentTypeDbModel()
+            return new AddressDbModel()
             {
                 Id = input.id,
-                name = input.nombre
+                actual = input.actual,
+                IdPerson = (int)input.idPersona,
+                IdTown = (int)input.idMunicipio,
+                immovableType = input.tipoInmueble,
+                neighborhood = input.barrio,
+                number = input.numero,
+                observations = input.observaciones,
+                streetType = input.tipoCalle
             };
         }
 
-        public override IEnumerable<DocumentTypeDbModel> DatabaseToDbModelMapper(IEnumerable<tipoDocumento> input)
+        public override IEnumerable<AddressDbModel> DatabaseToDbModelMapper(IEnumerable<direccion> input)
         {
-            IList<DocumentTypeDbModel> list = new List<DocumentTypeDbModel>();
+            IList<AddressDbModel> list = new List<AddressDbModel>();
             foreach (var item in input)
             {
                 list.Add(this.DatabaseToDbModelMapper(item));
@@ -25,18 +32,25 @@ namespace PackageDelivery.Repository.Implementation.Mappers.Parameters
             return list;
         }
 
-        public override tipoDocumento DbModelToDatabaseMapper(DocumentTypeDbModel input)
+        public override direccion DbModelToDatabaseMapper(AddressDbModel input)
         {
-            return new tipoDocumento()
+            return new direccion()
             {
                 id = input.Id,
-                nombre = input.name
+                idPersona = input.IdPerson,
+                idMunicipio = input.IdTown,
+                actual = input.actual,
+                barrio = input.neighborhood,
+                observaciones = input.observations,
+                numero = input.number,
+                tipoInmueble = input.immovableType,
+                tipoCalle = input.streetType
             };
         }
 
-        public override IEnumerable<tipoDocumento> DbModelToDatabaseMapper(IEnumerable<DocumentTypeDbModel> input)
+        public override IEnumerable<direccion> DbModelToDatabaseMapper(IEnumerable<AddressDbModel> input)
         {
-            IList<tipoDocumento> list = new List<tipoDocumento>();
+            IList<direccion> list = new List<direccion>();
             foreach (var item in input)
             {
                 list.Add(this.DbModelToDatabaseMapper(item));

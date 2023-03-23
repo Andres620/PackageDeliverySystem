@@ -2,7 +2,7 @@
 
 namespace PackageDelivery.Repository_Contracts.DbModels.Core
 {
-    public class RecordDbModel
+    public class HistoryDbModel
     {
         public int Id { get; set; }
         public DateTime entryDate { get; set; }
