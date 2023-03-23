@@ -45,7 +45,7 @@ namespace PackageDelivery.Repository.Implementation.Mappers.Parameters
                 telefono = input.cellphone,
                 correo = input.email,
                 documento = input.identificationNumber,
-                direccion = input.IdAddress,
+                idDireccion = input.IdAddress,
                 idTipoDocumento = input.IdDocumentType
             };
         }

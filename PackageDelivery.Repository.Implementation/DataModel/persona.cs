@@ -9,9 +9,8 @@
 
 namespace PackageDelivery.Repository.Implementation.DataModel
 {
-    using System;
     using System.Collections.Generic;
-    
+
     public partial class persona
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
