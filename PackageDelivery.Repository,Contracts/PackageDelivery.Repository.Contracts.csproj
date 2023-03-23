@@ -41,11 +41,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DbModels\Core\BodegaDbModel.cs" />
-    <Compile Include="DbModels\Core\VehiculoDbModel.cs" />
-    <Compile Include="DbModels\Core\EstadoEnvioDbModel.cs" />
-    <Compile Include="DbModels\Core\TipoTransporteDbModel.cs" />
-    <Compile Include="DbModels\Core\EnvioDbModel.cs" />
+    <Compile Include="DbModels\Core\RecordDbModel.cs" />
+    <Compile Include="DbModels\Core\OficinaDbModel.cs" />
+    <Compile Include="DbModels\Core\PackageDbModel.cs" />
+    <Compile Include="DbModels\Core\WarehouseDbModel.cs" />
+    <Compile Include="DbModels\Core\VehicleDbModel.cs" />
+    <Compile Include="DbModels\Core\ShipmentStateDbModel.cs" />
+    <Compile Include="DbModels\Core\TransportTypeDbModel.cs" />
+    <Compile Include="DbModels\Core\ShimpmentDbModel.cs" />
+    <Compile Include="DbModels\Parameters\AddressDbModel.cs" />
+    <Compile Include="DbModels\Parameters\TownDbModel.cs" />
+    <Compile Include="DbModels\Parameters\DepartmentDbModel.cs" />
     <Compile Include="DbModels\Parameters\DocumentTypeDbModel.cs" />
     <Compile Include="DbModels\Parameters\PersonDbModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

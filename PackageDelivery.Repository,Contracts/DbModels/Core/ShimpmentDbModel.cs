@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PackageDelivery.Repository_Contracts.DbModels.Core
 {
-    internal class EnvioDbModel
+    internal class ShimpmentDbModel
     {
     }
 }
