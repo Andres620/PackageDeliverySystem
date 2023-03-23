@@ -1,12 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace PackageDelivery.Repository_Contracts.DbModels.Core
+﻿namespace PackageDelivery.Repository_Contracts.DbModels.Core
 {
-    internal class Class1
+    public class PackageDbModel
     {
+        public int Id { get; set; }
+        public float weight { get; set; }
+        public float height { get; set; }
+        public float depth { get; set; }
+        public float width { get; set; }
+        public int idOffice { get; set; }
+
     }
 }

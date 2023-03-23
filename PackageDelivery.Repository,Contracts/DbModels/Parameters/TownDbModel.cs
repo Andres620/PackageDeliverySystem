@@ -1,9 +1,12 @@
-﻿namespace PackageDelivery.Repository.Contracts.DbModels.Parameters
-{
-    public class DocumentTypeDbModel
-    {
+﻿using System;
 
-        public int Id { get; set; }
-        public string name { get; set; }
+namespace PackageDelivery.Repository.Contracts.DbModels.Parameters
+{
+    public class TownDbModel
+    {
+        public long Id { get; set; }
+        public string name{ get; set; }
+        public int IdDepartment { get; set; }
+
     }
 }

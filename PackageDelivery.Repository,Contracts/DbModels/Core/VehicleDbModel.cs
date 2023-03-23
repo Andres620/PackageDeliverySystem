@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace PackageDelivery.Repository_Contracts.DbModels.Core
+﻿namespace PackageDelivery.Repository_Contracts.DbModels.Core
 {
-    internal class Class1
+    public class VehicleDbModel
     {
+        public int Id { get; set; }
+        public string plate { get; set; }
+        public int idTransportType { get; set; }
     }
 }

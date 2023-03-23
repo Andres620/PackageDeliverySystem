@@ -9,8 +9,9 @@
 
 namespace PackageDelivery.Repository.Implementation.DataModel
 {
+    using System;
     using System.Collections.Generic;
-
+    
     public partial class persona
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -28,7 +29,7 @@ namespace PackageDelivery.Repository.Implementation.DataModel
         public string documento { get; set; }
         public string telefono { get; set; }
         public string correo { get; set; }
-        public int idDireccion { get; set; }
+        public Nullable<long> idDireccion { get; set; }
         public int idTipoDocumento { get; set; }
     
         public virtual direccion direccion { get; set; }

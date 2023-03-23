@@ -1,12 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace PackageDelivery.Repository_Contracts.DbModels.Core
+﻿namespace PackageDelivery.Repository_Contracts.DbModels.Core
 {
-    internal class Class1
+    public class WarehouseDbModel
     {
+        public int Id { get; set; }
+        public string name { get; set; }
+        public string code { get; set; }
+        public string address { get; set; }
+        public string latitude { get; set; }
+        public string longitude { get; set; }
+        public int idTown { get; set; }
     }
 }

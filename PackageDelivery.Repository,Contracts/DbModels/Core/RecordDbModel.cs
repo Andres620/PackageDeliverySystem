@@ -1,12 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PackageDelivery.Repository_Contracts.DbModels.Core
 {
-    internal class Class1
+    public class RecordDbModel
     {
+        public int Id { get; set; }
+        public DateTime entryDate { get; set; }
+        public DateTime departureDate{ get; set; }
+        public string description { get; set; }
+        public int idPackage { get; set; }
+        public int idWarehouse { get; set; }
+
     }
 }
