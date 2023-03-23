@@ -1,23 +1,29 @@
 ﻿using PackageDelivery.Repository.Implementation.DataModel;
-using PackageDelivery.Repository.Contracts.DbModels.Parameters;
+using PackageDelivery.Repository_Contracts.DbModels.Core;
 using System.Collections.Generic;
 
 namespace PackageDelivery.Repository.Implementation.Mappers.Parameters
 {
-    public class DocumentTypeRepositoryMapper: DbModelMapperBase<DocumentTypeDbModel, tipoDocumento>
+    public class OfficeRepositoryMapper : DbModelMapperBase<OfficeDbModel, oficina>
     {
-        public override DocumentTypeDbModel DatabaseToDbModelMapper(tipoDocumento input)
+        public override OfficeDbModel DatabaseToDbModelMapper(oficina input)
         {
-            return new DocumentTypeDbModel()
+            return new OfficeDbModel()
             {
-                Id = input.id,
+                Id = (int)input.id,
+                address = input.direccion,
+                cellphone = input.telefono,
+                code = input.codigo,
+                idTown = (int)input.idMunicipio,
+                latitude = input.latitud,
+                longitude = input.longitud,
                 name = input.nombre
             };
         }
 
-        public override IEnumerable<DocumentTypeDbModel> DatabaseToDbModelMapper(IEnumerable<tipoDocumento> input)
+        public override IEnumerable<OfficeDbModel> DatabaseToDbModelMapper(IEnumerable<oficina> input)
         {
-            IList<DocumentTypeDbModel> list = new List<DocumentTypeDbModel>();
+            IList<OfficeDbModel> list = new List<OfficeDbModel>();
             foreach (var item in input)
             {
                 list.Add(this.DatabaseToDbModelMapper(item));
@@ -25,18 +31,24 @@ namespace PackageDelivery.Repository.Implementation.Mappers.Parameters
             return list;
         }
 
-        public override tipoDocumento DbModelToDatabaseMapper(DocumentTypeDbModel input)
+        public override oficina DbModelToDatabaseMapper(OfficeDbModel input)
         {
-            return new tipoDocumento()
+            return new oficina()
             {
                 id = input.Id,
+                direccion = input.address,
+                telefono = input.cellphone,
+                codigo = input.code,
+                idMunicipio = input.idTown,
+                latitud = input.latitude,
+                longitud = input.longitude,
                 nombre = input.name
             };
         }
 
-        public override IEnumerable<tipoDocumento> DbModelToDatabaseMapper(IEnumerable<DocumentTypeDbModel> input)
+        public override IEnumerable<oficina> DbModelToDatabaseMapper(IEnumerable<OfficeDbModel> input)
         {
-            IList<tipoDocumento> list = new List<tipoDocumento>();
+            IList<oficina> list = new List<oficina>();
             foreach (var item in input)
             {
                 list.Add(this.DbModelToDatabaseMapper(item));

@@ -1,23 +1,27 @@
 ﻿using PackageDelivery.Repository.Implementation.DataModel;
-using PackageDelivery.Repository.Contracts.DbModels.Parameters;
+using PackageDelivery.Repository_Contracts.DbModels.Core;
 using System.Collections.Generic;
 
 namespace PackageDelivery.Repository.Implementation.Mappers.Parameters
 {
-    public class DocumentTypeRepositoryMapper: DbModelMapperBase<DocumentTypeDbModel, tipoDocumento>
+    public class HistoryRepositoryMapper : DbModelMapperBase<HistoryDbModel, historial>
     {
-        public override DocumentTypeDbModel DatabaseToDbModelMapper(tipoDocumento input)
+        public override HistoryDbModel DatabaseToDbModelMapper(historial input)
         {
-            return new DocumentTypeDbModel()
+            return new HistoryDbModel()
             {
-                Id = input.id,
-                name = input.nombre
+                Id = (int)input.id,
+                description = input.descripcion,
+                entryDate = input.fechaIngreso,
+                departureDate = input.fechaSalida,
+                idPackage = (int)input.idPaquete,
+                idWarehouse = (int)input.id
             };
         }
 
-        public override IEnumerable<DocumentTypeDbModel> DatabaseToDbModelMapper(IEnumerable<tipoDocumento> input)
+        public override IEnumerable<HistoryDbModel> DatabaseToDbModelMapper(IEnumerable<historial> input)
         {
-            IList<DocumentTypeDbModel> list = new List<DocumentTypeDbModel>();
+            IList<HistoryDbModel> list = new List<HistoryDbModel>();
             foreach (var item in input)
             {
                 list.Add(this.DatabaseToDbModelMapper(item));
@@ -25,18 +29,22 @@ namespace PackageDelivery.Repository.Implementation.Mappers.Parameters
             return list;
         }
 
-        public override tipoDocumento DbModelToDatabaseMapper(DocumentTypeDbModel input)
+        public override historial DbModelToDatabaseMapper(HistoryDbModel input)
         {
-            return new tipoDocumento()
+            return new historial()
             {
                 id = input.Id,
-                nombre = input.name
+                descripcion = input.description,
+                fechaIngreso = input.entryDate,
+                fechaSalida = input.departureDate,
+                idPaquete = input.idPackage,
+                idBodega = input.idWarehouse
             };
         }
 
-        public override IEnumerable<tipoDocumento> DbModelToDatabaseMapper(IEnumerable<DocumentTypeDbModel> input)
+        public override IEnumerable<historial> DbModelToDatabaseMapper(IEnumerable<HistoryDbModel> input)
         {
-            IList<tipoDocumento> list = new List<tipoDocumento>();
+            IList<historial> list = new List<historial>();
             foreach (var item in input)
             {
                 list.Add(this.DbModelToDatabaseMapper(item));

@@ -1,23 +1,28 @@
 ﻿using PackageDelivery.Repository.Implementation.DataModel;
-using PackageDelivery.Repository.Contracts.DbModels.Parameters;
+using PackageDelivery.Repository_Contracts.DbModels.Core;
 using System.Collections.Generic;
 
 namespace PackageDelivery.Repository.Implementation.Mappers.Parameters
 {
-    public class DocumentTypeRepositoryMapper: DbModelMapperBase<DocumentTypeDbModel, tipoDocumento>
+    public class WarehouseRepositoryMapper : DbModelMapperBase<WarehouseDbModel, bodega>
     {
-        public override DocumentTypeDbModel DatabaseToDbModelMapper(tipoDocumento input)
+        public override WarehouseDbModel DatabaseToDbModelMapper(bodega input)
         {
-            return new DocumentTypeDbModel()
+            return new WarehouseDbModel()
             {
-                Id = input.id,
+                Id = (int)input.id,
+                address = input.direccion,
+                code = input.codigo,
+                idTown = (int)input.idMunicipio,
+                latitude = input.latitud,
+                longitude = input.longitud,
                 name = input.nombre
             };
         }
 
-        public override IEnumerable<DocumentTypeDbModel> DatabaseToDbModelMapper(IEnumerable<tipoDocumento> input)
+        public override IEnumerable<WarehouseDbModel> DatabaseToDbModelMapper(IEnumerable<bodega> input)
         {
-            IList<DocumentTypeDbModel> list = new List<DocumentTypeDbModel>();
+            IList<WarehouseDbModel> list = new List<WarehouseDbModel>();
             foreach (var item in input)
             {
                 list.Add(this.DatabaseToDbModelMapper(item));
@@ -25,18 +30,23 @@ namespace PackageDelivery.Repository.Implementation.Mappers.Parameters
             return list;
         }
 
-        public override tipoDocumento DbModelToDatabaseMapper(DocumentTypeDbModel input)
+        public override bodega DbModelToDatabaseMapper(WarehouseDbModel input)
         {
-            return new tipoDocumento()
+            return new bodega()
             {
                 id = input.Id,
+                direccion = input.address,
+                codigo = input.code,
+                idMunicipio = input.idTown,
+                latitud = input.latitude,
+                longitud = input.longitude,
                 nombre = input.name
             };
         }
 
-        public override IEnumerable<tipoDocumento> DbModelToDatabaseMapper(IEnumerable<DocumentTypeDbModel> input)
+        public override IEnumerable<bodega> DbModelToDatabaseMapper(IEnumerable<WarehouseDbModel> input)
         {
-            IList<tipoDocumento> list = new List<tipoDocumento>();
+            IList<bodega> list = new List<bodega>();
             foreach (var item in input)
             {
                 list.Add(this.DbModelToDatabaseMapper(item));

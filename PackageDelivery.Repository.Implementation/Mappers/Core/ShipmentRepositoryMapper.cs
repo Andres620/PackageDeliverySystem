@@ -1,23 +1,29 @@
 ﻿using PackageDelivery.Repository.Implementation.DataModel;
-using PackageDelivery.Repository.Contracts.DbModels.Parameters;
+using PackageDelivery.Repository_Contracts.DbModels.Core;
 using System.Collections.Generic;
 
 namespace PackageDelivery.Repository.Implementation.Mappers.Parameters
 {
-    public class DocumentTypeRepositoryMapper: DbModelMapperBase<DocumentTypeDbModel, tipoDocumento>
+    public class ShipmentRepositoryMapper : DbModelMapperBase<ShipmentDbModel, envio>
     {
-        public override DocumentTypeDbModel DatabaseToDbModelMapper(tipoDocumento input)
+        public override ShipmentDbModel DatabaseToDbModelMapper(envio input)
         {
-            return new DocumentTypeDbModel()
+            return new ShipmentDbModel()
             {
-                Id = input.id,
-                name = input.nombre
+                Id = (int)input.id,
+                idDestinationAddress = (int)input.idDireccionDestino,
+                price = (int)input.precio,
+                shippingDate = input.fechaEnvio,
+                idPackage = (int)input.idPaquete,
+                idSender = (int)input.idRemitente,
+                idShipmentState = (int)input.idEstado,
+                idTransportType = (int)input.idTipoTransporte               
             };
         }
 
-        public override IEnumerable<DocumentTypeDbModel> DatabaseToDbModelMapper(IEnumerable<tipoDocumento> input)
+        public override IEnumerable<ShipmentDbModel> DatabaseToDbModelMapper(IEnumerable<envio> input)
         {
-            IList<DocumentTypeDbModel> list = new List<DocumentTypeDbModel>();
+            IList<ShipmentDbModel> list = new List<ShipmentDbModel>();
             foreach (var item in input)
             {
                 list.Add(this.DatabaseToDbModelMapper(item));
@@ -25,18 +31,24 @@ namespace PackageDelivery.Repository.Implementation.Mappers.Parameters
             return list;
         }
 
-        public override tipoDocumento DbModelToDatabaseMapper(DocumentTypeDbModel input)
+        public override envio DbModelToDatabaseMapper(ShipmentDbModel input)
         {
-            return new tipoDocumento()
+            return new envio()
             {
                 id = input.Id,
-                nombre = input.name
+                idDireccionDestino = input.idDestinationAddress,
+                precio = input.price,
+                fechaEnvio = input.shippingDate,
+                idPaquete = input.idPackage,
+                idRemitente = input.idSender,
+                idEstado = input.idShipmentState,
+                idTipoTransporte = input.idTransportType
             };
         }
 
-        public override IEnumerable<tipoDocumento> DbModelToDatabaseMapper(IEnumerable<DocumentTypeDbModel> input)
+        public override IEnumerable<envio> DbModelToDatabaseMapper(IEnumerable<ShipmentDbModel> input)
         {
-            IList<tipoDocumento> list = new List<tipoDocumento>();
+            IList<envio> list = new List<envio>();
             foreach (var item in input)
             {
                 list.Add(this.DbModelToDatabaseMapper(item));

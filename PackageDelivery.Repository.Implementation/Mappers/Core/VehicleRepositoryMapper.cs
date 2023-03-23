@@ -1,23 +1,24 @@
 ﻿using PackageDelivery.Repository.Implementation.DataModel;
-using PackageDelivery.Repository.Contracts.DbModels.Parameters;
+using PackageDelivery.Repository_Contracts.DbModels.Core;
 using System.Collections.Generic;
 
 namespace PackageDelivery.Repository.Implementation.Mappers.Parameters
 {
-    public class DocumentTypeRepositoryMapper: DbModelMapperBase<DocumentTypeDbModel, tipoDocumento>
+    public class VehicleRepositoryMapper : DbModelMapperBase<VehicleDbModel, vehiculo>
     {
-        public override DocumentTypeDbModel DatabaseToDbModelMapper(tipoDocumento input)
+        public override VehicleDbModel DatabaseToDbModelMapper(vehiculo input)
         {
-            return new DocumentTypeDbModel()
+            return new VehicleDbModel()
             {
-                Id = input.id,
-                name = input.nombre
+                Id = (int)input.id,
+                plate = input.placa,
+                idTransportType = (int)input.idTipoTransporte
             };
         }
 
-        public override IEnumerable<DocumentTypeDbModel> DatabaseToDbModelMapper(IEnumerable<tipoDocumento> input)
+        public override IEnumerable<VehicleDbModel> DatabaseToDbModelMapper(IEnumerable<vehiculo> input)
         {
-            IList<DocumentTypeDbModel> list = new List<DocumentTypeDbModel>();
+            IList<VehicleDbModel> list = new List<VehicleDbModel>();
             foreach (var item in input)
             {
                 list.Add(this.DatabaseToDbModelMapper(item));
@@ -25,18 +26,19 @@ namespace PackageDelivery.Repository.Implementation.Mappers.Parameters
             return list;
         }
 
-        public override tipoDocumento DbModelToDatabaseMapper(DocumentTypeDbModel input)
+        public override vehiculo DbModelToDatabaseMapper(VehicleDbModel input)
         {
-            return new tipoDocumento()
+            return new vehiculo()
             {
                 id = input.Id,
-                nombre = input.name
+                placa = input.plate,
+                idTipoTransporte = input.idTransportType
             };
         }
 
-        public override IEnumerable<tipoDocumento> DbModelToDatabaseMapper(IEnumerable<DocumentTypeDbModel> input)
+        public override IEnumerable<vehiculo> DbModelToDatabaseMapper(IEnumerable<VehicleDbModel> input)
         {
-            IList<tipoDocumento> list = new List<tipoDocumento>();
+            IList<vehiculo> list = new List<vehiculo>();
             foreach (var item in input)
             {
                 list.Add(this.DbModelToDatabaseMapper(item));

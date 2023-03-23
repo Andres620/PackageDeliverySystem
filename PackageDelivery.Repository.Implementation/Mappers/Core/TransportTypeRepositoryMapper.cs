@@ -1,23 +1,23 @@
 ﻿using PackageDelivery.Repository.Implementation.DataModel;
-using PackageDelivery.Repository.Contracts.DbModels.Parameters;
+using PackageDelivery.Repository_Contracts.DbModels.Core;
 using System.Collections.Generic;
 
 namespace PackageDelivery.Repository.Implementation.Mappers.Parameters
 {
-    public class DocumentTypeRepositoryMapper: DbModelMapperBase<DocumentTypeDbModel, tipoDocumento>
+    public class TransportTypeRepositoryMapper : DbModelMapperBase<TransportTypeDbModel, tipoTransporte>
     {
-        public override DocumentTypeDbModel DatabaseToDbModelMapper(tipoDocumento input)
+        public override TransportTypeDbModel DatabaseToDbModelMapper(tipoTransporte input)
         {
-            return new DocumentTypeDbModel()
+            return new TransportTypeDbModel()
             {
-                Id = input.id,
+                Id = (int)input.id,
                 name = input.nombre
             };
         }
 
-        public override IEnumerable<DocumentTypeDbModel> DatabaseToDbModelMapper(IEnumerable<tipoDocumento> input)
+        public override IEnumerable<TransportTypeDbModel> DatabaseToDbModelMapper(IEnumerable<tipoTransporte> input)
         {
-            IList<DocumentTypeDbModel> list = new List<DocumentTypeDbModel>();
+            IList<TransportTypeDbModel> list = new List<TransportTypeDbModel>();
             foreach (var item in input)
             {
                 list.Add(this.DatabaseToDbModelMapper(item));
@@ -25,18 +25,18 @@ namespace PackageDelivery.Repository.Implementation.Mappers.Parameters
             return list;
         }
 
-        public override tipoDocumento DbModelToDatabaseMapper(DocumentTypeDbModel input)
+        public override tipoTransporte DbModelToDatabaseMapper(TransportTypeDbModel input)
         {
-            return new tipoDocumento()
+            return new tipoTransporte()
             {
                 id = input.Id,
                 nombre = input.name
             };
         }
 
-        public override IEnumerable<tipoDocumento> DbModelToDatabaseMapper(IEnumerable<DocumentTypeDbModel> input)
+        public override IEnumerable<tipoTransporte> DbModelToDatabaseMapper(IEnumerable<TransportTypeDbModel> input)
         {
-            IList<tipoDocumento> list = new List<tipoDocumento>();
+            IList<tipoTransporte> list = new List<tipoTransporte>();
             foreach (var item in input)
             {
                 list.Add(this.DbModelToDatabaseMapper(item));

@@ -1,23 +1,27 @@
 ﻿using PackageDelivery.Repository.Implementation.DataModel;
-using PackageDelivery.Repository.Contracts.DbModels.Parameters;
+using PackageDelivery.Repository_Contracts.DbModels.Core;
 using System.Collections.Generic;
 
 namespace PackageDelivery.Repository.Implementation.Mappers.Parameters
 {
-    public class DocumentTypeRepositoryMapper: DbModelMapperBase<DocumentTypeDbModel, tipoDocumento>
+    public class PackageRepositoryMapper : DbModelMapperBase<PackageDbModel, paquete>
     {
-        public override DocumentTypeDbModel DatabaseToDbModelMapper(tipoDocumento input)
+        public override PackageDbModel DatabaseToDbModelMapper(paquete input)
         {
-            return new DocumentTypeDbModel()
+            return new PackageDbModel()
             {
-                Id = input.id,
-                name = input.nombre
+                Id = (int)input.id,
+                depth = (float)input.profundidad,
+                height = (float)input.altura,
+                weight = (float)input.peso,
+                width = (float)input.ancho,
+                idOffice = (int)input.idOficina
             };
         }
 
-        public override IEnumerable<DocumentTypeDbModel> DatabaseToDbModelMapper(IEnumerable<tipoDocumento> input)
+        public override IEnumerable<PackageDbModel> DatabaseToDbModelMapper(IEnumerable<paquete> input)
         {
-            IList<DocumentTypeDbModel> list = new List<DocumentTypeDbModel>();
+            IList<PackageDbModel> list = new List<PackageDbModel>();
             foreach (var item in input)
             {
                 list.Add(this.DatabaseToDbModelMapper(item));
@@ -25,18 +29,22 @@ namespace PackageDelivery.Repository.Implementation.Mappers.Parameters
             return list;
         }
 
-        public override tipoDocumento DbModelToDatabaseMapper(DocumentTypeDbModel input)
+        public override paquete DbModelToDatabaseMapper(PackageDbModel input)
         {
-            return new tipoDocumento()
+            return new paquete()
             {
                 id = input.Id,
-                nombre = input.name
+                profundidad = input.depth,
+                altura = input.height,
+                peso = input.weight,
+                ancho = input.width,
+                idOficina = input.idOffice
             };
         }
 
-        public override IEnumerable<tipoDocumento> DbModelToDatabaseMapper(IEnumerable<DocumentTypeDbModel> input)
+        public override IEnumerable<paquete> DbModelToDatabaseMapper(IEnumerable<PackageDbModel> input)
         {
-            IList<tipoDocumento> list = new List<tipoDocumento>();
+            IList<paquete> list = new List<paquete>();
             foreach (var item in input)
             {
                 list.Add(this.DbModelToDatabaseMapper(item));
