@@ -105,6 +105,7 @@
       <DependentUpon>PackageDeliveryDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Mappers\DbModelMapperBase.cs" />
+    <Compile Include="Mappers\Parameters\PersonRepositoryMapper.cs" />
     <Compile Include="Mappers\Parameters\DocumentTypeRepositoryMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

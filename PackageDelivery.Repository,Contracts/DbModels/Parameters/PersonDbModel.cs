@@ -14,7 +14,7 @@
         public string cellphone { get; set; }
         public string email { get; set; }
 
-        public long IdAddress { get; set; }
+        public int IdAddress { get; set; }
         public int IdDocumentType { get; set; }
 
     }
