@@ -1,5 +1,5 @@
 ﻿
-using PackageDelivery.Application.Contracts.DTO;
+using PackageDelivery.Application.Contracts.DTO.ParametersDTO;
 using PackageDelivery.Repository.Contracts.DbModels.Parameters;
 using System.Collections.Generic;
 

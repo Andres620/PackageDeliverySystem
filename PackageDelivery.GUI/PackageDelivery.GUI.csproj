@@ -175,11 +175,24 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Mappers\ModelMapperBase.cs" />
+    <Compile Include="Models\Core\HistoryModel.cs" />
+    <Compile Include="Models\Core\OfficeModel.cs" />
+    <Compile Include="Models\Core\PackageModel.cs" />
+    <Compile Include="Models\Core\ShipmentModel.cs" />
+    <Compile Include="Models\Core\ShipmentStateModel.cs" />
+    <Compile Include="Models\Core\TransportTypeModel.cs" />
+    <Compile Include="Models\Core\VehicleModel.cs" />
+    <Compile Include="Models\Core\WarehouseModel.cs" />
+    <Compile Include="Models\Paramaters\AddressModel.cs" />
     <Compile Include="Mappers\Parameters\DocumentTypeGUIMapper.cs" />
     <Compile Include="Mappers\Parameters\PersonGUIMapper.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Paramaters\DepartmentModel.cs" />
+    <Compile Include="Models\Paramaters\DocumentTypeModel.cs" />
+    <Compile Include="Models\Paramaters\PersonModel.cs" />
+    <Compile Include="Models\Paramaters\TownModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>

@@ -1,4 +1,4 @@
-﻿namespace PackageDelivery.Application.Contracts.DTO
+﻿namespace PackageDelivery.Application.Contracts.DTO.ParametersDTO
 {
     public class DocumentTypeDTO
     {

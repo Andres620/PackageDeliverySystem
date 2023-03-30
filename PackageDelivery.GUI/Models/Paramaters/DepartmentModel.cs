@@ -1,8 +1,8 @@
 ﻿namespace PackageDelivery.GUI.Models.Parameters
 {
-    public class DocumentTypeModel
+    public class DepartmentModel
     {
-        public int id { get; set; }
+        public long Id { get; set; }
         public string name { get; set; }
     }
 }
