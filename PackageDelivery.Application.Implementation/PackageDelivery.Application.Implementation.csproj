@@ -41,7 +41,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Mappers\DTOMapperBase.cs" />
+    <Compile Include="Mappers\Parameters\DocumentTypeApplicationMapper.cs" />
+    <Compile Include="Mappers\Parameters\PersonApplicationMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PackageDelivery.Application.Contracts\PackageDelivery.Application.Contracts.csproj">
+      <Project>{dc9279d6-e131-4b3b-9401-9d0d9ef424a2}</Project>
+      <Name>PackageDelivery.Application.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PackageDelivery.Repository,Contracts\PackageDelivery.Repository.Contracts.csproj">
+      <Project>{64287595-b868-457e-9a3f-1c5dba36c2e8}</Project>
+      <Name>PackageDelivery.Repository.Contracts</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Implementation\" />
+    <Folder Include="Services\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
