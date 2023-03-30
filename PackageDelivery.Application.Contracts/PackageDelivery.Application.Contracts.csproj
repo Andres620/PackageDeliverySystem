@@ -41,8 +41,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DTO\PersonDTO .cs" />
-    <Compile Include="DTO\DocumentTypeDTO.cs" />
+    <Compile Include="DTO\CoreDTO\HistoryDTO.cs" />
+    <Compile Include="DTO\CoreDTO\OfficeDTO.cs" />
+    <Compile Include="DTO\CoreDTO\PackageDTO.cs" />
+    <Compile Include="DTO\CoreDTO\ShipmentDTO.cs" />
+    <Compile Include="DTO\CoreDTO\ShipmentStateDTO.cs" />
+    <Compile Include="DTO\CoreDTO\TransportTypeDTO.cs" />
+    <Compile Include="DTO\CoreDTO\VehicleDTO.cs" />
+    <Compile Include="DTO\CoreDTO\WarehouseDTO.cs" />
+    <Compile Include="DTO\ParametersDTO\AddressDTO.cs" />
+    <Compile Include="DTO\ParametersDTO\DepartmentDTO.cs" />
+    <Compile Include="DTO\ParametersDTO\PersonDTO .cs" />
+    <Compile Include="DTO\ParametersDTO\DocumentTypeDTO.cs" />
+    <Compile Include="DTO\ParametersDTO\TownDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

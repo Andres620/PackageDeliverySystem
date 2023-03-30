@@ -1,4 +1,5 @@
-﻿using PackageDelivery.GUI.Contracts.DTO;
+﻿using PackageDelivery.Application.Contracts.DTO.ParametersDTO;
+using PackageDelivery.GUI.Models.Parameters;
 using System.Collections.Generic;
 
 namespace PackageDelivery.GUI.Implementation.Mappers.Parameters
@@ -9,8 +10,8 @@ namespace PackageDelivery.GUI.Implementation.Mappers.Parameters
         {
             return new DocumentTypeModel()
             {
-                Id = input.Id,
-                Name = input.Name,
+                id = input.Id,
+                name = input.name,
             };
         }
 
@@ -28,8 +29,8 @@ namespace PackageDelivery.GUI.Implementation.Mappers.Parameters
         {
             return new DocumentTypeDTO()
             {
-                Id = input.Id,
-                Name = input.Name
+                Id = input.id,
+                name = input.name
             };
         }
 
