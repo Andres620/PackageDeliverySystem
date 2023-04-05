@@ -41,9 +41,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Mappers\Core\HistoryApplicationMapper.cs" />
+    <Compile Include="Mappers\Core\OfficeApplicationMapper.cs" />
+    <Compile Include="Mappers\Core\PackageApplicationMapper.cs" />
+    <Compile Include="Mappers\Core\ShipmentApplicationMapper.cs" />
+    <Compile Include="Mappers\Core\ShipmentStateApplicationMapper.cs" />
+    <Compile Include="Mappers\Core\TransportTypeApplicationMapper.cs" />
+    <Compile Include="Mappers\Core\VehicleApplicationMapper.cs" />
+    <Compile Include="Mappers\Core\WarehouseApplicationMapper.cs" />
     <Compile Include="Mappers\DTOMapperBase.cs" />
+    <Compile Include="Mappers\Parameters\AddressApplicationMapper.cs" />
+    <Compile Include="Mappers\Parameters\DepartmentApplicationMapper.cs" />
     <Compile Include="Mappers\Parameters\DocumentTypeApplicationMapper.cs" />
     <Compile Include="Mappers\Parameters\PersonApplicationMapper.cs" />
+    <Compile Include="Mappers\Parameters\TownApplicationMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

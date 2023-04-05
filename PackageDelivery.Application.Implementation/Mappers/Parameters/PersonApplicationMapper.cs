@@ -15,9 +15,10 @@ namespace PackageDelivery.Application.Implementation.Mappers.Parameters
                 otherNames = input.otherNames,
                 firstLastName = input.firstLastName,
                 secondLastName = input.secondLastName,
+                identificationNumber = input.identificationNumber,
                 cellphone = input.cellphone,
                 email = input.email,
-                identificationNumber = input.identificationNumber,
+                IdAddress = input.IdAddress,
                 IdDocumentType = input.IdDocumentType
             };
         }
@@ -41,9 +42,10 @@ namespace PackageDelivery.Application.Implementation.Mappers.Parameters
                 otherNames = input.otherNames,
                 firstLastName = input.firstLastName,
                 secondLastName = input.secondLastName,
+                identificationNumber = input.identificationNumber,
                 cellphone = input.cellphone,
                 email = input.email,
-                identificationNumber = input.identificationNumber,
+                IdAddress = input.IdAddress, 
                 IdDocumentType = input.IdDocumentType
             };
         }
