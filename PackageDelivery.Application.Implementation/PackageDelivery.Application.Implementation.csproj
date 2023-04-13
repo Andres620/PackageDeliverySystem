@@ -41,6 +41,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Implementation\Parameters\DocumentTypeImpApplication.cs" />
+    <Compile Include="Implementation\Parameters\PersonImpApplication.cs" />
     <Compile Include="Mappers\Core\HistoryApplicationMapper.cs" />
     <Compile Include="Mappers\Core\OfficeApplicationMapper.cs" />
     <Compile Include="Mappers\Core\PackageApplicationMapper.cs" />
@@ -58,6 +60,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Services\" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\PackageDelivery.Application.Contracts\PackageDelivery.Application.Contracts.csproj">
       <Project>{dc9279d6-e131-4b3b-9401-9d0d9ef424a2}</Project>
       <Name>PackageDelivery.Application.Contracts</Name>
@@ -66,10 +71,10 @@
       <Project>{64287595-b868-457e-9a3f-1c5dba36c2e8}</Project>
       <Name>PackageDelivery.Repository.Contracts</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Implementation\" />
-    <Folder Include="Services\" />
+    <ProjectReference Include="..\PackageDelivery.Repository.Implementation\PackageDelivery.Repository.Implementation.csproj">
+      <Project>{9bd9dfb1-51a3-4d25-ba58-9e3863d65ebe}</Project>
+      <Name>PackageDelivery.Repository.Implementation</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

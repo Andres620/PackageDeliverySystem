@@ -104,6 +104,7 @@
     <Compile Include="DataModel\vehiculo.cs">
       <DependentUpon>PackageDeliveryDataModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Implementation\Parameters\DocumentTypeImpRepository.cs" />
     <Compile Include="Mappers\Core\WarehouseRepositoryMapper.cs" />
     <Compile Include="Mappers\Core\VehicleRepositoryMapper.cs" />
     <Compile Include="Mappers\Core\TransportTypeRepositoryMapper.cs" />
@@ -147,9 +148,6 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Implementation\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\PackageDelivery.Repository,Contracts\PackageDelivery.Repository.Contracts.csproj">

@@ -171,6 +171,8 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\Parameters\DocumentTypeController.cs" />
+    <Compile Include="Controllers\Parameters\PersonController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -317,6 +319,8 @@
     <Content Include="bin\roslyn\vbc.rsp" />
     <Content Include="bin\roslyn\VBCSCompiler.exe.config" />
     <Content Include="bin\PackageDelivery.GUI.dll.config" />
+    <Content Include="Properties\serviceDependencies.json" />
+    <Content Include="Properties\serviceDependencies.local.json" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -362,6 +366,16 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\DocumentType\Create.cshtml" />
+    <Content Include="Views\DocumentType\Delete.cshtml" />
+    <Content Include="Views\DocumentType\Details.cshtml" />
+    <Content Include="Views\DocumentType\Edit.cshtml" />
+    <Content Include="Views\DocumentType\Index.cshtml" />
+    <Content Include="Views\Person\Create.cshtml" />
+    <Content Include="Views\Person\Delete.cshtml" />
+    <Content Include="Views\Person\Details.cshtml" />
+    <Content Include="Views\Person\Edit.cshtml" />
+    <Content Include="Views\Person\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -397,6 +411,10 @@
     <ProjectReference Include="..\PackageDelivery.Application.Contracts\PackageDelivery.Application.Contracts.csproj">
       <Project>{dc9279d6-e131-4b3b-9401-9d0d9ef424a2}</Project>
       <Name>PackageDelivery.Application.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PackageDelivery.Application.Implementation\PackageDelivery.Application.Implementation.csproj">
+      <Project>{56c9cf15-d50e-4de0-9c06-55f5cedf5e2a}</Project>
+      <Name>PackageDelivery.Application.Implementation</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
