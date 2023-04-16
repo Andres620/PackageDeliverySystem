@@ -24,8 +24,8 @@ namespace PackageDelivery.GUI.Mappers.Core
 
         public override IEnumerable<ShipmentModel> DTOToModelMapper(IEnumerable<ShipmentDTO> input)
         {
-            IList<ShipmentModel> list = new List<ShipmentModel>(); 
-            foreach (var dto in input) 
+            IList<ShipmentModel> list = new List<ShipmentModel>();
+            foreach (var dto in input)
             {
                 list.Add(this.DTOToModelMapper(dto));
             }

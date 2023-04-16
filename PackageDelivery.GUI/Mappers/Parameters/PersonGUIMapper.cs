@@ -1,4 +1,5 @@
-﻿using PackageDelivery.Application.Contracts.DTO.ParametersDTO;
+﻿
+using PackageDelivery.Application.Contracts.DTO.ParametersDTO;
 using PackageDelivery.GUI.Models.Parameters;
 using System.Collections.Generic;
 
@@ -11,14 +12,14 @@ namespace PackageDelivery.GUI.Implementation.Mappers.Parameters
             return new PersonModel()
             {
                 Id = input.Id,
-                firstName = input.firstName,
-                otherNames = input.otherNames,
-                firstLastname = input.firstLastName,
-                secondLastname = input.secondLastName,
-                cellphone = input.cellphone,
-                email = input.email,
-                identificationNumber = input.identificationNumber,
-                idDocumentType = input.IdDocumentType
+                FirstName = input.firstName,
+                OtherNames = input.otherNames,
+                FirstLastname = input.firstLastName,
+                SecondLastname = input.secondLastName,
+                Cellphone = input.cellphone,
+                Email = input.email,
+                IdentificationNumber = input.identificationNumber,
+                IdentificationType = input.IdDocumentType
             };
         }
 
@@ -37,14 +38,14 @@ namespace PackageDelivery.GUI.Implementation.Mappers.Parameters
             return new PersonDTO()
             {
                 Id = input.Id,
-                firstName = input.firstName,
-                otherNames = input.otherNames,
-                firstLastName = input.firstLastname,
-                secondLastName = input.secondLastname,
-                cellphone = input.cellphone,
-                email = input.email,
-                identificationNumber = input.identificationNumber,
-                IdDocumentType = input.idDocumentType
+                firstName = input.FirstName,
+                otherNames = input.OtherNames,
+                firstLastName = input.FirstLastname,
+                secondLastName = input.SecondLastname,
+                cellphone = input.Cellphone,
+                email = input.Email,
+                identificationNumber = input.IdentificationNumber,
+                IdDocumentType = input.IdentificationType
             };
         }
 

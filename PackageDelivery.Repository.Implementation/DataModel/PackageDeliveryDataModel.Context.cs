@@ -35,6 +35,7 @@ namespace PackageDelivery.Repository.Implementation.DataModel
         public virtual DbSet<oficina> oficina { get; set; }
         public virtual DbSet<paquete> paquete { get; set; }
         public virtual DbSet<persona> persona { get; set; }
+        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<tipoDocumento> tipoDocumento { get; set; }
         public virtual DbSet<tipoTransporte> tipoTransporte { get; set; }
         public virtual DbSet<vehiculo> vehiculo { get; set; }

@@ -1,4 +1,5 @@
-﻿using PackageDelivery.Repository.Implementation.DataModel;
+﻿
+using PackageDelivery.Repository.Implementation.DataModel;
 using PackageDelivery.Repository.Contracts.DbModels.Parameters;
 using System.Collections.Generic;
 

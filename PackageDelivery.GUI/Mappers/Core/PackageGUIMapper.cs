@@ -23,7 +23,7 @@ namespace PackageDelivery.GUI.Mappers.Core
         public override IEnumerable<PackageModel> DTOToModelMapper(IEnumerable<PackageDTO> input)
         {
             IList<PackageModel> list = new List<PackageModel>();
-            foreach (var dto in input) 
+            foreach (var dto in input)
             {
                 list.Add(this.DTOToModelMapper(dto));
             }

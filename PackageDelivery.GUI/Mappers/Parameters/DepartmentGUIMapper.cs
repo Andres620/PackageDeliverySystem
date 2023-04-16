@@ -29,7 +29,7 @@ namespace PackageDelivery.GUI.Mappers.Parameters
 
         public override DepartmentDTO ModelToDTOMapper(DepartmentModel input)
         {
-            return new DepartmentDTO() 
+            return new DepartmentDTO()
             {
                 Id = input.Id,
                 name = input.name

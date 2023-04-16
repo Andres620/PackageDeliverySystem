@@ -1,5 +1,6 @@
-﻿using PackageDelivery.Repository.Implementation.DataModel;
-using PackageDelivery.Repository.Contracts.DbModels.Parameters;
+﻿
+using PackageDelivery.Repository.DbModels.Parameters;
+using PackageDelivery.Repository.Implementation.DataModel;
 using System.Collections.Generic;
 
 namespace PackageDelivery.Repository.Implementation.Mappers.Parameters
@@ -11,15 +12,14 @@ namespace PackageDelivery.Repository.Implementation.Mappers.Parameters
             return new PersonDbModel()
             {
                 Id = input.id,
-                firstName = input.primerNombre,
-                otherNames = input.otrosNombres,
-                firstLastName = input.primerApellido,
-                secondLastName = input.segundoApellido,
-                cellphone = input.telefono,
-                email = input.correo,
-                identificationNumber = input.documento,
-                IdAddress = (int)input.idDireccion,
-                IdDocumentType = input.idTipoDocumento
+                FirstName = input.primerNombre,
+                OtherNames = input.otrosNombres,
+                FirstLastname = input.primerApellido,
+                SecondLastname = input.segundoApellido,
+                Cellphone = input.telefono,
+                Email = input.correo,
+                IdentificationNumber = input.documento,
+                IdentificationType = input.idTipoDocumento
             };
         }
 
@@ -38,15 +38,14 @@ namespace PackageDelivery.Repository.Implementation.Mappers.Parameters
             return new persona()
             {
                 id = input.Id,
-                primerNombre = input.firstName,
-                otrosNombres = input.otherNames,
-                primerApellido = input.firstLastName,
-                segundoApellido = input.secondLastName,
-                telefono = input.cellphone,
-                correo = input.email,
-                documento = input.identificationNumber,
-                idDireccion = input.IdAddress,
-                idTipoDocumento = input.IdDocumentType
+                primerNombre = input.FirstName,
+                otrosNombres = input.OtherNames,
+                primerApellido = input.FirstLastname,
+                segundoApellido = input.SecondLastname,
+                telefono = input.Cellphone,
+                correo = input.Email,
+                documento = input.IdentificationNumber,
+                idTipoDocumento = input.IdentificationType
             };
         }
 

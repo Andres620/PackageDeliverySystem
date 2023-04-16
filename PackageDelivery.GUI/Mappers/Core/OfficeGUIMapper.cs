@@ -13,7 +13,7 @@ namespace PackageDelivery.GUI.Mappers.Core
             {
                 Id = input.Id,
                 name = input.name,
-                code = input.code,   
+                code = input.code,
                 cellphone = input.cellphone,
                 address = input.address,
                 latitude = input.latitude,

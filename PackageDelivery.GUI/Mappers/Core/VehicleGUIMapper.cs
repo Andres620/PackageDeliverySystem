@@ -40,7 +40,7 @@ namespace PackageDelivery.GUI.Mappers.Core
         public override IEnumerable<VehicleDTO> ModelToDTOMapper(IEnumerable<VehicleModel> input)
         {
             IList<VehicleDTO> list = new List<VehicleDTO>();
-            foreach (var model in input) 
+            foreach (var model in input)
             {
                 list.Add(this.ModelToDTOMapper(model));
             }

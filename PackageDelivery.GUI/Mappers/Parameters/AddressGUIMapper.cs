@@ -35,15 +35,15 @@ namespace PackageDelivery.GUI.Mappers.Parameters
 
         public override AddressDTO ModelToDTOMapper(AddressModel input)
         {
-            return new AddressDTO() 
-            { 
+            return new AddressDTO()
+            {
                 Id = input.Id,
                 actual = input.actual,
                 IdPerson = input.IdPerson,
                 IdTown = input.IdTown,
                 immovableType = input.immovableType,
                 neighborhood = input.neighborhood,
-                number = input.number, 
+                number = input.number,
                 observations = input.observations,
                 streetType = input.streetType
             };

@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{56C9CF15-D50E-4DE0-9C06-55F5CEDF5E2A}</ProjectGuid>
+    <ProjectGuid>{B0BE8DBF-B528-4BF0-B4C9-47BE53AC2A21}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>PackageDelivery.Application.Implementation</RootNamespace>
@@ -41,34 +41,39 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Mappers\Core\HistoryApplicationMapper.cs" />
-    <Compile Include="Mappers\Core\OfficeApplicationMapper.cs" />
-    <Compile Include="Mappers\Core\PackageApplicationMapper.cs" />
-    <Compile Include="Mappers\Core\ShipmentApplicationMapper.cs" />
-    <Compile Include="Mappers\Core\ShipmentStateApplicationMapper.cs" />
-    <Compile Include="Mappers\Core\TransportTypeApplicationMapper.cs" />
-    <Compile Include="Mappers\Core\VehicleApplicationMapper.cs" />
+    <Compile Include="Implementation\Parameters\PersonImpApplication.cs" />
+    <Compile Include="Implementation\Parameters\DocumentTypeImpApplication.cs" />
     <Compile Include="Mappers\Core\WarehouseApplicationMapper.cs" />
+    <Compile Include="Mappers\Core\VehicleApplicationMapper.cs" />
+    <Compile Include="Mappers\Core\TransportTypeApplicationMapper.cs" />
+    <Compile Include="Mappers\Core\ShipmentStateApplicationMapper.cs" />
+    <Compile Include="Mappers\Core\ShipmentApplicationMapper.cs" />
+    <Compile Include="Mappers\Core\PackageApplicationMapper.cs" />
+    <Compile Include="Mappers\Core\OfficeApplicationMapper.cs" />
+    <Compile Include="Mappers\Core\HistoryApplicationMapper.cs" />
     <Compile Include="Mappers\DTOMapperBase.cs" />
-    <Compile Include="Mappers\Parameters\AddressApplicationMapper.cs" />
     <Compile Include="Mappers\Parameters\DepartmentApplicationMapper.cs" />
+    <Compile Include="Mappers\Parameters\TownApplicationMapper.cs" />
+    <Compile Include="Mappers\Parameters\AddressApplicationMapper.cs" />
     <Compile Include="Mappers\Parameters\DocumentTypeApplicationMapper.cs" />
     <Compile Include="Mappers\Parameters\PersonApplicationMapper.cs" />
-    <Compile Include="Mappers\Parameters\TownApplicationMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\PackageDelivery.Application.Contracts\PackageDelivery.Application.Contracts.csproj">
-      <Project>{dc9279d6-e131-4b3b-9401-9d0d9ef424a2}</Project>
+      <Project>{a5fd98e0-77b7-4a13-b861-afd1cf04879a}</Project>
       <Name>PackageDelivery.Application.Contracts</Name>
     </ProjectReference>
-    <ProjectReference Include="..\PackageDelivery.Repository,Contracts\PackageDelivery.Repository.Contracts.csproj">
-      <Project>{64287595-b868-457e-9a3f-1c5dba36c2e8}</Project>
+    <ProjectReference Include="..\PackageDelivery.Repository.Contracts\PackageDelivery.Repository.Contracts.csproj">
+      <Project>{4d69747d-2959-481f-b1e3-ef207a76cd29}</Project>
       <Name>PackageDelivery.Repository.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PackageDelivery.Repository.Implementation\PackageDelivery.Repository.Implementation.csproj">
+      <Project>{f95e6cf3-256a-4519-86d1-f9430c515554}</Project>
+      <Name>PackageDelivery.Repository.Implementation</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Implementation\" />
     <Folder Include="Services\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

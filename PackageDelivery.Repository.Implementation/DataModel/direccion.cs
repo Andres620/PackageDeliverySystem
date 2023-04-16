@@ -18,7 +18,6 @@ namespace PackageDelivery.Repository.Implementation.DataModel
         public direccion()
         {
             this.envio = new HashSet<envio>();
-            this.persona = new HashSet<persona>();
         }
     
         public long id { get; set; }
@@ -27,15 +26,13 @@ namespace PackageDelivery.Repository.Implementation.DataModel
         public string tipoInmueble { get; set; }
         public string barrio { get; set; }
         public string observaciones { get; set; }
+        public bool actual { get; set; }
         public Nullable<long> idMunicipio { get; set; }
         public long idPersona { get; set; }
-        public bool actual { get; set; }
     
         public virtual municipio municipio { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<envio> envio { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<persona> persona { get; set; }
-        public virtual persona persona1 { get; set; }
+        public virtual persona persona { get; set; }
     }
 }

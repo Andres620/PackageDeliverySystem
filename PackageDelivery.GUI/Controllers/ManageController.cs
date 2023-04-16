@@ -189,7 +189,7 @@ namespace PackageDelivery.GUI.Controllers
                 }
                 return RedirectToAction("Index", new { Message = ManageMessageId.AddPhoneSuccess });
             }
-            // Si llegamos a este punto, es que se ha producido un error y volvemos a mostrar el formulario
+            // Si llegamos a este punto, es que se ha producido un error, volvemos a mostrar el formulario
             ModelState.AddModelError("", "No se ha podido comprobar el teléfono");
             return View(model);
         }
@@ -272,7 +272,7 @@ namespace PackageDelivery.GUI.Controllers
                 AddErrors(result);
             }
 
-            // Si llegamos a este punto, es que se ha producido un error y volvemos a mostrar el formulario
+            // Si llegamos a este punto, es que se ha producido un error, volvemos a mostrar el formulario
             return View(model);
         }
 
@@ -334,7 +334,7 @@ namespace PackageDelivery.GUI.Controllers
         }
 
 #region Aplicaciones auxiliares
-        // Se usa para la protección XSRF al agregar inicios de sesión externos
+        // Se usan para protección XSRF al agregar inicios de sesión externos
         private const string XsrfKey = "XsrfId";
 
         private IAuthenticationManager AuthenticationManager

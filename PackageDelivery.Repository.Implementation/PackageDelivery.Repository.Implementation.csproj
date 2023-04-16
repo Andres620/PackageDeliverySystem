@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{9BD9DFB1-51A3-4D25-BA58-9E3863D65EBE}</ProjectGuid>
+    <ProjectGuid>{F95E6CF3-256A-4519-86D1-F9430C515554}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>PackageDelivery.Repository.Implementation</RootNamespace>
@@ -95,6 +95,9 @@
     <Compile Include="DataModel\persona.cs">
       <DependentUpon>PackageDeliveryDataModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DataModel\sysdiagrams.cs">
+      <DependentUpon>PackageDeliveryDataModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="DataModel\tipoDocumento.cs">
       <DependentUpon>PackageDeliveryDataModel.tt</DependentUpon>
     </Compile>
@@ -104,18 +107,19 @@
     <Compile Include="DataModel\vehiculo.cs">
       <DependentUpon>PackageDeliveryDataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Mappers\Core\WarehouseRepositoryMapper.cs" />
-    <Compile Include="Mappers\Core\VehicleRepositoryMapper.cs" />
-    <Compile Include="Mappers\Core\TransportTypeRepositoryMapper.cs" />
-    <Compile Include="Mappers\Core\ShipmentStateRepositoryMapper.cs" />
-    <Compile Include="Mappers\Core\ShipmentRepositoryMapper.cs" />
+    <Compile Include="Implementation\Parameters\DocumentTypeImpRepository.cs" />
     <Compile Include="Mappers\Core\HistoryRepositoryMapper.cs" />
-    <Compile Include="Mappers\Core\PackageRepositoryMapper.cs" />
     <Compile Include="Mappers\Core\OfficeRepositoryMapper.cs" />
+    <Compile Include="Mappers\Core\PackageRepositoryMapper.cs" />
+    <Compile Include="Mappers\Core\ShipmentRepositoryMapper.cs" />
+    <Compile Include="Mappers\Core\ShipmentStateRepositoryMapper.cs" />
+    <Compile Include="Mappers\Core\TransportTypeRepositoryMapper.cs" />
+    <Compile Include="Mappers\Core\VehicleRepositoryMapper.cs" />
+    <Compile Include="Mappers\Core\WarehouseRepositoryMapper.cs" />
     <Compile Include="Mappers\DbModelMapperBase.cs" />
-    <Compile Include="Mappers\Parameters\TownRepositoryMapper.cs" />
-    <Compile Include="Mappers\Parameters\DepartmentRepositoryMapper.cs" />
     <Compile Include="Mappers\Parameters\AddressRepositoryMapper.cs" />
+    <Compile Include="Mappers\Parameters\DepartmentRepositoryMapper.cs" />
+    <Compile Include="Mappers\Parameters\TownRepositoryMapper.cs" />
     <Compile Include="Mappers\Parameters\PersonRepositoryMapper.cs" />
     <Compile Include="Mappers\Parameters\DocumentTypeRepositoryMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -148,12 +152,10 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="Implementation\" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\PackageDelivery.Repository,Contracts\PackageDelivery.Repository.Contracts.csproj">
-      <Project>{64287595-b868-457e-9a3f-1c5dba36c2e8}</Project>
+    <ProjectReference Include="..\PackageDelivery.Repository.Contracts\PackageDelivery.Repository.Contracts.csproj">
+      <Project>{4d69747d-2959-481f-b1e3-ef207a76cd29}</Project>
       <Name>PackageDelivery.Repository.Contracts</Name>
     </ProjectReference>
   </ItemGroup>
