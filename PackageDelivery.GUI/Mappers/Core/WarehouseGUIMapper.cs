@@ -35,7 +35,7 @@ namespace PackageDelivery.GUI.Mappers.Core
         {
             return new WarehouseDTO()
             {
-                Id = input.Id, 
+                Id = input.Id,
                 name = input.name,
                 code = input.code,
                 address = input.address,
@@ -48,8 +48,8 @@ namespace PackageDelivery.GUI.Mappers.Core
         public override IEnumerable<WarehouseDTO> ModelToDTOMapper(IEnumerable<WarehouseModel> input)
         {
             IList<WarehouseDTO> list = new List<WarehouseDTO>();
-            foreach (var model in input) 
-            { 
+            foreach (var model in input)
+            {
                 list.Add(this.ModelToDTOMapper(model));
             }
             return list;

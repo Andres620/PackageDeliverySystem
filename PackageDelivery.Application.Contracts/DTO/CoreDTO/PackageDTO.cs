@@ -1,4 +1,4 @@
-﻿namespace PackageDelivery.Application.Contracts.DTO.CoreDTO
+namespace PackageDelivery.Application.Contracts.DTO.CoreDTO
 {
     public class PackageDTO
     {

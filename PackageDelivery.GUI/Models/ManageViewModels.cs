@@ -28,7 +28,7 @@ namespace PackageDelivery.GUI.Models
     public class SetPasswordViewModel
     {
         [Required]
-        [StringLength(100, ErrorMessage = "El número de caracteres de {0} debe ser al menos {2}.", MinimumLength = 6)]
+        [StringLength(100, ErrorMessage = "{0} debe tener al menos {2} caracteres de longitud.", MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(Name = "Contraseña nueva")]
         public string NewPassword { get; set; }
@@ -47,7 +47,7 @@ namespace PackageDelivery.GUI.Models
         public string OldPassword { get; set; }
 
         [Required]
-        [StringLength(100, ErrorMessage = "El número de caracteres de {0} debe ser al menos {2}.", MinimumLength = 6)]
+        [StringLength(100, ErrorMessage = "{0} debe tener al menos {2} caracteres de longitud.", MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(Name = "Contraseña nueva")]
         public string NewPassword { get; set; }

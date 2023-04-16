@@ -10,8 +10,8 @@ namespace PackageDelivery.GUI.Implementation.Mappers.Parameters
         {
             return new DocumentTypeModel()
             {
-                id = input.Id,
-                name = input.name,
+                Id = input.Id,
+                Name = input.name,
             };
         }
 
@@ -29,8 +29,8 @@ namespace PackageDelivery.GUI.Implementation.Mappers.Parameters
         {
             return new DocumentTypeDTO()
             {
-                Id = input.id,
-                name = input.name
+                Id = input.Id,
+                name = input.Name
             };
         }
 

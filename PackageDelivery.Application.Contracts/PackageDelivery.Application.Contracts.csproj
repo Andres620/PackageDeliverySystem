@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{DC9279D6-E131-4B3B-9401-9D0D9EF424A2}</ProjectGuid>
+    <ProjectGuid>{A5FD98E0-77B7-4A13-B861-AFD1CF04879A}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>PackageDelivery.Application.Contracts</RootNamespace>
@@ -51,12 +51,22 @@
     <Compile Include="DTO\CoreDTO\WarehouseDTO.cs" />
     <Compile Include="DTO\ParametersDTO\AddressDTO.cs" />
     <Compile Include="DTO\ParametersDTO\DepartmentDTO.cs" />
-    <Compile Include="DTO\ParametersDTO\PersonDTO .cs" />
     <Compile Include="DTO\ParametersDTO\DocumentTypeDTO.cs" />
+    <Compile Include="DTO\ParametersDTO\PersonDTO.cs" />
     <Compile Include="DTO\ParametersDTO\TownDTO.cs" />
-    <Compile Include="Interfaces\Parameters\IDocumentTypeApplication.cs" />
     <Compile Include="Interfaces\Parameters\IPersonApplication.cs" />
+    <Compile Include="Interfaces\Parameters\IDocumentTypeApplication.cs" />
+    <Compile Include="obj\Debug\.NETFramework,Version=v4.7.2.AssemblyAttributes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
+    <None Include="obj\Debug\PackageDelivery.Application.Contracts.csproj.AssemblyReference.cache" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="bin\Debug\" />
+    <Folder Include="bin\Release\" />
+    <Folder Include="obj\Debug\TempPE\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

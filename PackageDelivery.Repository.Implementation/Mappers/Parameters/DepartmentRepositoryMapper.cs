@@ -1,4 +1,5 @@
-﻿using PackageDelivery.Repository.Implementation.DataModel;
+﻿
+using PackageDelivery.Repository.Implementation.DataModel;
 using PackageDelivery.Repository.Contracts.DbModels.Parameters;
 using System.Collections.Generic;
 
@@ -12,7 +13,7 @@ namespace PackageDelivery.Repository.Implementation.Mappers.Parameters
             {
                 Id = input.id,
                 name = input.nombre
-               
+
             };
         }
 

@@ -18,7 +18,7 @@ namespace PackageDelivery.GUI
     {
         public Task SendAsync(IdentityMessage message)
         {
-            // Conecte el servicio de correo electrónico aquí para enviar un correo electrónico.
+            // Conecte su servicio de correo electrónico aquí para enviar correo electrónico.
             return Task.FromResult(0);
         }
     }
@@ -65,7 +65,7 @@ namespace PackageDelivery.GUI
             manager.DefaultAccountLockoutTimeSpan = TimeSpan.FromMinutes(5);
             manager.MaxFailedAccessAttemptsBeforeLockout = 5;
 
-            // Registre los proveedores de autenticación de dos factores. Esta aplicación usa el teléfono y el correo electrónico para recibir un código de verificación del usuario
+            // Registre proveedores de autenticación en dos fases. Esta aplicación usa los pasos Teléfono y Correo electrónico para recibir un código para comprobar el usuario
             // Puede escribir su propio proveedor y conectarlo aquí.
             manager.RegisterTwoFactorProvider("Código telefónico", new PhoneNumberTokenProvider<ApplicationUser>
             {

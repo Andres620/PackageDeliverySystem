@@ -1,5 +1,6 @@
-﻿using PackageDelivery.Application.Contracts.DTO.ParametersDTO;
-using PackageDelivery.Repository.Contracts.DbModels.Parameters;
+﻿
+using PackageDelivery.Application.Contracts.DTO.ParametersDTO;
+using PackageDelivery.Repository.DbModels.Parameters;
 using System.Collections.Generic;
 
 namespace PackageDelivery.Application.Implementation.Mappers.Parameters
@@ -11,15 +12,14 @@ namespace PackageDelivery.Application.Implementation.Mappers.Parameters
             return new PersonDTO()
             {
                 Id = input.Id,
-                firstName = input.firstName,
-                otherNames = input.otherNames,
-                firstLastName = input.firstLastName,
-                secondLastName = input.secondLastName,
-                identificationNumber = input.identificationNumber,
-                cellphone = input.cellphone,
-                email = input.email,
-                IdAddress = input.IdAddress,
-                IdDocumentType = input.IdDocumentType
+                firstName = input.FirstName,
+                otherNames = input.OtherNames,
+                firstLastName = input.FirstLastname,
+                secondLastName = input.SecondLastname,
+                cellphone = input.Cellphone,
+                email = input.Email,
+                identificationNumber = input.IdentificationNumber,
+                IdDocumentType = input.IdentificationType
             };
         }
 
@@ -38,15 +38,14 @@ namespace PackageDelivery.Application.Implementation.Mappers.Parameters
             return new PersonDbModel()
             {
                 Id = input.Id,
-                firstName = input.firstName,
-                otherNames = input.otherNames,
-                firstLastName = input.firstLastName,
-                secondLastName = input.secondLastName,
-                identificationNumber = input.identificationNumber,
-                cellphone = input.cellphone,
-                email = input.email,
-                IdAddress = input.IdAddress, 
-                IdDocumentType = input.IdDocumentType
+                FirstName = input.firstName,
+                OtherNames = input.otherNames,
+                FirstLastname = input.firstLastName,
+                SecondLastname = input.secondLastName,
+                Cellphone = input.cellphone,
+                Email = input.email,
+                IdentificationNumber = input.identificationNumber,
+                IdentificationType = input.IdDocumentType
             };
         }
 

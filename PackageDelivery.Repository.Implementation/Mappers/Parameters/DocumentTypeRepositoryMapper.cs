@@ -1,17 +1,17 @@
-﻿using PackageDelivery.Repository.Implementation.DataModel;
-using PackageDelivery.Repository.Contracts.DbModels.Parameters;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using PackageDelivery.Repository.Implementation.DataModel;
+using PackageDelivery.Repository.DbModels.Parameters;
 
 namespace PackageDelivery.Repository.Implementation.Mappers.Parameters
 {
-    public class DocumentTypeRepositoryMapper: DbModelMapperBase<DocumentTypeDbModel, tipoDocumento>
+    public class DocumentTypeRepositoryMapper : DbModelMapperBase<DocumentTypeDbModel, tipoDocumento>
     {
         public override DocumentTypeDbModel DatabaseToDbModelMapper(tipoDocumento input)
         {
             return new DocumentTypeDbModel()
             {
                 Id = input.id,
-                name = input.nombre
+                Name = input.nombre
             };
         }
 
@@ -30,7 +30,7 @@ namespace PackageDelivery.Repository.Implementation.Mappers.Parameters
             return new tipoDocumento()
             {
                 id = input.Id,
-                nombre = input.name
+                nombre = input.Name
             };
         }
 

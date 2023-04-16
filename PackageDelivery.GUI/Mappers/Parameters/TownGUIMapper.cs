@@ -9,8 +9,8 @@ namespace PackageDelivery.GUI.Mappers.Parameters
     {
         public override TownModel DTOToModelMapper(TownDTO input)
         {
-            return new TownModel() 
-            { 
+            return new TownModel()
+            {
                 Id = input.Id,
                 name = input.name,
                 IdDepartment = input.IdDepartment
@@ -29,7 +29,7 @@ namespace PackageDelivery.GUI.Mappers.Parameters
 
         public override TownDTO ModelToDTOMapper(TownModel input)
         {
-            return new TownDTO() 
+            return new TownDTO()
             {
                 Id = input.Id,
                 name = input.name,

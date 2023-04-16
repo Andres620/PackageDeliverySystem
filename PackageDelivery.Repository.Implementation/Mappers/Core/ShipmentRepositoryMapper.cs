@@ -1,4 +1,5 @@
-﻿using PackageDelivery.Repository.Implementation.DataModel;
+﻿
+using PackageDelivery.Repository.Implementation.DataModel;
 using PackageDelivery.Repository_Contracts.DbModels.Core;
 using System.Collections.Generic;
 
@@ -17,7 +18,7 @@ namespace PackageDelivery.Repository.Implementation.Mappers.Parameters
                 idPackage = (int)input.idPaquete,
                 idSender = (int)input.idRemitente,
                 idShipmentState = (int)input.idEstado,
-                idTransportType = (int)input.idTipoTransporte               
+                idTransportType = (int)input.idTipoTransporte
             };
         }
 

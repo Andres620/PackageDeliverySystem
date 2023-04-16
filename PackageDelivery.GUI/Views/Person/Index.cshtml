@@ -12,28 +12,28 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.firstName)
+            @Html.DisplayNameFor(model => model.FirstName)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.otherNames)
+            @Html.DisplayNameFor(model => model.OtherNames)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.firstLastname)
+            @Html.DisplayNameFor(model => model.FirstLastname)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.secondLastname)
+            @Html.DisplayNameFor(model => model.SecondLastname)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.identificationNumber)
+            @Html.DisplayNameFor(model => model.IdentificationNumber)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.cellphone)
+            @Html.DisplayNameFor(model => model.Cellphone)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.email)
+            @Html.DisplayNameFor(model => model.Email)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.idDocumentType)
+            @Html.DisplayNameFor(model => model.IdentificationType)
         </th>
         <th></th>
     </tr>
@@ -41,28 +41,28 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.firstName)
+            @Html.DisplayFor(modelItem => item.FirstName)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.otherNames)
+            @Html.DisplayFor(modelItem => item.OtherNames)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.firstLastname)
+            @Html.DisplayFor(modelItem => item.FirstLastname)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.secondLastname)
+            @Html.DisplayFor(modelItem => item.SecondLastname)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.identificationNumber)
+            @Html.DisplayFor(modelItem => item.IdentificationNumber)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.cellphone)
+            @Html.DisplayFor(modelItem => item.Cellphone)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.email)
+            @Html.DisplayFor(modelItem => item.Email)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.idDocumentType)
+            @Html.DisplayFor(modelItem => item.IdentificationType)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |

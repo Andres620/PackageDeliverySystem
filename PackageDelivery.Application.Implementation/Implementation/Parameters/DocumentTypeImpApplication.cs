@@ -1,9 +1,9 @@
 ﻿using PackageDelivery.Application.Contracts.DTO.ParametersDTO;
 using PackageDelivery.Application.Contracts.Interfaces.Parameters;
 using PackageDelivery.Application.Implementation.Mappers.Parameters;
-using PackageDelivery.Repository.Contracts.DbModels.Parameters;
-using PackageDelivery.Repository.Implementation.Implementation.Parameters;
-using PackageDelivery.Repository_Contracts.Interfaces.Parameters;
+using PackageDelivery.Repository.Contracts.Interfaces.Parameters;
+using PackageDelivery.Repository.DbModels.Parameters;
+using PackageDelivery.Repository.Implementation.Parameters;
 using System;
 using System.Collections.Generic;
 
@@ -26,7 +26,7 @@ namespace PackageDelivery.Application.Implementation.Implementation.Parameters
         {
             DocumentTypeApplicationMapper mapper = new DocumentTypeApplicationMapper();
             DocumentTypeDbModel dbModel = _repository.getRecordById(id);
-            if (dbModel == null)
+            if(dbModel == null)
             {
                 return null;
             }

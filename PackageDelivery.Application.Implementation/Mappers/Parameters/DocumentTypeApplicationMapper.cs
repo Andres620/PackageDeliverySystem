@@ -1,6 +1,6 @@
 ﻿
 using PackageDelivery.Application.Contracts.DTO.ParametersDTO;
-using PackageDelivery.Repository.Contracts.DbModels.Parameters;
+using PackageDelivery.Repository.DbModels.Parameters;
 using System.Collections.Generic;
 
 namespace PackageDelivery.Application.Implementation.Mappers.Parameters
@@ -12,7 +12,7 @@ namespace PackageDelivery.Application.Implementation.Mappers.Parameters
             return new DocumentTypeDTO()
             {
                 Id = input.Id,
-                name = input.name,
+                name = input.Name,
             };
         }
 
@@ -31,7 +31,7 @@ namespace PackageDelivery.Application.Implementation.Mappers.Parameters
             return new DocumentTypeDbModel()
             {
                 Id = input.Id,
-                name = input.name
+                Name = input.name
             };
         }
 

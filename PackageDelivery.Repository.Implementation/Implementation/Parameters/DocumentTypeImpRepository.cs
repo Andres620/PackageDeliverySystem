@@ -1,12 +1,12 @@
-﻿using PackageDelivery.Repository.Contracts.DbModels.Parameters;
+﻿using PackageDelivery.Repository.Contracts.Interfaces.Parameters;
+using PackageDelivery.Repository.DbModels.Parameters;
 using PackageDelivery.Repository.Implementation.DataModel;
 using PackageDelivery.Repository.Implementation.Mappers.Parameters;
-using PackageDelivery.Repository_Contracts.Interfaces.Parameters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace PackageDelivery.Repository.Implementation.Implementation.Parameters
+namespace PackageDelivery.Repository.Implementation.Parameters
 {
     public class DocumentTypeImpRepository : IDocumentTypeRepository
     {
@@ -52,7 +52,7 @@ namespace PackageDelivery.Repository.Implementation.Implementation.Parameters
             using (PackageDeliveryEntities db = new PackageDeliveryEntities())
             {
                 tipoDocumento record = db.tipoDocumento.Find(id);
-                if (record == null)
+                if(record == null)
                 {
                     return null;
                 }

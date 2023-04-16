@@ -16,7 +16,7 @@ namespace PackageDelivery.Repository.Implementation.DataModel
     {
         public long id { get; set; }
         public System.DateTime fechaEnvio { get; set; }
-        public long precio { get; set; }
+        public decimal precio { get; set; }
         public Nullable<long> idRemitente { get; set; }
         public Nullable<long> idDireccionDestino { get; set; }
         public Nullable<long> idPaquete { get; set; }
