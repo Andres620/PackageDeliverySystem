@@ -54,6 +54,17 @@
     <Compile Include="DTO\ParametersDTO\DocumentTypeDTO.cs" />
     <Compile Include="DTO\ParametersDTO\PersonDTO.cs" />
     <Compile Include="DTO\ParametersDTO\TownDTO.cs" />
+    <Compile Include="Interfaces\Core\IOfficeApplication.cs" />
+    <Compile Include="Interfaces\Core\IPacakgeApplication.cs" />
+    <Compile Include="Interfaces\Core\IShipmentApplication.cs" />
+    <Compile Include="Interfaces\Core\IShipmentStateApplication.cs" />
+    <Compile Include="Interfaces\Core\ITransportTypeApplication.cs" />
+    <Compile Include="Interfaces\Core\IVehicleApplication.cs" />
+    <Compile Include="Interfaces\Core\IWarehouseApplication.cs" />
+    <Compile Include="Interfaces\Core\IHistoryApplication.cs" />
+    <Compile Include="Interfaces\Parameters\IAddressApplication.cs" />
+    <Compile Include="Interfaces\Parameters\IDepartmentApplication.cs" />
+    <Compile Include="Interfaces\Parameters\ITownApplication.cs" />
     <Compile Include="Interfaces\Parameters\IPersonApplication.cs" />
     <Compile Include="Interfaces\Parameters\IDocumentTypeApplication.cs" />
     <Compile Include="obj\Debug\.NETFramework,Version=v4.7.2.AssemblyAttributes.cs" />
