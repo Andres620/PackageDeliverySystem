@@ -1,7 +1,10 @@
-﻿namespace PackageDelivery.GUI.Models.Core
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace PackageDelivery.GUI.Models.Core
 {
     public class PackageModel
     {
+        [Key]
         public int Id { get; set; }
         public float weight { get; set; }
         public float height { get; set; }

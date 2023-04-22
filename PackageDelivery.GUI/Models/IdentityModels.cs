@@ -33,5 +33,27 @@ namespace PackageDelivery.GUI.Models
         public System.Data.Entity.DbSet<PackageDelivery.GUI.Models.Parameters.DocumentTypeModel> DocumentTypeModels { get; set; }
 
         public System.Data.Entity.DbSet<PackageDelivery.GUI.Models.Parameters.PersonModel> PersonModels { get; set; }
+
+        public System.Data.Entity.DbSet<PackageDelivery.GUI.Models.Parameters.TownModel> TownModels { get; set; }
+
+        public System.Data.Entity.DbSet<PackageDelivery.GUI.Models.Parameters.DepartmentModel> DepartmentModels { get; set; }
+
+        public System.Data.Entity.DbSet<PackageDelivery.GUI.Models.Parameters.AddressModel> AddressModels { get; set; }
+
+        public System.Data.Entity.DbSet<PackageDelivery.GUI.Models.Core.HistoryModel> HistoryModels { get; set; }
+
+        public System.Data.Entity.DbSet<PackageDelivery.GUI.Models.Core.OfficeModel> OfficeModels { get; set; }
+
+        public System.Data.Entity.DbSet<PackageDelivery.GUI.Models.Core.PackageModel> PackageModels { get; set; }
+
+        public System.Data.Entity.DbSet<PackageDelivery.GUI.Models.Core.ShipmentModel> ShipmentModels { get; set; }
+
+        public System.Data.Entity.DbSet<PackageDelivery.GUI.Models.Core.ShipmentStateModel> ShipmentStateModels { get; set; }
+
+        public System.Data.Entity.DbSet<PackageDelivery.GUI.Models.Core.TransportTypeModel> TransportTypeModels { get; set; }
+
+        public System.Data.Entity.DbSet<PackageDelivery.GUI.Models.Core.WarehouseModel> WarehouseModels { get; set; }
+
+        public System.Data.Entity.DbSet<PackageDelivery.GUI.Models.Core.VehicleModel> VehicleModels { get; set; }
     }
 }

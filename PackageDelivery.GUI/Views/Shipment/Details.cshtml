@@ -1,0 +1,74 @@
+﻿@model PackageDelivery.GUI.Models.Core.ShipmentModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>ShipmentModel</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.shippingDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.shippingDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.price)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.idSender)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.idSender)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.idDestinationAddress)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.idDestinationAddress)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.idPackage)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.idPackage)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.idShipmentState)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.idShipmentState)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.idTransportType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.idTransportType)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
