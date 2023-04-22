@@ -1,9 +1,11 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace PackageDelivery.GUI.Models.Parameters
 {
     public class AddressModel
     {
+        [Key]
         public long Id { get; set; }
         public string streetType { get; set; }
         public string number { get; set; }

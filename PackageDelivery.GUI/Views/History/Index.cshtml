@@ -1,0 +1,57 @@
+﻿@model IEnumerable<PackageDelivery.GUI.Models.Core.HistoryModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.entryDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.departureDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.idPackage)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.idWarehouse)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.entryDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.departureDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.idPackage)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.idWarehouse)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>
