@@ -55,7 +55,7 @@
     <Compile Include="DTO\ParametersDTO\PersonDTO.cs" />
     <Compile Include="DTO\ParametersDTO\TownDTO.cs" />
     <Compile Include="Interfaces\Core\IOfficeApplication.cs" />
-    <Compile Include="Interfaces\Core\IPacakgeApplication.cs" />
+    <Compile Include="Interfaces\Core\IPackageApplication.cs" />
     <Compile Include="Interfaces\Core\IShipmentApplication.cs" />
     <Compile Include="Interfaces\Core\IShipmentStateApplication.cs" />
     <Compile Include="Interfaces\Core\ITransportTypeApplication.cs" />

@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace PackageDelivery.GUI.Models.Parameters
 {
@@ -6,6 +7,9 @@ namespace PackageDelivery.GUI.Models.Parameters
     {
         [Key]
         public long Id { get; set; }
-        public string name { get; set; }
+
+		[Required]
+		[DisplayName("Nombre del departamento")]
+		public string name { get; set; }
     }
 }

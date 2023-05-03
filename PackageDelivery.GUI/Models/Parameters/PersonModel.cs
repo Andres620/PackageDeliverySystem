@@ -35,6 +35,10 @@ namespace PackageDelivery.GUI.Models.Parameters
         [DisplayName("Correo Electrónico")]
         public string Email { get; set; }
 
+		[Required]
+		[DisplayName("Dirección")]
+		public string Address { get; set; }
+
         [Required]
         [DisplayName("Tipo de Documento")]
         public int IdentificationType { get; set; }
