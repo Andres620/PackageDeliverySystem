@@ -41,8 +41,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Implementation\Core\HistoryImpApplication.cs" />
+    <Compile Include="Implementation\Core\OfficeImpApplication.cs" />
+    <Compile Include="Implementation\Core\PackageImpApplication.cs" />
+    <Compile Include="Implementation\Core\ShipmentImpApplication.cs" />
+    <Compile Include="Implementation\Core\ShipmentStateImpApplication.cs" />
+    <Compile Include="Implementation\Core\TransportTypeImpApplication.cs" />
+    <Compile Include="Implementation\Core\VehicleImpApplication.cs" />
+    <Compile Include="Implementation\Core\WarehouseImpApplication.cs" />
+    <Compile Include="Implementation\Parameters\AddressImpApplication.cs" />
+    <Compile Include="Implementation\Parameters\DepartmentImpApplication.cs" />
     <Compile Include="Implementation\Parameters\PersonImpApplication.cs" />
     <Compile Include="Implementation\Parameters\DocumentTypeImpApplication.cs" />
+    <Compile Include="Implementation\Parameters\TownImpApplication.cs" />
     <Compile Include="Mappers\Core\WarehouseApplicationMapper.cs" />
     <Compile Include="Mappers\Core\VehicleApplicationMapper.cs" />
     <Compile Include="Mappers\Core\TransportTypeApplicationMapper.cs" />
