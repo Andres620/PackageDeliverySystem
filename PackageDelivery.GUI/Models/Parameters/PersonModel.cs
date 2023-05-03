@@ -6,6 +6,7 @@ namespace PackageDelivery.GUI.Models.Parameters
     public class PersonModel
     {
 
+        [Key]
         public long Id { get; set; }
 
         [Required]

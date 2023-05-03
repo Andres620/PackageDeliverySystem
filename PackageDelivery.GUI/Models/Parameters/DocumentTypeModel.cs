@@ -5,6 +5,7 @@ namespace PackageDelivery.GUI.Models.Parameters
 {
     public class DocumentTypeModel
     {
+        [Key]
         public int Id { get; set; }
 
         [Required]

@@ -1,9 +1,11 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace PackageDelivery.GUI.Models.Core
 {
     public class HistoryModel
     {
+        [Key]
         public int Id { get; set; }
         public DateTime entryDate { get; set; }
         public DateTime departureDate { get; set; }

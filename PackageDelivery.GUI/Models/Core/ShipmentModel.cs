@@ -1,9 +1,11 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace PackageDelivery.GUI.Models.Core
 {
     public class ShipmentModel
     {
+        [Key]
         public int Id { get; set; }
         public DateTime shippingDate { get; set; }
         public int price { get; set; }

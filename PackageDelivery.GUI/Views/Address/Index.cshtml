@@ -1,0 +1,75 @@
+﻿@model IEnumerable<PackageDelivery.GUI.Models.Parameters.AddressModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.streetType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.number)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.immovableType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.neighborhood)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.observations)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.actual)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IdPerson)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IdTown)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.streetType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.number)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.immovableType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.neighborhood)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.observations)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.actual)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IdPerson)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IdTown)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>
