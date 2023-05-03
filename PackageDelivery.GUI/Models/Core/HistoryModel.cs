@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace PackageDelivery.GUI.Models.Core
@@ -7,10 +8,24 @@ namespace PackageDelivery.GUI.Models.Core
     {
         [Key]
         public int Id { get; set; }
-        public DateTime entryDate { get; set; }
-        public DateTime departureDate { get; set; }
-        public string description { get; set; }
-        public int idPackage { get; set; }
-        public int idWarehouse { get; set; }
+
+		[Required]
+		[DisplayName("Fecha de ingreso")]
+		public DateTime entryDate { get; set; }
+
+		[Required]
+		[DisplayName("Fecha de salida")]
+		public DateTime departureDate { get; set; }
+
+		[DisplayName("Descripción")]
+		public string description { get; set; }
+
+		[Required]
+		[DisplayName("Id de Paquete")]
+		public int idPackage { get; set; }
+
+		[Required]
+		[DisplayName("Id de bodega")]
+		public int idWarehouse { get; set; }
     }
 }

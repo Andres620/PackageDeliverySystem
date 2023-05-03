@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace PackageDelivery.GUI.Models.Core
 {
@@ -6,7 +7,13 @@ namespace PackageDelivery.GUI.Models.Core
     {
         [Key]
         public int Id { get; set; }
-        public string plate { get; set; }
-        public int idTransportType { get; set; }
+
+		[Required]
+		[DisplayName("Placa")]
+		public string plate { get; set; }
+
+		[Required]
+		[DisplayName("Tipo de transporte")]
+		public int idTransportType { get; set; }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace PackageDelivery.GUI.Models.Core
 {
@@ -6,11 +7,26 @@ namespace PackageDelivery.GUI.Models.Core
     {
         [Key]
         public int Id { get; set; }
-        public float weight { get; set; }
-        public float height { get; set; }
-        public float depth { get; set; }
-        public float width { get; set; }
-        public int idOffice { get; set; }
+
+		[Required]
+		[DisplayName("Peso")]
+		public float weight { get; set; }
+
+		[Required]
+		[DisplayName("Altura")]
+		public float height { get; set; }
+
+		[Required]
+		[DisplayName("Profundidad")]
+		public float depth { get; set; }
+
+		[Required]
+		[DisplayName("Ancho")]
+		public float width { get; set; }
+
+		[Required]
+		[DisplayName("Oficina")]
+		public int idOffice { get; set; }
 
     }
 }
