@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace PackageDelivery.Repository_Contracts.DbModels.Core
+namespace PackageDelivery.Repository.Contracts.DbModels.Core
 {
     public class HistoryDbModel
     {
