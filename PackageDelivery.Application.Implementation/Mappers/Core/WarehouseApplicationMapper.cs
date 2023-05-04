@@ -1,12 +1,6 @@
 ﻿using PackageDelivery.Application.Contracts.DTO.CoreDTO;
-using PackageDelivery.Application.Contracts.DTO.ParametersDTO;
-using PackageDelivery.Repository.Contracts.DbModels.Parameters;
-using PackageDelivery.Repository_Contracts.DbModels.Core;
-using System;
+using PackageDelivery.Repository.Contracts.DbModels.Core;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PackageDelivery.Application.Implementation.Mappers.Core
 {
