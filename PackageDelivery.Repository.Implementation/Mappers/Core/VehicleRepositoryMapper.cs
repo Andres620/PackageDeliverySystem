@@ -1,6 +1,6 @@
 ﻿
 using PackageDelivery.Repository.Implementation.DataModel;
-using PackageDelivery.Repository_Contracts.DbModels.Core;
+using PackageDelivery.Repository.Contracts.DbModels.Core;
 using System.Collections.Generic;
 
 namespace PackageDelivery.Repository.Implementation.Mappers.Parameters

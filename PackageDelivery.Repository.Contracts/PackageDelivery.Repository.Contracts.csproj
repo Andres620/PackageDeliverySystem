@@ -54,6 +54,17 @@
     <Compile Include="DbModels\Parameters\TownDbModel.cs" />
     <Compile Include="DbModels\Parameters\DocumentTypeDbModel.cs" />
     <Compile Include="DbModels\Parameters\PersonDbModel.cs" />
+    <Compile Include="Interfaces\Core\IShipmentRepository.cs" />
+    <Compile Include="Interfaces\Core\IShipmentStateRepository.cs" />
+    <Compile Include="Interfaces\Core\ITransportTypeRepository.cs" />
+    <Compile Include="Interfaces\Core\IVehicleRepository.cs" />
+    <Compile Include="Interfaces\Core\IWarehouseRepository.cs" />
+    <Compile Include="Interfaces\Core\IPackageRepository.cs" />
+    <Compile Include="Interfaces\Core\IOfficeRepository.cs" />
+    <Compile Include="Interfaces\Core\IHistoryRepository.cs" />
+    <Compile Include="Interfaces\Parameters\IAddressRepository.cs" />
+    <Compile Include="Interfaces\Parameters\ITownRepository.cs" />
+    <Compile Include="Interfaces\Parameters\IDepartmentRepository.cs" />
     <Compile Include="Interfaces\Parameters\IPersonRepository.cs" />
     <Compile Include="Interfaces\Parameters\IDocumentTypeRepository.cs" />
     <Compile Include="obj\Debug\.NETFramework,Version=v4.7.2.AssemblyAttributes.cs" />
