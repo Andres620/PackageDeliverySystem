@@ -30,7 +30,7 @@ namespace PackageDelivery.Repository.Implementation.Mappers.Parameters
             return new tipoDocumento()
             {
                 id = input.Id,
-                nombre = input.Name
+                nombre = input.Name.Trim()
             };
         }
 

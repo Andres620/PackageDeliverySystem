@@ -1,6 +1,7 @@
 ﻿using PackageDelivery.Application.Contracts.DTO.CoreDTO;
 using PackageDelivery.Application.Contracts.Interfaces.Core;
 using PackageDelivery.Application.Implementation.Implementation.Core;
+using PackageDelivery.GUI.Helpers;
 using PackageDelivery.GUI.Mappers.Core;
 using PackageDelivery.GUI.Models.Core;
 using System.Net;
@@ -53,11 +54,16 @@ namespace PackageDelivery.GUI.Controllers.Core
                 WarehouseDTO response = _app.createRecord(mapper.ModelToDTOMapper(documentTypeModel));
                 if (response != null)
                 {
+                    ViewBag.ClassName = ActionMessages.successClass;
+                    ViewBag.Message = ActionMessages.successMessage;
                     return RedirectToAction("Index");
                 }
+                ViewBag.ClassName = ActionMessages.warningClass;
+                ViewBag.Message = ActionMessages.alreadyExistsMessage;
                 return View(documentTypeModel);
             }
-            ViewBag.ErrorMessage = "Error ejecutando la acción";
+            ViewBag.ClassName = ActionMessages.warningClass;
+            ViewBag.Message = ActionMessages.errorMessage;
             return View(documentTypeModel);
         }
 
@@ -90,10 +96,13 @@ namespace PackageDelivery.GUI.Controllers.Core
                 WarehouseDTO response = _app.updateRecord(mapper.ModelToDTOMapper(documentTypeModel));
                 if (response != null)
                 {
+                    ViewBag.ClassName = ActionMessages.successClass;
+                    ViewBag.Message = ActionMessages.successMessage;
                     return RedirectToAction("Index");
                 }
             }
-            ViewBag.ErrorMessage = "Error ejecutando la acción";
+            ViewBag.ClassName = ActionMessages.warningClass;
+            ViewBag.Message = ActionMessages.errorMessage;
             return View(documentTypeModel);
         }
 
@@ -121,9 +130,12 @@ namespace PackageDelivery.GUI.Controllers.Core
             bool response = _app.deleteRecordById(id);
             if (response)
             {
+                ViewBag.ClassName = ActionMessages.successClass;
+                ViewBag.Message = ActionMessages.successMessage;
                 return RedirectToAction("Index");
             }
-            ViewBag.ErrorMessage = "Error ejecutando la acción";
+            ViewBag.ClassName = ActionMessages.warningClass;
+            ViewBag.Message = ActionMessages.errorMessage;
             return View();
         }
     }
