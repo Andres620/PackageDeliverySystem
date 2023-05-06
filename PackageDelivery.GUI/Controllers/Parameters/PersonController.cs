@@ -1,6 +1,7 @@
 ﻿using PackageDelivery.Application.Contracts.DTO.ParametersDTO;
 using PackageDelivery.Application.Contracts.Interfaces.Parameters;
 using PackageDelivery.Application.Implementation.Implementation.Parameters;
+using PackageDelivery.GUI.Helpers;
 using PackageDelivery.GUI.Implementation.Mappers.Parameters;
 using PackageDelivery.GUI.Models.Parameters;
 using System.Net;
@@ -53,11 +54,16 @@ namespace PackageDelivery.GUI.Controllers.Parameters
                 PersonDTO response = _app.createRecord(mapper.ModelToDTOMapper(documentTypeModel));
                 if (response != null)
                 {
+                    ViewBag.ClassName = ActionMessages.successClass;
+                    ViewBag.Message = ActionMessages.successMessage;
                     return RedirectToAction("Index");
                 }
+                ViewBag.ClassName = ActionMessages.warningClass;
+                ViewBag.Message = ActionMessages.alreadyExistsMessage;
                 return View(documentTypeModel);
             }
-            ViewBag.ErrorMessage = "Error ejecutando la acción";
+            ViewBag.ClassName = ActionMessages.warningClass;
+            ViewBag.Message = ActionMessages.errorMessage;
             return View(documentTypeModel);
         }
 
@@ -89,11 +95,10 @@ namespace PackageDelivery.GUI.Controllers.Parameters
                 PersonGUIMapper mapper = new PersonGUIMapper();
                 PersonDTO response = _app.updateRecord(mapper.ModelToDTOMapper(documentTypeModel));
                 if (response != null)
-                {
+                {   
                     return RedirectToAction("Index");
                 }
             }
-            ViewBag.ErrorMessage = "Error ejecutando la acción";
             return View(documentTypeModel);
         }
 
@@ -120,10 +125,13 @@ namespace PackageDelivery.GUI.Controllers.Parameters
         {
             bool response = _app.deleteRecordById(id);
             if (response)
-            {
+            {   
+                ViewBag.ClassName = ActionMessages.successClass;
+                ViewBag.Message = ActionMessages.successMessage;
                 return RedirectToAction("Index");
             }
-            ViewBag.ErrorMessage = "Error ejecutando la acción";
+            ViewBag.ClassName = ActionMessages.warningClass;
+            ViewBag.Message = ActionMessages.errorMessage;
             return View();
         }
     }

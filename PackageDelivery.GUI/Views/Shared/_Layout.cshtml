@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - Mi aplicación ASP.NET</title>
@@ -26,6 +26,19 @@
                     <li>@Html.ActionLink("Acerca de", "About", "Home")</li>
                     <li>@Html.ActionLink("Contacto", "Contact", "Home")</li>
                 </ul>
+                @if (@ViewBag.ClassName != null)
+                {
+                    <div id="divMessageId" class="divMessage @ViewBag.ClassName">
+                        <strong>@ViewBag.Message</strong>
+                    </div>
+                    <script type="text/javascript">
+                        setTimeout(function () {
+                            //alert("")
+                            //document.querySelector("#divMessageId").style.display = "none";
+                            $("#divMessageId").hide(    );
+                        }, 3000);
+                    </script>
+                }
                 @Html.Partial("_LoginPartial")
             </div>
         </div>
