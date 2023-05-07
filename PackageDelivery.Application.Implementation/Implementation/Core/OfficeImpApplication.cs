@@ -1,5 +1,9 @@
 ﻿using PackageDelivery.Application.Contracts.DTO.CoreDTO;
 using PackageDelivery.Application.Contracts.Interfaces.Core;
+using PackageDelivery.Application.Implementation.Mappers.Core;
+using PackageDelivery.Repository.Contracts.DbModels.Core;
+using PackageDelivery.Repository.Contracts.Interfaces.Core;
+using PackageDelivery.Repository.Implementation.Implementation.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,29 +14,52 @@ namespace PackageDelivery.Application.Implementation.Implementation.Core
 {
 	public class OfficeImpApplication : IOfficeApplication
 	{
+		IOfficeRepository _repository = new OfficeImpRepository();
 		public OfficeDTO createRecord(OfficeDTO record)
 		{
-			throw new NotImplementedException();
+			OfficeApplicationMapper mapper = new OfficeApplicationMapper();
+			OfficeDbModel dbModel = mapper.DTOToDbModelMapper(record);
+			OfficeDbModel response = this._repository.createRecord(dbModel);
+			if (response == null)
+			{
+				return null;
+			}
+			return mapper.DbModelToDTOMapper(response);
 		}
 
 		public bool deleteRecordById(int id)
 		{
-			throw new NotImplementedException();
+			return _repository.deleteRecordById(id);
 		}
 
 		public OfficeDTO getRecordById(int id)
 		{
-			throw new NotImplementedException();
+			OfficeApplicationMapper mapper = new OfficeApplicationMapper();
+			OfficeDbModel dbModel = _repository.getRecordById(id);
+			if (dbModel == null)
+			{
+				return null;
+			}
+			return mapper.DbModelToDTOMapper(dbModel);
 		}
 
 		public IEnumerable<OfficeDTO> getRecordsList(string filter)
 		{
-			throw new NotImplementedException();
+			OfficeApplicationMapper mapper = new OfficeApplicationMapper();
+			IEnumerable<OfficeDbModel> dbModelList = _repository.getRecordsList(filter);
+			return mapper.DbModelToDTOMapper(dbModelList);
 		}
 
 		public OfficeDTO updateRecord(OfficeDTO record)
 		{
-			throw new NotImplementedException();
+			OfficeApplicationMapper mapper = new OfficeApplicationMapper();
+			OfficeDbModel dbModel = mapper.DTOToDbModelMapper(record);
+			OfficeDbModel response = this._repository.updateRecord(dbModel);
+			if (response == null)
+			{
+				return null;
+			}
+			return mapper.DbModelToDTOMapper(response);
 		}
 	}
 }

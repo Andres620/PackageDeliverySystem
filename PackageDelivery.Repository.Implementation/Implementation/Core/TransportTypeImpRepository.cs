@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace PackageDelivery.Repository.Implementation.Implementation.Core
 {
-    public class TransportTypeImpRespository : ITransportTypeRepository
+    public class TransportTypeImpRepository : ITransportTypeRepository
     {
         public TransportTypeDbModel createRecord(TransportTypeDbModel record)
         {

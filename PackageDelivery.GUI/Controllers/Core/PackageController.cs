@@ -13,7 +13,7 @@ namespace PackageDelivery.GUI.Controllers.Core
         private IPackageApplication _app = new PackageImpApplication();
 
         // GET: Package
-        public ActionResult Index(string filter = "")
+        public ActionResult Index(double filter = 0)
         {
             return View(_app.getRecordsList(filter));
         }

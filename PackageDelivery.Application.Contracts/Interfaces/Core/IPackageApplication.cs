@@ -6,7 +6,7 @@ namespace PackageDelivery.Application.Contracts.Interfaces.Core
     public interface IPackageApplication
     {
         PackageDTO getRecordById(int id);
-        IEnumerable<PackageDTO> getRecordsList(string filter);
+        IEnumerable<PackageDTO> getRecordsList(double filter);
         PackageDTO createRecord(PackageDTO record);
         PackageDTO updateRecord(PackageDTO record);
         bool deleteRecordById(int id);
