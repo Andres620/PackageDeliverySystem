@@ -27,12 +27,12 @@ namespace PackageDelivery.GUI.Controllers.Parameters
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             DepartmentGUIMapper mapper = new DepartmentGUIMapper();
-            DepartmentModel documentTypeModel = mapper.DTOToModelMapper(_app.getRecordById(id.Value));
-            if (documentTypeModel == null)
+            DepartmentModel departmentModel = mapper.DTOToModelMapper(_app.getRecordById(id.Value));
+            if (departmentModel == null)
             {
                 return HttpNotFound();
             }
-            return View(documentTypeModel);
+            return View(departmentModel);
         }
 
         // GET: Department/Create
@@ -46,12 +46,12 @@ namespace PackageDelivery.GUI.Controllers.Parameters
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,FirstName,OtherNames,FirstLastname,SecondLastname,IdentificationNumber,Cellphone,Email,IdentificationType")] DepartmentModel documentTypeModel)
+        public ActionResult Create([Bind(Include = "Id,FirstName,OtherNames,FirstLastname,SecondLastname,IdentificationNumber,Cellphone,Email,IdentificationType")] DepartmentModel departmentModel)
         {
             if (ModelState.IsValid)
             {
                 DepartmentGUIMapper mapper = new DepartmentGUIMapper();
-                DepartmentDTO response = _app.createRecord(mapper.ModelToDTOMapper(documentTypeModel));
+                DepartmentDTO response = _app.createRecord(mapper.ModelToDTOMapper(departmentModel));
                 if (response != null)
                 {   
                     ViewBag.ClassName = ActionMessages.successClass;
@@ -60,11 +60,11 @@ namespace PackageDelivery.GUI.Controllers.Parameters
                 }
                 ViewBag.ClassName = ActionMessages.warningClass;
                 ViewBag.Message = ActionMessages.alreadyExistsMessage;
-                return View(documentTypeModel);
+                return View(departmentModel);
             }
             ViewBag.ClassName = ActionMessages.warningClass;
             ViewBag.Message = ActionMessages.errorMessage;
-            return View(documentTypeModel);
+            return View(departmentModel);
         }
 
         // GET: Department/Edit/5
@@ -75,12 +75,12 @@ namespace PackageDelivery.GUI.Controllers.Parameters
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             DepartmentGUIMapper mapper = new DepartmentGUIMapper();
-            DepartmentModel documentTypeModel = mapper.DTOToModelMapper(_app.getRecordById(id.Value));
-            if (documentTypeModel == null)
+            DepartmentModel departmentModel = mapper.DTOToModelMapper(_app.getRecordById(id.Value));
+            if (departmentModel == null)
             {
                 return HttpNotFound();
             }
-            return View(documentTypeModel);
+            return View(departmentModel);
         }
 
         // POST: Department/Edit/5
@@ -88,12 +88,12 @@ namespace PackageDelivery.GUI.Controllers.Parameters
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,FirstName,OtherNames,FirstLastname,SecondLastname,IdentificationNumber,Cellphone,Email,IdentificationType")] DepartmentModel documentTypeModel)
+        public ActionResult Edit([Bind(Include = "Id,FirstName,OtherNames,FirstLastname,SecondLastname,IdentificationNumber,Cellphone,Email,IdentificationType")] DepartmentModel departmentModel)
         {
             if (ModelState.IsValid)
             {
                 DepartmentGUIMapper mapper = new DepartmentGUIMapper();
-                DepartmentDTO response = _app.updateRecord(mapper.ModelToDTOMapper(documentTypeModel));
+                DepartmentDTO response = _app.updateRecord(mapper.ModelToDTOMapper(departmentModel));
                 if (response != null)
                 {   
                     ViewBag.ClassName = ActionMessages.successClass;
@@ -103,7 +103,7 @@ namespace PackageDelivery.GUI.Controllers.Parameters
             }
             ViewBag.ClassName = ActionMessages.warningClass;
             ViewBag.Message = ActionMessages.errorMessage;
-            return View(documentTypeModel);
+            return View(departmentModel);
         }
 
         // GET: Department/Delete/5
@@ -114,12 +114,12 @@ namespace PackageDelivery.GUI.Controllers.Parameters
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             DepartmentGUIMapper mapper = new DepartmentGUIMapper();
-            DepartmentModel documentTypeModel = mapper.DTOToModelMapper(_app.getRecordById(id.Value));
-            if (documentTypeModel == null)
+            DepartmentModel departmentModel = mapper.DTOToModelMapper(_app.getRecordById(id.Value));
+            if (departmentModel == null)
             {
                 return HttpNotFound();
             }
-            return View(documentTypeModel);
+            return View(departmentModel);
         }
 
         // POST: Department/Delete/5

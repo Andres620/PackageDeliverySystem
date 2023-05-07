@@ -27,12 +27,12 @@ namespace PackageDelivery.GUI.Controllers.Core
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             WarehouseGUIMapper mapper = new WarehouseGUIMapper();
-            WarehouseModel documentTypeModel = mapper.DTOToModelMapper(_app.getRecordById(id.Value));
-            if (documentTypeModel == null)
+            WarehouseModel warehouseModel = mapper.DTOToModelMapper(_app.getRecordById(id.Value));
+            if (warehouseModel == null)
             {
                 return HttpNotFound();
             }
-            return View(documentTypeModel);
+            return View(warehouseModel);
         }
 
         // GET: Warehouse/Create
@@ -46,12 +46,12 @@ namespace PackageDelivery.GUI.Controllers.Core
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,FirstName,OtherNames,FirstLastname,SecondLastname,IdentificationNumber,Cellphone,Email,IdentificationType")] WarehouseModel documentTypeModel)
+        public ActionResult Create([Bind(Include = "Id,FirstName,OtherNames,FirstLastname,SecondLastname,IdentificationNumber,Cellphone,Email,IdentificationType")] WarehouseModel warehouseModel)
         {
             if (ModelState.IsValid)
             {
                 WarehouseGUIMapper mapper = new WarehouseGUIMapper();
-                WarehouseDTO response = _app.createRecord(mapper.ModelToDTOMapper(documentTypeModel));
+                WarehouseDTO response = _app.createRecord(mapper.ModelToDTOMapper(warehouseModel));
                 if (response != null)
                 {
                     ViewBag.ClassName = ActionMessages.successClass;
@@ -60,11 +60,11 @@ namespace PackageDelivery.GUI.Controllers.Core
                 }
                 ViewBag.ClassName = ActionMessages.warningClass;
                 ViewBag.Message = ActionMessages.alreadyExistsMessage;
-                return View(documentTypeModel);
+                return View(warehouseModel);
             }
             ViewBag.ClassName = ActionMessages.warningClass;
             ViewBag.Message = ActionMessages.errorMessage;
-            return View(documentTypeModel);
+            return View(warehouseModel);
         }
 
         // GET: Warehouse/Edit/5
@@ -75,12 +75,12 @@ namespace PackageDelivery.GUI.Controllers.Core
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             WarehouseGUIMapper mapper = new WarehouseGUIMapper();
-            WarehouseModel documentTypeModel = mapper.DTOToModelMapper(_app.getRecordById(id.Value));
-            if (documentTypeModel == null)
+            WarehouseModel warehouseModel = mapper.DTOToModelMapper(_app.getRecordById(id.Value));
+            if (warehouseModel == null)
             {
                 return HttpNotFound();
             }
-            return View(documentTypeModel);
+            return View(warehouseModel);
         }
 
         // POST: Warehouse/Edit/5
@@ -88,12 +88,12 @@ namespace PackageDelivery.GUI.Controllers.Core
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,FirstName,OtherNames,FirstLastname,SecondLastname,IdentificationNumber,Cellphone,Email,IdentificationType")] WarehouseModel documentTypeModel)
+        public ActionResult Edit([Bind(Include = "Id,FirstName,OtherNames,FirstLastname,SecondLastname,IdentificationNumber,Cellphone,Email,IdentificationType")] WarehouseModel warehouseModel)
         {
             if (ModelState.IsValid)
             {
                 WarehouseGUIMapper mapper = new WarehouseGUIMapper();
-                WarehouseDTO response = _app.updateRecord(mapper.ModelToDTOMapper(documentTypeModel));
+                WarehouseDTO response = _app.updateRecord(mapper.ModelToDTOMapper(warehouseModel));
                 if (response != null)
                 {
                     ViewBag.ClassName = ActionMessages.successClass;
@@ -103,7 +103,7 @@ namespace PackageDelivery.GUI.Controllers.Core
             }
             ViewBag.ClassName = ActionMessages.warningClass;
             ViewBag.Message = ActionMessages.errorMessage;
-            return View(documentTypeModel);
+            return View(warehouseModel);
         }
 
         // GET: Warehouse/Delete/5
@@ -114,12 +114,12 @@ namespace PackageDelivery.GUI.Controllers.Core
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             WarehouseGUIMapper mapper = new WarehouseGUIMapper();
-            WarehouseModel documentTypeModel = mapper.DTOToModelMapper(_app.getRecordById(id.Value));
-            if (documentTypeModel == null)
+            WarehouseModel warehouseModel = mapper.DTOToModelMapper(_app.getRecordById(id.Value));
+            if (warehouseModel == null)
             {
                 return HttpNotFound();
             }
-            return View(documentTypeModel);
+            return View(warehouseModel);
         }
 
         // POST: Warehouse/Delete/5

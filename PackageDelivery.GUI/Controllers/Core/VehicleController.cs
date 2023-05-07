@@ -27,12 +27,12 @@ namespace PackageDelivery.GUI.Controllers.Core
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             VehicleGUIMapper mapper = new VehicleGUIMapper();
-            VehicleModel documentTypeModel = mapper.DTOToModelMapper(_app.getRecordById(id.Value));
-            if (documentTypeModel == null)
+            VehicleModel veehicleModel = mapper.DTOToModelMapper(_app.getRecordById(id.Value));
+            if (veehicleModel == null)
             {
                 return HttpNotFound();
             }
-            return View(documentTypeModel);
+            return View(veehicleModel);
         }
 
         // GET: Vehicle/Create
@@ -46,12 +46,12 @@ namespace PackageDelivery.GUI.Controllers.Core
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,FirstName,OtherNames,FirstLastname,SecondLastname,IdentificationNumber,Cellphone,Email,IdentificationType")] VehicleModel documentTypeModel)
+        public ActionResult Create([Bind(Include = "Id,FirstName,OtherNames,FirstLastname,SecondLastname,IdentificationNumber,Cellphone,Email,IdentificationType")] VehicleModel veehicleModel)
         {
             if (ModelState.IsValid)
             {
                 VehicleGUIMapper mapper = new VehicleGUIMapper();
-                VehicleDTO response = _app.createRecord(mapper.ModelToDTOMapper(documentTypeModel));
+                VehicleDTO response = _app.createRecord(mapper.ModelToDTOMapper(veehicleModel));
                 if (response != null)
                 {
                     ViewBag.ClassName = ActionMessages.successClass;
@@ -60,11 +60,11 @@ namespace PackageDelivery.GUI.Controllers.Core
                 }
                 ViewBag.ClassName = ActionMessages.warningClass;
                 ViewBag.Message = ActionMessages.alreadyExistsMessage;
-                return View(documentTypeModel);
+                return View(veehicleModel);
             }
             ViewBag.ClassName = ActionMessages.warningClass;
             ViewBag.Message = ActionMessages.errorMessage;
-            return View(documentTypeModel);
+            return View(veehicleModel);
         }
 
         // GET: Vehicle/Edit/5
@@ -75,12 +75,12 @@ namespace PackageDelivery.GUI.Controllers.Core
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             VehicleGUIMapper mapper = new VehicleGUIMapper();
-            VehicleModel documentTypeModel = mapper.DTOToModelMapper(_app.getRecordById(id.Value));
-            if (documentTypeModel == null)
+            VehicleModel veehicleModel = mapper.DTOToModelMapper(_app.getRecordById(id.Value));
+            if (veehicleModel == null)
             {
                 return HttpNotFound();
             }
-            return View(documentTypeModel);
+            return View(veehicleModel);
         }
 
         // POST: Vehicle/Edit/5
@@ -88,12 +88,12 @@ namespace PackageDelivery.GUI.Controllers.Core
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,FirstName,OtherNames,FirstLastname,SecondLastname,IdentificationNumber,Cellphone,Email,IdentificationType")] VehicleModel documentTypeModel)
+        public ActionResult Edit([Bind(Include = "Id,FirstName,OtherNames,FirstLastname,SecondLastname,IdentificationNumber,Cellphone,Email,IdentificationType")] VehicleModel veehicleModel)
         {
             if (ModelState.IsValid)
             {
                 VehicleGUIMapper mapper = new VehicleGUIMapper();
-                VehicleDTO response = _app.updateRecord(mapper.ModelToDTOMapper(documentTypeModel));
+                VehicleDTO response = _app.updateRecord(mapper.ModelToDTOMapper(veehicleModel));
                 if (response != null)
                 {
                     ViewBag.ClassName = ActionMessages.successClass;
@@ -103,7 +103,7 @@ namespace PackageDelivery.GUI.Controllers.Core
             }
             ViewBag.ClassName = ActionMessages.warningClass;
             ViewBag.Message = ActionMessages.errorMessage;
-            return View(documentTypeModel);
+            return View(veehicleModel);
         }
 
         // GET: Vehicle/Delete/5
@@ -114,12 +114,12 @@ namespace PackageDelivery.GUI.Controllers.Core
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             VehicleGUIMapper mapper = new VehicleGUIMapper();
-            VehicleModel documentTypeModel = mapper.DTOToModelMapper(_app.getRecordById(id.Value));
-            if (documentTypeModel == null)
+            VehicleModel veehicleModel = mapper.DTOToModelMapper(_app.getRecordById(id.Value));
+            if (veehicleModel == null)
             {
                 return HttpNotFound();
             }
-            return View(documentTypeModel);
+            return View(veehicleModel);
         }
 
         // POST: Vehicle/Delete/5

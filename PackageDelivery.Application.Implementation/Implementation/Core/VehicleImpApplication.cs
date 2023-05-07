@@ -1,5 +1,9 @@
 ﻿using PackageDelivery.Application.Contracts.DTO.CoreDTO;
 using PackageDelivery.Application.Contracts.Interfaces.Core;
+using PackageDelivery.Application.Implementation.Mappers.Core;
+using PackageDelivery.Repository.Contracts.DbModels.Core;
+using PackageDelivery.Repository.Contracts.Interfaces.Core;
+using PackageDelivery.Repository.Implementation.Implementation.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,29 +14,52 @@ namespace PackageDelivery.Application.Implementation.Implementation.Core
 {
 	public class VehicleImpApplication : IVehicleApplication
 	{
+		IVehicleRepository _repository = new VehicleImpRepository();
 		public VehicleDTO createRecord(VehicleDTO record)
 		{
-			throw new NotImplementedException();
+			VehicleApplicationMapper mapper = new VehicleApplicationMapper();
+			VehicleDbModel dbModel = mapper.DTOToDbModelMapper(record);
+			VehicleDbModel response = this._repository.createRecord(dbModel);
+			if (response == null)
+			{
+				return null;
+			}
+			return mapper.DbModelToDTOMapper(response);
 		}
 
 		public bool deleteRecordById(int id)
 		{
-			throw new NotImplementedException();
+			return _repository.deleteRecordById(id);
 		}
 
 		public VehicleDTO getRecordById(int id)
 		{
-			throw new NotImplementedException();
+			VehicleApplicationMapper mapper = new VehicleApplicationMapper();
+			VehicleDbModel dbModel = _repository.getRecordById(id);
+			if (dbModel == null)
+			{
+				return null;
+			}
+			return mapper.DbModelToDTOMapper(dbModel);
 		}
 
 		public IEnumerable<VehicleDTO> getRecordsList(string filter)
 		{
-			throw new NotImplementedException();
+			VehicleApplicationMapper mapper = new VehicleApplicationMapper();
+			IEnumerable<VehicleDbModel> dbModelList = _repository.getRecordsList(filter);
+			return mapper.DbModelToDTOMapper(dbModelList);
 		}
 
 		public VehicleDTO updateRecord(VehicleDTO record)
 		{
-			throw new NotImplementedException();
+			VehicleApplicationMapper mapper = new VehicleApplicationMapper();
+			VehicleDbModel dbModel = mapper.DTOToDbModelMapper(record);
+			VehicleDbModel response = this._repository.updateRecord(dbModel);
+			if (response == null)
+			{
+				return null;
+			}
+			return mapper.DbModelToDTOMapper(response);
 		}
 	}
 }

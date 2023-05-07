@@ -27,12 +27,12 @@ namespace PackageDelivery.GUI.Controllers.Core
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             TransportTypeGUIMapper mapper = new TransportTypeGUIMapper();
-            TransportTypeModel documentTypeModel = mapper.DTOToModelMapper(_app.getRecordById(id.Value));
-            if (documentTypeModel == null)
+            TransportTypeModel transportTypeModel = mapper.DTOToModelMapper(_app.getRecordById(id.Value));
+            if (transportTypeModel == null)
             {
                 return HttpNotFound();
             }
-            return View(documentTypeModel);
+            return View(transportTypeModel);
         }
 
         // GET: TransportType/Create
@@ -46,12 +46,12 @@ namespace PackageDelivery.GUI.Controllers.Core
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,FirstName,OtherNames,FirstLastname,SecondLastname,IdentificationNumber,Cellphone,Email,IdentificationType")] TransportTypeModel documentTypeModel)
+        public ActionResult Create([Bind(Include = "Id,FirstName,OtherNames,FirstLastname,SecondLastname,IdentificationNumber,Cellphone,Email,IdentificationType")] TransportTypeModel transportTypeModel)
         {
             if (ModelState.IsValid)
             {
                 TransportTypeGUIMapper mapper = new TransportTypeGUIMapper();
-                TransportTypeDTO response = _app.createRecord(mapper.ModelToDTOMapper(documentTypeModel));
+                TransportTypeDTO response = _app.createRecord(mapper.ModelToDTOMapper(transportTypeModel));
                 if (response != null)
                 {
                     ViewBag.ClassName = ActionMessages.successClass;
@@ -60,11 +60,11 @@ namespace PackageDelivery.GUI.Controllers.Core
                 }
                 ViewBag.ClassName = ActionMessages.warningClass;
                 ViewBag.Message = ActionMessages.alreadyExistsMessage;
-                return View(documentTypeModel);
+                return View(transportTypeModel);
             }
             ViewBag.ClassName = ActionMessages.warningClass;
             ViewBag.Message = ActionMessages.errorMessage;
-            return View(documentTypeModel);
+            return View(transportTypeModel);
         }
 
         // GET: TransportType/Edit/5
@@ -75,12 +75,12 @@ namespace PackageDelivery.GUI.Controllers.Core
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             TransportTypeGUIMapper mapper = new TransportTypeGUIMapper();
-            TransportTypeModel documentTypeModel = mapper.DTOToModelMapper(_app.getRecordById(id.Value));
-            if (documentTypeModel == null)
+            TransportTypeModel transportTypeModel = mapper.DTOToModelMapper(_app.getRecordById(id.Value));
+            if (transportTypeModel == null)
             {
                 return HttpNotFound();
             }
-            return View(documentTypeModel);
+            return View(transportTypeModel);
         }
 
         // POST: TransportType/Edit/5
@@ -88,12 +88,12 @@ namespace PackageDelivery.GUI.Controllers.Core
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,FirstName,OtherNames,FirstLastname,SecondLastname,IdentificationNumber,Cellphone,Email,IdentificationType")] TransportTypeModel documentTypeModel)
+        public ActionResult Edit([Bind(Include = "Id,FirstName,OtherNames,FirstLastname,SecondLastname,IdentificationNumber,Cellphone,Email,IdentificationType")] TransportTypeModel transportTypeModel)
         {
             if (ModelState.IsValid)
             {
                 TransportTypeGUIMapper mapper = new TransportTypeGUIMapper();
-                TransportTypeDTO response = _app.updateRecord(mapper.ModelToDTOMapper(documentTypeModel));
+                TransportTypeDTO response = _app.updateRecord(mapper.ModelToDTOMapper(transportTypeModel));
                 if (response != null)
                 {
                     ViewBag.ClassName = ActionMessages.successClass;
@@ -103,7 +103,7 @@ namespace PackageDelivery.GUI.Controllers.Core
             }
             ViewBag.ClassName = ActionMessages.warningClass;
             ViewBag.Message = ActionMessages.errorMessage;
-            return View(documentTypeModel);
+            return View(transportTypeModel);
         }
 
         // GET: TransportType/Delete/5
@@ -114,12 +114,12 @@ namespace PackageDelivery.GUI.Controllers.Core
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             TransportTypeGUIMapper mapper = new TransportTypeGUIMapper();
-            TransportTypeModel documentTypeModel = mapper.DTOToModelMapper(_app.getRecordById(id.Value));
-            if (documentTypeModel == null)
+            TransportTypeModel transportTypeModel = mapper.DTOToModelMapper(_app.getRecordById(id.Value));
+            if (transportTypeModel == null)
             {
                 return HttpNotFound();
             }
-            return View(documentTypeModel);
+            return View(transportTypeModel);
         }
 
         // POST: TransportType/Delete/5

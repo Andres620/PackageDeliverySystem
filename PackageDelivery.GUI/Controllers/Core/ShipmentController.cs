@@ -14,7 +14,7 @@ namespace PackageDelivery.GUI.Controllers.Core
         private IShipmentApplication _app = new ShipmentImpApplication();
 
         // GET: Shipment
-        public ActionResult Index(string filter = "")
+        public ActionResult Index(long filter = 0)
         {
             return View(_app.getRecordsList(filter));
         }
@@ -27,12 +27,12 @@ namespace PackageDelivery.GUI.Controllers.Core
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             ShipmentGUIMapper mapper = new ShipmentGUIMapper();
-            ShipmentModel documentTypeModel = mapper.DTOToModelMapper(_app.getRecordById(id.Value));
-            if (documentTypeModel == null)
+            ShipmentModel shipmentModel = mapper.DTOToModelMapper(_app.getRecordById(id.Value));
+            if (shipmentModel == null)
             {
                 return HttpNotFound();
             }
-            return View(documentTypeModel);
+            return View(shipmentModel);
         }
 
         // GET: Shipment/Create
@@ -46,12 +46,12 @@ namespace PackageDelivery.GUI.Controllers.Core
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,FirstName,OtherNames,FirstLastname,SecondLastname,IdentificationNumber,Cellphone,Email,IdentificationType")] ShipmentModel documentTypeModel)
+        public ActionResult Create([Bind(Include = "Id,FirstName,OtherNames,FirstLastname,SecondLastname,IdentificationNumber,Cellphone,Email,IdentificationType")] ShipmentModel shipmentModel)
         {
             if (ModelState.IsValid)
             {
                 ShipmentGUIMapper mapper = new ShipmentGUIMapper();
-                ShipmentDTO response = _app.createRecord(mapper.ModelToDTOMapper(documentTypeModel));
+                ShipmentDTO response = _app.createRecord(mapper.ModelToDTOMapper(shipmentModel));
                 if (response != null)
                 {
                     ViewBag.ClassName = ActionMessages.successClass;
@@ -60,11 +60,11 @@ namespace PackageDelivery.GUI.Controllers.Core
                 }
                 ViewBag.ClassName = ActionMessages.warningClass;
                 ViewBag.Message = ActionMessages.alreadyExistsMessage;
-                return View(documentTypeModel);
+                return View(shipmentModel);
             }
             ViewBag.ClassName = ActionMessages.warningClass;
             ViewBag.Message = ActionMessages.errorMessage;
-            return View(documentTypeModel);
+            return View(shipmentModel);
         }
 
         // GET: Shipment/Edit/5
@@ -75,12 +75,12 @@ namespace PackageDelivery.GUI.Controllers.Core
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             ShipmentGUIMapper mapper = new ShipmentGUIMapper();
-            ShipmentModel documentTypeModel = mapper.DTOToModelMapper(_app.getRecordById(id.Value));
-            if (documentTypeModel == null)
+            ShipmentModel shipmentModel = mapper.DTOToModelMapper(_app.getRecordById(id.Value));
+            if (shipmentModel == null)
             {
                 return HttpNotFound();
             }
-            return View(documentTypeModel);
+            return View(shipmentModel);
         }
 
         // POST: Shipment/Edit/5
@@ -88,12 +88,12 @@ namespace PackageDelivery.GUI.Controllers.Core
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,FirstName,OtherNames,FirstLastname,SecondLastname,IdentificationNumber,Cellphone,Email,IdentificationType")] ShipmentModel documentTypeModel)
+        public ActionResult Edit([Bind(Include = "Id,FirstName,OtherNames,FirstLastname,SecondLastname,IdentificationNumber,Cellphone,Email,IdentificationType")] ShipmentModel shipmentModel)
         {
             if (ModelState.IsValid)
             {
                 ShipmentGUIMapper mapper = new ShipmentGUIMapper();
-                ShipmentDTO response = _app.updateRecord(mapper.ModelToDTOMapper(documentTypeModel));
+                ShipmentDTO response = _app.updateRecord(mapper.ModelToDTOMapper(shipmentModel));
                 if (response != null)
                 {
                     ViewBag.ClassName = ActionMessages.successClass;
@@ -103,7 +103,7 @@ namespace PackageDelivery.GUI.Controllers.Core
             }
             ViewBag.ClassName = ActionMessages.warningClass;
             ViewBag.Message = ActionMessages.errorMessage;
-            return View(documentTypeModel);
+            return View(shipmentModel);
         }
 
         // GET: Shipment/Delete/5
@@ -114,12 +114,12 @@ namespace PackageDelivery.GUI.Controllers.Core
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             ShipmentGUIMapper mapper = new ShipmentGUIMapper();
-            ShipmentModel documentTypeModel = mapper.DTOToModelMapper(_app.getRecordById(id.Value));
-            if (documentTypeModel == null)
+            ShipmentModel shipmentModel = mapper.DTOToModelMapper(_app.getRecordById(id.Value));
+            if (shipmentModel == null)
             {
                 return HttpNotFound();
             }
-            return View(documentTypeModel);
+            return View(shipmentModel);
         }
 
         // POST: Shipment/Delete/5

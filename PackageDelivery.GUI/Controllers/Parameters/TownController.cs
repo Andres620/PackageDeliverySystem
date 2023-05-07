@@ -27,12 +27,12 @@ namespace PackageDelivery.GUI.Controllers.Parameters
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             TownGUIMapper mapper = new TownGUIMapper();
-            TownModel documentTypeModel = mapper.DTOToModelMapper(_app.getRecordById(id.Value));
-            if (documentTypeModel == null)
+            TownModel townModel = mapper.DTOToModelMapper(_app.getRecordById(id.Value));
+            if (townModel == null)
             {
                 return HttpNotFound();
             }
-            return View(documentTypeModel);
+            return View(townModel);
         }
 
         // GET: Town/Create
@@ -46,12 +46,12 @@ namespace PackageDelivery.GUI.Controllers.Parameters
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,FirstName,OtherNames,FirstLastname,SecondLastname,IdentificationNumber,Cellphone,Email,IdentificationType")] TownModel documentTypeModel)
+        public ActionResult Create([Bind(Include = "Id,FirstName,OtherNames,FirstLastname,SecondLastname,IdentificationNumber,Cellphone,Email,IdentificationType")] TownModel townModel)
         {
             if (ModelState.IsValid)
             {
                 TownGUIMapper mapper = new TownGUIMapper();
-                TownDTO response = _app.createRecord(mapper.ModelToDTOMapper(documentTypeModel));
+                TownDTO response = _app.createRecord(mapper.ModelToDTOMapper(townModel));
                 if (response != null)
                 {   
                     ViewBag.ClassName = ActionMessages.successClass;
@@ -60,11 +60,11 @@ namespace PackageDelivery.GUI.Controllers.Parameters
                 }
                 ViewBag.ClassName = ActionMessages.warningClass;
                 ViewBag.Message = ActionMessages.alreadyExistsMessage;
-                return View(documentTypeModel);
+                return View(townModel);
             }
             ViewBag.ClassName = ActionMessages.warningClass;
             ViewBag.Message = ActionMessages.errorMessage;
-            return View(documentTypeModel);
+            return View(townModel);
         }
 
         // GET: Town/Edit/5
@@ -75,12 +75,12 @@ namespace PackageDelivery.GUI.Controllers.Parameters
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             TownGUIMapper mapper = new TownGUIMapper();
-            TownModel documentTypeModel = mapper.DTOToModelMapper(_app.getRecordById(id.Value));
-            if (documentTypeModel == null)
+            TownModel townModel = mapper.DTOToModelMapper(_app.getRecordById(id.Value));
+            if (townModel == null)
             {
                 return HttpNotFound();
             }
-            return View(documentTypeModel);
+            return View(townModel);
         }
 
         // POST: Town/Edit/5
@@ -88,12 +88,12 @@ namespace PackageDelivery.GUI.Controllers.Parameters
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,FirstName,OtherNames,FirstLastname,SecondLastname,IdentificationNumber,Cellphone,Email,IdentificationType")] TownModel documentTypeModel)
+        public ActionResult Edit([Bind(Include = "Id,FirstName,OtherNames,FirstLastname,SecondLastname,IdentificationNumber,Cellphone,Email,IdentificationType")] TownModel townModel)
         {
             if (ModelState.IsValid)
             {
                 TownGUIMapper mapper = new TownGUIMapper();
-                TownDTO response = _app.updateRecord(mapper.ModelToDTOMapper(documentTypeModel));
+                TownDTO response = _app.updateRecord(mapper.ModelToDTOMapper(townModel));
                 if (response != null)
                 {
                     ViewBag.ClassName = ActionMessages.successClass;
@@ -103,7 +103,7 @@ namespace PackageDelivery.GUI.Controllers.Parameters
             }
             ViewBag.ClassName = ActionMessages.warningClass;
             ViewBag.Message = ActionMessages.errorMessage;
-            return View(documentTypeModel);
+            return View(townModel);
         }
 
         // GET: Town/Delete/5
@@ -114,12 +114,12 @@ namespace PackageDelivery.GUI.Controllers.Parameters
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             TownGUIMapper mapper = new TownGUIMapper();
-            TownModel documentTypeModel = mapper.DTOToModelMapper(_app.getRecordById(id.Value));
-            if (documentTypeModel == null)
+            TownModel townModel = mapper.DTOToModelMapper(_app.getRecordById(id.Value));
+            if (townModel == null)
             {
                 return HttpNotFound();
             }
-            return View(documentTypeModel);
+            return View(townModel);
         }
 
         // POST: Town/Delete/5

@@ -14,7 +14,7 @@ namespace PackageDelivery.GUI.Controllers.Core
         private IPackageApplication _app = new PackageImpApplication();
 
         // GET: Package
-        public ActionResult Index(string filter = "")
+        public ActionResult Index(double filter = 0)
         {
             return View(_app.getRecordsList(filter));
         }
@@ -27,12 +27,12 @@ namespace PackageDelivery.GUI.Controllers.Core
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             PackageGUIMapper mapper = new PackageGUIMapper();
-            PackageModel documentTypeModel = mapper.DTOToModelMapper(_app.getRecordById(id.Value));
-            if (documentTypeModel == null)
+            PackageModel packageModel = mapper.DTOToModelMapper(_app.getRecordById(id.Value));
+            if (packageModel == null)
             {
                 return HttpNotFound();
             }
-            return View(documentTypeModel);
+            return View(packageModel);
         }
 
         // GET: Package/Create
@@ -46,12 +46,12 @@ namespace PackageDelivery.GUI.Controllers.Core
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,FirstName,OtherNames,FirstLastname,SecondLastname,IdentificationNumber,Cellphone,Email,IdentificationType")] PackageModel documentTypeModel)
+        public ActionResult Create([Bind(Include = "Id,FirstName,OtherNames,FirstLastname,SecondLastname,IdentificationNumber,Cellphone,Email,IdentificationType")] PackageModel packageModel)
         {
             if (ModelState.IsValid)
             {
                 PackageGUIMapper mapper = new PackageGUIMapper();
-                PackageDTO response = _app.createRecord(mapper.ModelToDTOMapper(documentTypeModel));
+                PackageDTO response = _app.createRecord(mapper.ModelToDTOMapper(packageModel));
                 if (response != null)
                 {
                     ViewBag.ClassName = ActionMessages.successClass;
@@ -60,11 +60,11 @@ namespace PackageDelivery.GUI.Controllers.Core
                 }
                 ViewBag.ClassName = ActionMessages.warningClass;
                 ViewBag.Message = ActionMessages.alreadyExistsMessage;
-                return View(documentTypeModel);
+                return View(packageModel);
             }
             ViewBag.ClassName = ActionMessages.warningClass;
             ViewBag.Message = ActionMessages.errorMessage;
-            return View(documentTypeModel);
+            return View(packageModel);
         }
 
         // GET: Package/Edit/5
@@ -75,12 +75,12 @@ namespace PackageDelivery.GUI.Controllers.Core
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             PackageGUIMapper mapper = new PackageGUIMapper();
-            PackageModel documentTypeModel = mapper.DTOToModelMapper(_app.getRecordById(id.Value));
-            if (documentTypeModel == null)
+            PackageModel packageModel = mapper.DTOToModelMapper(_app.getRecordById(id.Value));
+            if (packageModel == null)
             {
                 return HttpNotFound();
             }
-            return View(documentTypeModel);
+            return View(packageModel);
         }
 
         // POST: Package/Edit/5
@@ -88,12 +88,12 @@ namespace PackageDelivery.GUI.Controllers.Core
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,FirstName,OtherNames,FirstLastname,SecondLastname,IdentificationNumber,Cellphone,Email,IdentificationType")] PackageModel documentTypeModel)
+        public ActionResult Edit([Bind(Include = "Id,FirstName,OtherNames,FirstLastname,SecondLastname,IdentificationNumber,Cellphone,Email,IdentificationType")] PackageModel packageModel)
         {
             if (ModelState.IsValid)
             {
                 PackageGUIMapper mapper = new PackageGUIMapper();
-                PackageDTO response = _app.updateRecord(mapper.ModelToDTOMapper(documentTypeModel));
+                PackageDTO response = _app.updateRecord(mapper.ModelToDTOMapper(packageModel));
                 if (response != null)
                 {
                     ViewBag.ClassName = ActionMessages.successClass;
@@ -103,7 +103,7 @@ namespace PackageDelivery.GUI.Controllers.Core
             }
             ViewBag.ClassName = ActionMessages.warningClass;
             ViewBag.Message = ActionMessages.errorMessage;
-            return View(documentTypeModel);
+            return View(packageModel);
         }
 
         // GET: Package/Delete/5
@@ -114,12 +114,12 @@ namespace PackageDelivery.GUI.Controllers.Core
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             PackageGUIMapper mapper = new PackageGUIMapper();
-            PackageModel documentTypeModel = mapper.DTOToModelMapper(_app.getRecordById(id.Value));
-            if (documentTypeModel == null)
+            PackageModel packageModel = mapper.DTOToModelMapper(_app.getRecordById(id.Value));
+            if (packageModel == null)
             {
                 return HttpNotFound();
             }
-            return View(documentTypeModel);
+            return View(packageModel);
         }
 
         // POST: Package/Delete/5

@@ -27,12 +27,12 @@ namespace PackageDelivery.GUI.Controllers.Core
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             HistoryGUIMapper mapper = new HistoryGUIMapper();
-            HistoryModel documentTypeModel = mapper.DTOToModelMapper(_app.getRecordById(id.Value));
-            if (documentTypeModel == null)
+            HistoryModel historyModel = mapper.DTOToModelMapper(_app.getRecordById(id.Value));
+            if (historyModel == null)
             {
                 return HttpNotFound();
             }
-            return View(documentTypeModel);
+            return View(historyModel);
         }
 
         // GET: History/Create
@@ -46,12 +46,12 @@ namespace PackageDelivery.GUI.Controllers.Core
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,FirstName,OtherNames,FirstLastname,SecondLastname,IdentificationNumber,Cellphone,Email,IdentificationType")] HistoryModel documentTypeModel)
+        public ActionResult Create([Bind(Include = "Id,FirstName,OtherNames,FirstLastname,SecondLastname,IdentificationNumber,Cellphone,Email,IdentificationType")] HistoryModel historyModel)
         {
             if (ModelState.IsValid)
             {
                 HistoryGUIMapper mapper = new HistoryGUIMapper();
-                HistoryDTO response = _app.createRecord(mapper.ModelToDTOMapper(documentTypeModel));
+                HistoryDTO response = _app.createRecord(mapper.ModelToDTOMapper(historyModel));
                 if (response != null)
                 {
                     ViewBag.ClassName = ActionMessages.successClass;
@@ -60,10 +60,10 @@ namespace PackageDelivery.GUI.Controllers.Core
                 }
                 ViewBag.className = ActionMessages.warningClass;
                 ViewBag.Message = ActionMessages.errorMessage;
-                return View(documentTypeModel);
+                return View(historyModel);
             }
             ViewBag.ErrorMessage = "Error ejecutando la acción";
-            return View(documentTypeModel);
+            return View(historyModel);
         }
 
         // GET: History/Edit/5
@@ -74,12 +74,12 @@ namespace PackageDelivery.GUI.Controllers.Core
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             HistoryGUIMapper mapper = new HistoryGUIMapper();
-            HistoryModel documentTypeModel = mapper.DTOToModelMapper(_app.getRecordById(id.Value));
-            if (documentTypeModel == null)
+            HistoryModel historyModel = mapper.DTOToModelMapper(_app.getRecordById(id.Value));
+            if (historyModel == null)
             {
                 return HttpNotFound();
             }
-            return View(documentTypeModel);
+            return View(historyModel);
         }
 
         // POST: History/Edit/5
@@ -87,12 +87,12 @@ namespace PackageDelivery.GUI.Controllers.Core
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,FirstName,OtherNames,FirstLastname,SecondLastname,IdentificationNumber,Cellphone,Email,IdentificationType")] HistoryModel documentTypeModel)
+        public ActionResult Edit([Bind(Include = "Id,FirstName,OtherNames,FirstLastname,SecondLastname,IdentificationNumber,Cellphone,Email,IdentificationType")] HistoryModel historyModel)
         {
             if (ModelState.IsValid)
             {
                 HistoryGUIMapper mapper = new HistoryGUIMapper();
-                HistoryDTO response = _app.updateRecord(mapper.ModelToDTOMapper(documentTypeModel));
+                HistoryDTO response = _app.updateRecord(mapper.ModelToDTOMapper(historyModel));
                 if (response != null)
                 {
                     ViewBag.ClassName = ActionMessages.successClass;
@@ -102,7 +102,7 @@ namespace PackageDelivery.GUI.Controllers.Core
             }
             ViewBag.ClassName = ActionMessages.warningClass;
             ViewBag.Message = ActionMessages.errorMessage;
-            return View(documentTypeModel);
+            return View(historyModel);
         }
 
         // GET: History/Delete/5
@@ -113,12 +113,12 @@ namespace PackageDelivery.GUI.Controllers.Core
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             HistoryGUIMapper mapper = new HistoryGUIMapper();
-            HistoryModel documentTypeModel = mapper.DTOToModelMapper(_app.getRecordById(id.Value));
-            if (documentTypeModel == null)
+            HistoryModel historyModel = mapper.DTOToModelMapper(_app.getRecordById(id.Value));
+            if (historyModel == null)
             {
                 return HttpNotFound();
             }
-            return View(documentTypeModel);
+            return View(historyModel);
         }
 
         // POST: History/Delete/5

@@ -27,12 +27,12 @@ namespace PackageDelivery.GUI.Controllers.Core
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             OfficeGUIMapper mapper = new OfficeGUIMapper();
-            OfficeModel documentTypeModel = mapper.DTOToModelMapper(_app.getRecordById(id.Value));
-            if (documentTypeModel == null)
+            OfficeModel officeModel = mapper.DTOToModelMapper(_app.getRecordById(id.Value));
+            if (officeModel == null)
             {
                 return HttpNotFound();
             }
-            return View(documentTypeModel);
+            return View(officeModel);
         }
 
         // GET: Office/Create
@@ -46,12 +46,12 @@ namespace PackageDelivery.GUI.Controllers.Core
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,FirstName,OtherNames,FirstLastname,SecondLastname,IdentificationNumber,Cellphone,Email,IdentificationType")] OfficeModel documentTypeModel)
+        public ActionResult Create([Bind(Include = "Id,FirstName,OtherNames,FirstLastname,SecondLastname,IdentificationNumber,Cellphone,Email,IdentificationType")] OfficeModel officeModel)
         {
             if (ModelState.IsValid)
             {
                 OfficeGUIMapper mapper = new OfficeGUIMapper();
-                OfficeDTO response = _app.createRecord(mapper.ModelToDTOMapper(documentTypeModel));
+                OfficeDTO response = _app.createRecord(mapper.ModelToDTOMapper(officeModel));
                 if (response != null)
                 {
                     ViewBag.ClassName = ActionMessages.successClass;
@@ -60,11 +60,11 @@ namespace PackageDelivery.GUI.Controllers.Core
                 }
                 ViewBag.ClassName = ActionMessages.warningClass;
                 ViewBag.Message = ActionMessages.alreadyExistsMessage;
-                return View(documentTypeModel);
+                return View(officeModel);
             }
             ViewBag.ClassName = ActionMessages.warningClass;
             ViewBag.Message = ActionMessages.errorMessage;
-            return View(documentTypeModel);
+            return View(officeModel);
         }
 
         // GET: Office/Edit/5
@@ -75,12 +75,12 @@ namespace PackageDelivery.GUI.Controllers.Core
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             OfficeGUIMapper mapper = new OfficeGUIMapper();
-            OfficeModel documentTypeModel = mapper.DTOToModelMapper(_app.getRecordById(id.Value));
-            if (documentTypeModel == null)
+            OfficeModel officeModel = mapper.DTOToModelMapper(_app.getRecordById(id.Value));
+            if (officeModel == null)
             {
                 return HttpNotFound();
             }
-            return View(documentTypeModel);
+            return View(officeModel);
         }
 
         // POST: Office/Edit/5
@@ -88,12 +88,12 @@ namespace PackageDelivery.GUI.Controllers.Core
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,FirstName,OtherNames,FirstLastname,SecondLastname,IdentificationNumber,Cellphone,Email,IdentificationType")] OfficeModel documentTypeModel)
+        public ActionResult Edit([Bind(Include = "Id,FirstName,OtherNames,FirstLastname,SecondLastname,IdentificationNumber,Cellphone,Email,IdentificationType")] OfficeModel officeModel)
         {
             if (ModelState.IsValid)
             {
                 OfficeGUIMapper mapper = new OfficeGUIMapper();
-                OfficeDTO response = _app.updateRecord(mapper.ModelToDTOMapper(documentTypeModel));
+                OfficeDTO response = _app.updateRecord(mapper.ModelToDTOMapper(officeModel));
                 if (response != null)
                 {   
                     ViewBag.ClassName = ActionMessages.successClass;
@@ -103,7 +103,7 @@ namespace PackageDelivery.GUI.Controllers.Core
             }
             ViewBag.ClassName = ActionMessages.warningClass;
             ViewBag.Message = ActionMessages.errorMessage;
-            return View(documentTypeModel);
+            return View(officeModel);
         }
 
         // GET: Office/Delete/5
@@ -114,12 +114,12 @@ namespace PackageDelivery.GUI.Controllers.Core
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             OfficeGUIMapper mapper = new OfficeGUIMapper();
-            OfficeModel documentTypeModel = mapper.DTOToModelMapper(_app.getRecordById(id.Value));
-            if (documentTypeModel == null)
+            OfficeModel officeModel = mapper.DTOToModelMapper(_app.getRecordById(id.Value));
+            if (officeModel == null)
             {
                 return HttpNotFound();
             }
-            return View(documentTypeModel);
+            return View(officeModel);
         }
 
         // POST: Office/Delete/5

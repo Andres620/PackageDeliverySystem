@@ -115,7 +115,7 @@
     <Compile Include="Implementation\Core\PackageImpRepository.cs" />
     <Compile Include="Implementation\Core\ShipmentImpRepository.cs" />
     <Compile Include="Implementation\Core\ShipmentStateImpRepository.cs" />
-    <Compile Include="Implementation\Core\TransportTypeImpRespository.cs" />
+    <Compile Include="Implementation\Core\TransportTypeImpRepository.cs" />
     <Compile Include="Implementation\Core\VehicleImpRepository.cs" />
     <Compile Include="Implementation\Core\WarehouseImpRepository.cs" />
     <Compile Include="Implementation\Parameters\AddressImpRepository.cs" />

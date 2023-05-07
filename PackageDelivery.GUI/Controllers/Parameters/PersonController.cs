@@ -27,12 +27,12 @@ namespace PackageDelivery.GUI.Controllers.Parameters
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             PersonGUIMapper mapper = new PersonGUIMapper();
-            PersonModel documentTypeModel = mapper.DTOToModelMapper(_app.getRecordById(id.Value));
-            if (documentTypeModel == null)
+            PersonModel personModel = mapper.DTOToModelMapper(_app.getRecordById(id.Value));
+            if (personModel == null)
             {
                 return HttpNotFound();
             }
-            return View(documentTypeModel);
+            return View(personModel);
         }
 
         // GET: Person/Create
@@ -46,12 +46,12 @@ namespace PackageDelivery.GUI.Controllers.Parameters
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,FirstName,OtherNames,FirstLastname,SecondLastname,IdentificationNumber,Cellphone,Email,IdentificationType")] PersonModel documentTypeModel)
+        public ActionResult Create([Bind(Include = "Id,FirstName,OtherNames,FirstLastname,SecondLastname,IdentificationNumber,Cellphone,Email,IdentificationType")] PersonModel personModel)
         {
             if (ModelState.IsValid)
             {
                 PersonGUIMapper mapper = new PersonGUIMapper();
-                PersonDTO response = _app.createRecord(mapper.ModelToDTOMapper(documentTypeModel));
+                PersonDTO response = _app.createRecord(mapper.ModelToDTOMapper(personModel));
                 if (response != null)
                 {
                     ViewBag.ClassName = ActionMessages.successClass;
@@ -60,11 +60,11 @@ namespace PackageDelivery.GUI.Controllers.Parameters
                 }
                 ViewBag.ClassName = ActionMessages.warningClass;
                 ViewBag.Message = ActionMessages.alreadyExistsMessage;
-                return View(documentTypeModel);
+                return View(personModel);
             }
             ViewBag.ClassName = ActionMessages.warningClass;
             ViewBag.Message = ActionMessages.errorMessage;
-            return View(documentTypeModel);
+            return View(personModel);
         }
 
         // GET: Person/Edit/5
@@ -75,12 +75,12 @@ namespace PackageDelivery.GUI.Controllers.Parameters
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             PersonGUIMapper mapper = new PersonGUIMapper();
-            PersonModel documentTypeModel = mapper.DTOToModelMapper(_app.getRecordById(id.Value));
-            if (documentTypeModel == null)
+            PersonModel personModel = mapper.DTOToModelMapper(_app.getRecordById(id.Value));
+            if (personModel == null)
             {
                 return HttpNotFound();
             }
-            return View(documentTypeModel);
+            return View(personModel);
         }
 
         // POST: Person/Edit/5
@@ -88,18 +88,18 @@ namespace PackageDelivery.GUI.Controllers.Parameters
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,FirstName,OtherNames,FirstLastname,SecondLastname,IdentificationNumber,Cellphone,Email,IdentificationType")] PersonModel documentTypeModel)
+        public ActionResult Edit([Bind(Include = "Id,FirstName,OtherNames,FirstLastname,SecondLastname,IdentificationNumber,Cellphone,Email,IdentificationType")] PersonModel personModel)
         {
             if (ModelState.IsValid)
             {
                 PersonGUIMapper mapper = new PersonGUIMapper();
-                PersonDTO response = _app.updateRecord(mapper.ModelToDTOMapper(documentTypeModel));
+                PersonDTO response = _app.updateRecord(mapper.ModelToDTOMapper(personModel));
                 if (response != null)
                 {   
                     return RedirectToAction("Index");
                 }
             }
-            return View(documentTypeModel);
+            return View(personModel);
         }
 
         // GET: Person/Delete/5
@@ -110,12 +110,12 @@ namespace PackageDelivery.GUI.Controllers.Parameters
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             PersonGUIMapper mapper = new PersonGUIMapper();
-            PersonModel documentTypeModel = mapper.DTOToModelMapper(_app.getRecordById(id.Value));
-            if (documentTypeModel == null)
+            PersonModel personModel = mapper.DTOToModelMapper(_app.getRecordById(id.Value));
+            if (personModel == null)
             {
                 return HttpNotFound();
             }
-            return View(documentTypeModel);
+            return View(personModel);
         }
 
         // POST: Person/Delete/5

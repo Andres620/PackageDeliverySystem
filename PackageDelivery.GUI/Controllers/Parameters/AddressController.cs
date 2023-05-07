@@ -27,12 +27,12 @@ namespace PackageDelivery.GUI.Controllers.Parameters
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             AddressGUIMapper mapper = new AddressGUIMapper();
-            AddressModel documentTypeModel = mapper.DTOToModelMapper(_app.getRecordById(id.Value));
-            if (documentTypeModel == null)
+            AddressModel addressModel = mapper.DTOToModelMapper(_app.getRecordById(id.Value));
+            if (addressModel == null)
             {
                 return HttpNotFound();
             }
-            return View(documentTypeModel);
+            return View(addressModel);
         }
 
         // GET: Address/Create
@@ -46,12 +46,12 @@ namespace PackageDelivery.GUI.Controllers.Parameters
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,FirstName,OtherNames,FirstLastname,SecondLastname,IdentificationNumber,Cellphone,Email,IdentificationType")] AddressModel documentTypeModel)
+        public ActionResult Create([Bind(Include = "Id,FirstName,OtherNames,FirstLastname,SecondLastname,IdentificationNumber,Cellphone,Email,IdentificationType")] AddressModel addressModel)
         {
             if (ModelState.IsValid)
             {
                 AddressGUIMapper mapper = new AddressGUIMapper();
-                AddressDTO response = _app.createRecord(mapper.ModelToDTOMapper(documentTypeModel));
+                AddressDTO response = _app.createRecord(mapper.ModelToDTOMapper(addressModel));
                 if (response != null)
                 {
                     ViewBag.ClassName = ActionMessages.successClass;
@@ -60,11 +60,11 @@ namespace PackageDelivery.GUI.Controllers.Parameters
                 }
                 ViewBag.ClassName = ActionMessages.warningClass;
                 ViewBag.Message = ActionMessages.alreadyExistsMessage;
-                return View(documentTypeModel);
+                return View(addressModel);
             }
             ViewBag.ClassName = ActionMessages.warningClass;
             ViewBag.Message = ActionMessages.errorMessage;
-            return View(documentTypeModel);
+            return View(addressModel);
         }
 
         // GET: Address/Edit/5
@@ -75,12 +75,12 @@ namespace PackageDelivery.GUI.Controllers.Parameters
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             AddressGUIMapper mapper = new AddressGUIMapper();
-            AddressModel documentTypeModel = mapper.DTOToModelMapper(_app.getRecordById(id.Value));
-            if (documentTypeModel == null)
+            AddressModel addressModel = mapper.DTOToModelMapper(_app.getRecordById(id.Value));
+            if (addressModel == null)
             {
                 return HttpNotFound();
             }
-            return View(documentTypeModel);
+            return View(addressModel);
         }
 
         // POST: Address/Edit/5
@@ -88,12 +88,12 @@ namespace PackageDelivery.GUI.Controllers.Parameters
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,FirstName,OtherNames,FirstLastname,SecondLastname,IdentificationNumber,Cellphone,Email,IdentificationType")] AddressModel documentTypeModel)
+        public ActionResult Edit([Bind(Include = "Id,FirstName,OtherNames,FirstLastname,SecondLastname,IdentificationNumber,Cellphone,Email,IdentificationType")] AddressModel addressModel)
         {
             if (ModelState.IsValid)
             {
                 AddressGUIMapper mapper = new AddressGUIMapper();
-                AddressDTO response = _app.updateRecord(mapper.ModelToDTOMapper(documentTypeModel));
+                AddressDTO response = _app.updateRecord(mapper.ModelToDTOMapper(addressModel));
                 if (response != null)
                 {
                     ViewBag.ClassName = ActionMessages.successClass;
@@ -103,7 +103,7 @@ namespace PackageDelivery.GUI.Controllers.Parameters
             }
             ViewBag.ClassName = ActionMessages.warningClass;
             ViewBag.Message = ActionMessages.errorMessage;
-            return View(documentTypeModel);
+            return View(addressModel);
         }
 
         // GET: Address/Delete/5
@@ -114,12 +114,12 @@ namespace PackageDelivery.GUI.Controllers.Parameters
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             AddressGUIMapper mapper = new AddressGUIMapper();
-            AddressModel documentTypeModel = mapper.DTOToModelMapper(_app.getRecordById(id.Value));
-            if (documentTypeModel == null)
+            AddressModel addressModel = mapper.DTOToModelMapper(_app.getRecordById(id.Value));
+            if (addressModel == null)
             {
                 return HttpNotFound();
             }
-            return View(documentTypeModel);
+            return View(addressModel);
         }
 
         // POST: Address/Delete/5
