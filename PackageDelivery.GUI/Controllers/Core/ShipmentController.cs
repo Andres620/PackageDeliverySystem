@@ -14,7 +14,7 @@ namespace PackageDelivery.GUI.Controllers.Core
         private IShipmentApplication _app = new ShipmentImpApplication();
 
         // GET: Shipment
-        public ActionResult Index(string filter = "")
+        public ActionResult Index(long filter = 0)
         {
             return View(_app.getRecordsList(filter));
         }
