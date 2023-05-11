@@ -19,7 +19,7 @@
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
-    <IISExpressSSLPort>44332</IISExpressSSLPort>
+    <IISExpressSSLPort>44348</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
@@ -169,6 +169,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\Core\HistoryController.cs" />
+    <Compile Include="Controllers\Core\HistoryModelsController.cs" />
     <Compile Include="Controllers\Core\OfficeController.cs" />
     <Compile Include="Controllers\Core\PackageController.cs" />
     <Compile Include="Controllers\Core\ShipmentController.cs" />
@@ -404,6 +405,11 @@
     <Content Include="Views\Vehicle\Edit.cshtml" />
     <Content Include="Views\Vehicle\Index.cshtml" />
     <Content Include="Web.config" />
+    <Content Include="Views\HistoryModels\Create.cshtml" />
+    <Content Include="Views\HistoryModels\Delete.cshtml" />
+    <Content Include="Views\HistoryModels\Details.cshtml" />
+    <Content Include="Views\HistoryModels\Edit.cshtml" />
+    <Content Include="Views\HistoryModels\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
