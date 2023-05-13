@@ -1,22 +1,24 @@
-﻿using PackageDelivery.Application.Contracts.DTO.CoreDTO;
-using PackageDelivery.Application.Contracts.Interfaces.Core;
-using PackageDelivery.Application.Implementation.Implementation.Core;
-using PackageDelivery.GUI.Helpers;
-using PackageDelivery.GUI.Mappers.Core;
-using PackageDelivery.GUI.Models.Core;
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
+using System.Linq;
 using System.Net;
+using System.Web;
 using System.Web.Mvc;
+using PackageDelivery.GUI.Models;
+using PackageDelivery.GUI.Models.Core;
 
 namespace PackageDelivery.GUI.Controllers.Core
 {
     public class VehicleController : Controller
     {
-        private IVehicleApplication _app = new VehicleImpApplication();
+        private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Vehicle
-        public ActionResult Index(string filter = "")
+        public ActionResult Index()
         {
-            return View(_app.getRecordsList(filter));
+            return View(db.VehicleModels.ToList());
         }
 
         // GET: Vehicle/Details/5
@@ -26,13 +28,12 @@ namespace PackageDelivery.GUI.Controllers.Core
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            VehicleGUIMapper mapper = new VehicleGUIMapper();
-            VehicleModel veehicleModel = mapper.DTOToModelMapper(_app.getRecordById(id.Value));
-            if (veehicleModel == null)
+            VehicleModel vehicleModel = db.VehicleModels.Find(id);
+            if (vehicleModel == null)
             {
                 return HttpNotFound();
             }
-            return View(veehicleModel);
+            return View(vehicleModel);
         }
 
         // GET: Vehicle/Create
@@ -46,25 +47,16 @@ namespace PackageDelivery.GUI.Controllers.Core
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,FirstName,OtherNames,FirstLastname,SecondLastname,IdentificationNumber,Cellphone,Email,IdentificationType")] VehicleModel veehicleModel)
+        public ActionResult Create([Bind(Include = "Id,plate,idTransportType")] VehicleModel vehicleModel)
         {
             if (ModelState.IsValid)
             {
-                VehicleGUIMapper mapper = new VehicleGUIMapper();
-                VehicleDTO response = _app.createRecord(mapper.ModelToDTOMapper(veehicleModel));
-                if (response != null)
-                {
-                    ViewBag.ClassName = ActionMessages.successClass;
-                    ViewBag.Message = ActionMessages.successMessage;
-                    return RedirectToAction("Index");
-                }
-                ViewBag.ClassName = ActionMessages.warningClass;
-                ViewBag.Message = ActionMessages.alreadyExistsMessage;
-                return View(veehicleModel);
+                db.VehicleModels.Add(vehicleModel);
+                db.SaveChanges();
+                return RedirectToAction("Index");
             }
-            ViewBag.ClassName = ActionMessages.warningClass;
-            ViewBag.Message = ActionMessages.errorMessage;
-            return View(veehicleModel);
+
+            return View(vehicleModel);
         }
 
         // GET: Vehicle/Edit/5
@@ -74,13 +66,12 @@ namespace PackageDelivery.GUI.Controllers.Core
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            VehicleGUIMapper mapper = new VehicleGUIMapper();
-            VehicleModel veehicleModel = mapper.DTOToModelMapper(_app.getRecordById(id.Value));
-            if (veehicleModel == null)
+            VehicleModel vehicleModel = db.VehicleModels.Find(id);
+            if (vehicleModel == null)
             {
                 return HttpNotFound();
             }
-            return View(veehicleModel);
+            return View(vehicleModel);
         }
 
         // POST: Vehicle/Edit/5
@@ -88,22 +79,15 @@ namespace PackageDelivery.GUI.Controllers.Core
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,FirstName,OtherNames,FirstLastname,SecondLastname,IdentificationNumber,Cellphone,Email,IdentificationType")] VehicleModel veehicleModel)
+        public ActionResult Edit([Bind(Include = "Id,plate,idTransportType")] VehicleModel vehicleModel)
         {
             if (ModelState.IsValid)
             {
-                VehicleGUIMapper mapper = new VehicleGUIMapper();
-                VehicleDTO response = _app.updateRecord(mapper.ModelToDTOMapper(veehicleModel));
-                if (response != null)
-                {
-                    ViewBag.ClassName = ActionMessages.successClass;
-                    ViewBag.Message = ActionMessages.successMessage;
-                    return RedirectToAction("Index");
-                }
+                db.Entry(vehicleModel).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
             }
-            ViewBag.ClassName = ActionMessages.warningClass;
-            ViewBag.Message = ActionMessages.errorMessage;
-            return View(veehicleModel);
+            return View(vehicleModel);
         }
 
         // GET: Vehicle/Delete/5
@@ -113,13 +97,12 @@ namespace PackageDelivery.GUI.Controllers.Core
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            VehicleGUIMapper mapper = new VehicleGUIMapper();
-            VehicleModel veehicleModel = mapper.DTOToModelMapper(_app.getRecordById(id.Value));
-            if (veehicleModel == null)
+            VehicleModel vehicleModel = db.VehicleModels.Find(id);
+            if (vehicleModel == null)
             {
                 return HttpNotFound();
             }
-            return View(veehicleModel);
+            return View(vehicleModel);
         }
 
         // POST: Vehicle/Delete/5
@@ -127,16 +110,19 @@ namespace PackageDelivery.GUI.Controllers.Core
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            bool response = _app.deleteRecordById(id);
-            if (response)
+            VehicleModel vehicleModel = db.VehicleModels.Find(id);
+            db.VehicleModels.Remove(vehicleModel);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
             {
-                ViewBag.ClassName = ActionMessages.successClass;
-                ViewBag.Message = ActionMessages.successMessage;
-                return RedirectToAction("Index");
+                db.Dispose();
             }
-            ViewBag.ClassName = ActionMessages.warningClass;
-            ViewBag.Message = ActionMessages.errorMessage;
-            return View();
+            base.Dispose(disposing);
         }
     }
 }

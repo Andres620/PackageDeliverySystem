@@ -1,33 +1,34 @@
-﻿using PackageDelivery.Application.Contracts.DTO.ParametersDTO;
-using PackageDelivery.Application.Contracts.Interfaces.Parameters;
-using PackageDelivery.Application.Implementation.Implementation.Parameters;
-using PackageDelivery.GUI.Helpers;
-using PackageDelivery.GUI.Implementation.Mappers.Parameters;
-using PackageDelivery.GUI.Models.Parameters;
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
+using System.Linq;
 using System.Net;
+using System.Web;
 using System.Web.Mvc;
+using PackageDelivery.GUI.Models;
+using PackageDelivery.GUI.Models.Parameters;
 
 namespace PackageDelivery.GUI.Controllers.Parameters
 {
     public class PersonController : Controller
     {
-        private IPersonApplication _app = new PersonImpApplication();
+        private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Person
-        public ActionResult Index(string filter = "")
+        public ActionResult Index()
         {
-            return View(_app.getRecordsList(filter));
+            return View(db.PersonModels.ToList());
         }
 
         // GET: Person/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult Details(long? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            PersonGUIMapper mapper = new PersonGUIMapper();
-            PersonModel personModel = mapper.DTOToModelMapper(_app.getRecordById(id.Value));
+            PersonModel personModel = db.PersonModels.Find(id);
             if (personModel == null)
             {
                 return HttpNotFound();
@@ -46,36 +47,26 @@ namespace PackageDelivery.GUI.Controllers.Parameters
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,FirstName,OtherNames,FirstLastname,SecondLastname,IdentificationNumber,Cellphone,Email,IdentificationType")] PersonModel personModel)
+        public ActionResult Create([Bind(Include = "Id,FirstName,OtherNames,FirstLastname,SecondLastname,IdentificationNumber,Cellphone,Email,Address,IdentificationType")] PersonModel personModel)
         {
             if (ModelState.IsValid)
             {
-                PersonGUIMapper mapper = new PersonGUIMapper();
-                PersonDTO response = _app.createRecord(mapper.ModelToDTOMapper(personModel));
-                if (response != null)
-                {
-                    ViewBag.ClassName = ActionMessages.successClass;
-                    ViewBag.Message = ActionMessages.successMessage;
-                    return RedirectToAction("Index");
-                }
-                ViewBag.ClassName = ActionMessages.warningClass;
-                ViewBag.Message = ActionMessages.alreadyExistsMessage;
-                return View(personModel);
+                db.PersonModels.Add(personModel);
+                db.SaveChanges();
+                return RedirectToAction("Index");
             }
-            ViewBag.ClassName = ActionMessages.warningClass;
-            ViewBag.Message = ActionMessages.errorMessage;
+
             return View(personModel);
         }
 
         // GET: Person/Edit/5
-        public ActionResult Edit(int? id)
+        public ActionResult Edit(long? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            PersonGUIMapper mapper = new PersonGUIMapper();
-            PersonModel personModel = mapper.DTOToModelMapper(_app.getRecordById(id.Value));
+            PersonModel personModel = db.PersonModels.Find(id);
             if (personModel == null)
             {
                 return HttpNotFound();
@@ -88,29 +79,25 @@ namespace PackageDelivery.GUI.Controllers.Parameters
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,FirstName,OtherNames,FirstLastname,SecondLastname,IdentificationNumber,Cellphone,Email,IdentificationType")] PersonModel personModel)
+        public ActionResult Edit([Bind(Include = "Id,FirstName,OtherNames,FirstLastname,SecondLastname,IdentificationNumber,Cellphone,Email,Address,IdentificationType")] PersonModel personModel)
         {
             if (ModelState.IsValid)
             {
-                PersonGUIMapper mapper = new PersonGUIMapper();
-                PersonDTO response = _app.updateRecord(mapper.ModelToDTOMapper(personModel));
-                if (response != null)
-                {   
-                    return RedirectToAction("Index");
-                }
+                db.Entry(personModel).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
             }
             return View(personModel);
         }
 
         // GET: Person/Delete/5
-        public ActionResult Delete(int? id)
+        public ActionResult Delete(long? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            PersonGUIMapper mapper = new PersonGUIMapper();
-            PersonModel personModel = mapper.DTOToModelMapper(_app.getRecordById(id.Value));
+            PersonModel personModel = db.PersonModels.Find(id);
             if (personModel == null)
             {
                 return HttpNotFound();
@@ -121,18 +108,21 @@ namespace PackageDelivery.GUI.Controllers.Parameters
         // POST: Person/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(long id)
         {
-            bool response = _app.deleteRecordById(id);
-            if (response)
-            {   
-                ViewBag.ClassName = ActionMessages.successClass;
-                ViewBag.Message = ActionMessages.successMessage;
-                return RedirectToAction("Index");
+            PersonModel personModel = db.PersonModels.Find(id);
+            db.PersonModels.Remove(personModel);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
             }
-            ViewBag.ClassName = ActionMessages.warningClass;
-            ViewBag.Message = ActionMessages.errorMessage;
-            return View();
+            base.Dispose(disposing);
         }
     }
 }

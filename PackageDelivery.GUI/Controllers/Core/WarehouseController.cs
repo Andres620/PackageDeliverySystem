@@ -1,22 +1,24 @@
-﻿using PackageDelivery.Application.Contracts.DTO.CoreDTO;
-using PackageDelivery.Application.Contracts.Interfaces.Core;
-using PackageDelivery.Application.Implementation.Implementation.Core;
-using PackageDelivery.GUI.Helpers;
-using PackageDelivery.GUI.Mappers.Core;
-using PackageDelivery.GUI.Models.Core;
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
+using System.Linq;
 using System.Net;
+using System.Web;
 using System.Web.Mvc;
+using PackageDelivery.GUI.Models;
+using PackageDelivery.GUI.Models.Core;
 
 namespace PackageDelivery.GUI.Controllers.Core
 {
     public class WarehouseController : Controller
     {
-        private IWarehouseApplication _app = new WarehouseImpApplication();
+        private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Warehouse
-        public ActionResult Index(string filter = "")
+        public ActionResult Index()
         {
-            return View(_app.getRecordsList(filter));
+            return View(db.WarehouseModels.ToList());
         }
 
         // GET: Warehouse/Details/5
@@ -26,8 +28,7 @@ namespace PackageDelivery.GUI.Controllers.Core
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            WarehouseGUIMapper mapper = new WarehouseGUIMapper();
-            WarehouseModel warehouseModel = mapper.DTOToModelMapper(_app.getRecordById(id.Value));
+            WarehouseModel warehouseModel = db.WarehouseModels.Find(id);
             if (warehouseModel == null)
             {
                 return HttpNotFound();
@@ -46,24 +47,15 @@ namespace PackageDelivery.GUI.Controllers.Core
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,FirstName,OtherNames,FirstLastname,SecondLastname,IdentificationNumber,Cellphone,Email,IdentificationType")] WarehouseModel warehouseModel)
+        public ActionResult Create([Bind(Include = "Id,name,code,address,latitude,longitude,idTown")] WarehouseModel warehouseModel)
         {
             if (ModelState.IsValid)
             {
-                WarehouseGUIMapper mapper = new WarehouseGUIMapper();
-                WarehouseDTO response = _app.createRecord(mapper.ModelToDTOMapper(warehouseModel));
-                if (response != null)
-                {
-                    ViewBag.ClassName = ActionMessages.successClass;
-                    ViewBag.Message = ActionMessages.successMessage;
-                    return RedirectToAction("Index");
-                }
-                ViewBag.ClassName = ActionMessages.warningClass;
-                ViewBag.Message = ActionMessages.alreadyExistsMessage;
-                return View(warehouseModel);
+                db.WarehouseModels.Add(warehouseModel);
+                db.SaveChanges();
+                return RedirectToAction("Index");
             }
-            ViewBag.ClassName = ActionMessages.warningClass;
-            ViewBag.Message = ActionMessages.errorMessage;
+
             return View(warehouseModel);
         }
 
@@ -74,8 +66,7 @@ namespace PackageDelivery.GUI.Controllers.Core
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            WarehouseGUIMapper mapper = new WarehouseGUIMapper();
-            WarehouseModel warehouseModel = mapper.DTOToModelMapper(_app.getRecordById(id.Value));
+            WarehouseModel warehouseModel = db.WarehouseModels.Find(id);
             if (warehouseModel == null)
             {
                 return HttpNotFound();
@@ -88,21 +79,14 @@ namespace PackageDelivery.GUI.Controllers.Core
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,FirstName,OtherNames,FirstLastname,SecondLastname,IdentificationNumber,Cellphone,Email,IdentificationType")] WarehouseModel warehouseModel)
+        public ActionResult Edit([Bind(Include = "Id,name,code,address,latitude,longitude,idTown")] WarehouseModel warehouseModel)
         {
             if (ModelState.IsValid)
             {
-                WarehouseGUIMapper mapper = new WarehouseGUIMapper();
-                WarehouseDTO response = _app.updateRecord(mapper.ModelToDTOMapper(warehouseModel));
-                if (response != null)
-                {
-                    ViewBag.ClassName = ActionMessages.successClass;
-                    ViewBag.Message = ActionMessages.successMessage;
-                    return RedirectToAction("Index");
-                }
+                db.Entry(warehouseModel).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
             }
-            ViewBag.ClassName = ActionMessages.warningClass;
-            ViewBag.Message = ActionMessages.errorMessage;
             return View(warehouseModel);
         }
 
@@ -113,8 +97,7 @@ namespace PackageDelivery.GUI.Controllers.Core
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            WarehouseGUIMapper mapper = new WarehouseGUIMapper();
-            WarehouseModel warehouseModel = mapper.DTOToModelMapper(_app.getRecordById(id.Value));
+            WarehouseModel warehouseModel = db.WarehouseModels.Find(id);
             if (warehouseModel == null)
             {
                 return HttpNotFound();
@@ -127,17 +110,19 @@ namespace PackageDelivery.GUI.Controllers.Core
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            bool response = _app.deleteRecordById(id);
-            if (response)
+            WarehouseModel warehouseModel = db.WarehouseModels.Find(id);
+            db.WarehouseModels.Remove(warehouseModel);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
             {
-                ViewBag.ClassName = ActionMessages.successClass;
-                ViewBag.Message = ActionMessages.successMessage;
-                return RedirectToAction("Index");
+                db.Dispose();
             }
-            ViewBag.ClassName = ActionMessages.warningClass;
-            ViewBag.Message = ActionMessages.errorMessage;
-            return View();
+            base.Dispose(disposing);
         }
     }
 }
-

@@ -1,22 +1,24 @@
-﻿using PackageDelivery.Application.Contracts.DTO.CoreDTO;
-using PackageDelivery.Application.Contracts.Interfaces.Core;
-using PackageDelivery.Application.Implementation.Implementation.Core;
-using PackageDelivery.GUI.Helpers;
-using PackageDelivery.GUI.Mappers.Core;
-using PackageDelivery.GUI.Models.Core;
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
+using System.Linq;
 using System.Net;
+using System.Web;
 using System.Web.Mvc;
+using PackageDelivery.GUI.Models;
+using PackageDelivery.GUI.Models.Core;
 
 namespace PackageDelivery.GUI.Controllers.Core
 {
     public class OfficeController : Controller
     {
-        private IOfficeApplication _app = new OfficeImpApplication();
+        private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Office
-        public ActionResult Index(string filter = "")
+        public ActionResult Index()
         {
-            return View(_app.getRecordsList(filter));
+            return View(db.OfficeModels.ToList());
         }
 
         // GET: Office/Details/5
@@ -26,8 +28,7 @@ namespace PackageDelivery.GUI.Controllers.Core
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            OfficeGUIMapper mapper = new OfficeGUIMapper();
-            OfficeModel officeModel = mapper.DTOToModelMapper(_app.getRecordById(id.Value));
+            OfficeModel officeModel = db.OfficeModels.Find(id);
             if (officeModel == null)
             {
                 return HttpNotFound();
@@ -46,24 +47,15 @@ namespace PackageDelivery.GUI.Controllers.Core
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,FirstName,OtherNames,FirstLastname,SecondLastname,IdentificationNumber,Cellphone,Email,IdentificationType")] OfficeModel officeModel)
+        public ActionResult Create([Bind(Include = "Id,name,code,cellphone,address,latitude,longitude,idTown")] OfficeModel officeModel)
         {
             if (ModelState.IsValid)
             {
-                OfficeGUIMapper mapper = new OfficeGUIMapper();
-                OfficeDTO response = _app.createRecord(mapper.ModelToDTOMapper(officeModel));
-                if (response != null)
-                {
-                    ViewBag.ClassName = ActionMessages.successClass;
-                    ViewBag.Message = ActionMessages.successMessage;
-                    return RedirectToAction("Index");
-                }
-                ViewBag.ClassName = ActionMessages.warningClass;
-                ViewBag.Message = ActionMessages.alreadyExistsMessage;
-                return View(officeModel);
+                db.OfficeModels.Add(officeModel);
+                db.SaveChanges();
+                return RedirectToAction("Index");
             }
-            ViewBag.ClassName = ActionMessages.warningClass;
-            ViewBag.Message = ActionMessages.errorMessage;
+
             return View(officeModel);
         }
 
@@ -74,8 +66,7 @@ namespace PackageDelivery.GUI.Controllers.Core
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            OfficeGUIMapper mapper = new OfficeGUIMapper();
-            OfficeModel officeModel = mapper.DTOToModelMapper(_app.getRecordById(id.Value));
+            OfficeModel officeModel = db.OfficeModels.Find(id);
             if (officeModel == null)
             {
                 return HttpNotFound();
@@ -88,21 +79,14 @@ namespace PackageDelivery.GUI.Controllers.Core
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,FirstName,OtherNames,FirstLastname,SecondLastname,IdentificationNumber,Cellphone,Email,IdentificationType")] OfficeModel officeModel)
+        public ActionResult Edit([Bind(Include = "Id,name,code,cellphone,address,latitude,longitude,idTown")] OfficeModel officeModel)
         {
             if (ModelState.IsValid)
             {
-                OfficeGUIMapper mapper = new OfficeGUIMapper();
-                OfficeDTO response = _app.updateRecord(mapper.ModelToDTOMapper(officeModel));
-                if (response != null)
-                {   
-                    ViewBag.ClassName = ActionMessages.successClass;
-                    ViewBag.Message = ActionMessages.successMessage;
-                    return RedirectToAction("Index");
-                }
+                db.Entry(officeModel).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
             }
-            ViewBag.ClassName = ActionMessages.warningClass;
-            ViewBag.Message = ActionMessages.errorMessage;
             return View(officeModel);
         }
 
@@ -113,8 +97,7 @@ namespace PackageDelivery.GUI.Controllers.Core
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            OfficeGUIMapper mapper = new OfficeGUIMapper();
-            OfficeModel officeModel = mapper.DTOToModelMapper(_app.getRecordById(id.Value));
+            OfficeModel officeModel = db.OfficeModels.Find(id);
             if (officeModel == null)
             {
                 return HttpNotFound();
@@ -127,16 +110,19 @@ namespace PackageDelivery.GUI.Controllers.Core
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            bool response = _app.deleteRecordById(id);
-            if (response)
+            OfficeModel officeModel = db.OfficeModels.Find(id);
+            db.OfficeModels.Remove(officeModel);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
             {
-                ViewBag.ClassName = ActionMessages.successClass;
-                ViewBag.Message = ActionMessages.successMessage;
-                return RedirectToAction("Index");
+                db.Dispose();
             }
-            ViewBag.ClassName = ActionMessages.warningClass;
-            ViewBag.Message = ActionMessages.errorMessage;
-            return View();
+            base.Dispose(disposing);
         }
     }
 }

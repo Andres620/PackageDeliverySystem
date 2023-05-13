@@ -1,22 +1,24 @@
-﻿using PackageDelivery.Application.Contracts.DTO.CoreDTO;
-using PackageDelivery.Application.Contracts.Interfaces.Core;
-using PackageDelivery.Application.Implementation.Implementation.Core;
-using PackageDelivery.GUI.Helpers;
-using PackageDelivery.GUI.Mappers.Core;
-using PackageDelivery.GUI.Models.Core;
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
+using System.Linq;
 using System.Net;
+using System.Web;
 using System.Web.Mvc;
+using PackageDelivery.GUI.Models;
+using PackageDelivery.GUI.Models.Core;
 
 namespace PackageDelivery.GUI.Controllers.Core
 {
     public class HistoryController : Controller
     {
-        private IHistoryApplication _app = new HistoryImpApplication();
+        private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: History
-        public ActionResult Index(string filter = "")
+        public ActionResult Index()
         {
-            return View(_app.getRecordsList(filter));
+            return View(db.HistoryModels.ToList());
         }
 
         // GET: History/Details/5
@@ -26,8 +28,7 @@ namespace PackageDelivery.GUI.Controllers.Core
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            HistoryGUIMapper mapper = new HistoryGUIMapper();
-            HistoryModel historyModel = mapper.DTOToModelMapper(_app.getRecordById(id.Value));
+            HistoryModel historyModel = db.HistoryModels.Find(id);
             if (historyModel == null)
             {
                 return HttpNotFound();
@@ -46,23 +47,15 @@ namespace PackageDelivery.GUI.Controllers.Core
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,FirstName,OtherNames,FirstLastname,SecondLastname,IdentificationNumber,Cellphone,Email,IdentificationType")] HistoryModel historyModel)
+        public ActionResult Create([Bind(Include = "Id,entryDate,departureDate,description,idPackage,idWarehouse")] HistoryModel historyModel)
         {
             if (ModelState.IsValid)
             {
-                HistoryGUIMapper mapper = new HistoryGUIMapper();
-                HistoryDTO response = _app.createRecord(mapper.ModelToDTOMapper(historyModel));
-                if (response != null)
-                {
-                    ViewBag.ClassName = ActionMessages.successClass;
-                    ViewBag.Message = ActionMessages.successMessage;
-                    return RedirectToAction("Index");
-                }
-                ViewBag.className = ActionMessages.warningClass;
-                ViewBag.Message = ActionMessages.errorMessage;
-                return View(historyModel);
+                db.HistoryModels.Add(historyModel);
+                db.SaveChanges();
+                return RedirectToAction("Index");
             }
-            ViewBag.ErrorMessage = "Error ejecutando la acción";
+
             return View(historyModel);
         }
 
@@ -73,8 +66,7 @@ namespace PackageDelivery.GUI.Controllers.Core
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            HistoryGUIMapper mapper = new HistoryGUIMapper();
-            HistoryModel historyModel = mapper.DTOToModelMapper(_app.getRecordById(id.Value));
+            HistoryModel historyModel = db.HistoryModels.Find(id);
             if (historyModel == null)
             {
                 return HttpNotFound();
@@ -87,21 +79,14 @@ namespace PackageDelivery.GUI.Controllers.Core
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,FirstName,OtherNames,FirstLastname,SecondLastname,IdentificationNumber,Cellphone,Email,IdentificationType")] HistoryModel historyModel)
+        public ActionResult Edit([Bind(Include = "Id,entryDate,departureDate,description,idPackage,idWarehouse")] HistoryModel historyModel)
         {
             if (ModelState.IsValid)
             {
-                HistoryGUIMapper mapper = new HistoryGUIMapper();
-                HistoryDTO response = _app.updateRecord(mapper.ModelToDTOMapper(historyModel));
-                if (response != null)
-                {
-                    ViewBag.ClassName = ActionMessages.successClass;
-                    ViewBag.Message = ActionMessages.successMessage;
-                    return RedirectToAction("Index");
-                }
+                db.Entry(historyModel).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
             }
-            ViewBag.ClassName = ActionMessages.warningClass;
-            ViewBag.Message = ActionMessages.errorMessage;
             return View(historyModel);
         }
 
@@ -112,8 +97,7 @@ namespace PackageDelivery.GUI.Controllers.Core
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            HistoryGUIMapper mapper = new HistoryGUIMapper();
-            HistoryModel historyModel = mapper.DTOToModelMapper(_app.getRecordById(id.Value));
+            HistoryModel historyModel = db.HistoryModels.Find(id);
             if (historyModel == null)
             {
                 return HttpNotFound();
@@ -126,16 +110,19 @@ namespace PackageDelivery.GUI.Controllers.Core
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            bool response = _app.deleteRecordById(id);
-            if (response)
+            HistoryModel historyModel = db.HistoryModels.Find(id);
+            db.HistoryModels.Remove(historyModel);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
             {
-                ViewBag.ClassName = ActionMessages.successClass;
-                ViewBag.Message = ActionMessages.successMessage;
-                return RedirectToAction("Index");
+                db.Dispose();
             }
-            ViewBag.ClassName = ActionMessages.warningClass;
-            ViewBag.Message = ActionMessages.errorMessage;
-            return View();
+            base.Dispose(disposing);
         }
     }
 }

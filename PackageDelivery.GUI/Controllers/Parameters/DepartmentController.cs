@@ -1,33 +1,34 @@
-﻿using PackageDelivery.Application.Contracts.DTO.ParametersDTO;
-using PackageDelivery.Application.Contracts.Interfaces.Parameters;
-using PackageDelivery.Application.Implementation.Implementation.Parameters;
-using PackageDelivery.GUI.Helpers;
-using PackageDelivery.GUI.Mappers.Parameters;
-using PackageDelivery.GUI.Models.Parameters;
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
+using System.Linq;
 using System.Net;
+using System.Web;
 using System.Web.Mvc;
+using PackageDelivery.GUI.Models;
+using PackageDelivery.GUI.Models.Parameters;
 
 namespace PackageDelivery.GUI.Controllers.Parameters
 {
     public class DepartmentController : Controller
     {
-        private IDepartmentApplication _app = new DepartmentImpApplication();
+        private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Department
-        public ActionResult Index(string filter = "")
+        public ActionResult Index()
         {
-            return View(_app.getRecordsList(filter));
+            return View(db.DepartmentModels.ToList());
         }
 
         // GET: Department/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult Details(long? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            DepartmentGUIMapper mapper = new DepartmentGUIMapper();
-            DepartmentModel departmentModel = mapper.DTOToModelMapper(_app.getRecordById(id.Value));
+            DepartmentModel departmentModel = db.DepartmentModels.Find(id);
             if (departmentModel == null)
             {
                 return HttpNotFound();
@@ -46,36 +47,26 @@ namespace PackageDelivery.GUI.Controllers.Parameters
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,FirstName,OtherNames,FirstLastname,SecondLastname,IdentificationNumber,Cellphone,Email,IdentificationType")] DepartmentModel departmentModel)
+        public ActionResult Create([Bind(Include = "Id,name")] DepartmentModel departmentModel)
         {
             if (ModelState.IsValid)
             {
-                DepartmentGUIMapper mapper = new DepartmentGUIMapper();
-                DepartmentDTO response = _app.createRecord(mapper.ModelToDTOMapper(departmentModel));
-                if (response != null)
-                {   
-                    ViewBag.ClassName = ActionMessages.successClass;
-                    ViewBag.Message = ActionMessages.successMessage;
-                    return RedirectToAction("Index");
-                }
-                ViewBag.ClassName = ActionMessages.warningClass;
-                ViewBag.Message = ActionMessages.alreadyExistsMessage;
-                return View(departmentModel);
+                db.DepartmentModels.Add(departmentModel);
+                db.SaveChanges();
+                return RedirectToAction("Index");
             }
-            ViewBag.ClassName = ActionMessages.warningClass;
-            ViewBag.Message = ActionMessages.errorMessage;
+
             return View(departmentModel);
         }
 
         // GET: Department/Edit/5
-        public ActionResult Edit(int? id)
+        public ActionResult Edit(long? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            DepartmentGUIMapper mapper = new DepartmentGUIMapper();
-            DepartmentModel departmentModel = mapper.DTOToModelMapper(_app.getRecordById(id.Value));
+            DepartmentModel departmentModel = db.DepartmentModels.Find(id);
             if (departmentModel == null)
             {
                 return HttpNotFound();
@@ -88,33 +79,25 @@ namespace PackageDelivery.GUI.Controllers.Parameters
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,FirstName,OtherNames,FirstLastname,SecondLastname,IdentificationNumber,Cellphone,Email,IdentificationType")] DepartmentModel departmentModel)
+        public ActionResult Edit([Bind(Include = "Id,name")] DepartmentModel departmentModel)
         {
             if (ModelState.IsValid)
             {
-                DepartmentGUIMapper mapper = new DepartmentGUIMapper();
-                DepartmentDTO response = _app.updateRecord(mapper.ModelToDTOMapper(departmentModel));
-                if (response != null)
-                {   
-                    ViewBag.ClassName = ActionMessages.successClass;
-                    ViewBag.Message = ActionMessages.successMessage;
-                    return RedirectToAction("Index");
-                }
+                db.Entry(departmentModel).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
             }
-            ViewBag.ClassName = ActionMessages.warningClass;
-            ViewBag.Message = ActionMessages.errorMessage;
             return View(departmentModel);
         }
 
         // GET: Department/Delete/5
-        public ActionResult Delete(int? id)
+        public ActionResult Delete(long? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            DepartmentGUIMapper mapper = new DepartmentGUIMapper();
-            DepartmentModel departmentModel = mapper.DTOToModelMapper(_app.getRecordById(id.Value));
+            DepartmentModel departmentModel = db.DepartmentModels.Find(id);
             if (departmentModel == null)
             {
                 return HttpNotFound();
@@ -125,18 +108,21 @@ namespace PackageDelivery.GUI.Controllers.Parameters
         // POST: Department/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(long id)
         {
-            bool response = _app.deleteRecordById(id);
-            if (response)
-            {   
-                ViewBag.ClassName = ActionMessages.successClass;
-                ViewBag.Message = ActionMessages.successMessage;
-                return RedirectToAction("Index");
+            DepartmentModel departmentModel = db.DepartmentModels.Find(id);
+            db.DepartmentModels.Remove(departmentModel);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
             }
-            ViewBag.ClassName = ActionMessages.warningClass;
-            ViewBag.Message = ActionMessages.errorMessage;
-            return View();
+            base.Dispose(disposing);
         }
     }
 }

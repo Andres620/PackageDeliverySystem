@@ -1,33 +1,34 @@
-﻿using PackageDelivery.Application.Contracts.DTO.ParametersDTO;
-using PackageDelivery.Application.Contracts.Interfaces.Parameters;
-using PackageDelivery.Application.Implementation.Implementation.Parameters;
-using PackageDelivery.GUI.Helpers;
-using PackageDelivery.GUI.Mappers.Parameters;
-using PackageDelivery.GUI.Models.Parameters;
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
+using System.Linq;
 using System.Net;
+using System.Web;
 using System.Web.Mvc;
+using PackageDelivery.GUI.Models;
+using PackageDelivery.GUI.Models.Parameters;
 
 namespace PackageDelivery.GUI.Controllers.Parameters
 {
     public class TownController : Controller
     {
-        private ITownApplication _app = new TownImpApplication();
+        private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Town
-        public ActionResult Index(string filter = "")
+        public ActionResult Index()
         {
-            return View(_app.getRecordsList(filter));
+            return View(db.TownModels.ToList());
         }
 
         // GET: Town/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult Details(long? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            TownGUIMapper mapper = new TownGUIMapper();
-            TownModel townModel = mapper.DTOToModelMapper(_app.getRecordById(id.Value));
+            TownModel townModel = db.TownModels.Find(id);
             if (townModel == null)
             {
                 return HttpNotFound();
@@ -46,36 +47,26 @@ namespace PackageDelivery.GUI.Controllers.Parameters
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,FirstName,OtherNames,FirstLastname,SecondLastname,IdentificationNumber,Cellphone,Email,IdentificationType")] TownModel townModel)
+        public ActionResult Create([Bind(Include = "Id,name,IdDepartment")] TownModel townModel)
         {
             if (ModelState.IsValid)
             {
-                TownGUIMapper mapper = new TownGUIMapper();
-                TownDTO response = _app.createRecord(mapper.ModelToDTOMapper(townModel));
-                if (response != null)
-                {   
-                    ViewBag.ClassName = ActionMessages.successClass;
-                    ViewBag.Message = ActionMessages.successMessage;
-                    return RedirectToAction("Index");
-                }
-                ViewBag.ClassName = ActionMessages.warningClass;
-                ViewBag.Message = ActionMessages.alreadyExistsMessage;
-                return View(townModel);
+                db.TownModels.Add(townModel);
+                db.SaveChanges();
+                return RedirectToAction("Index");
             }
-            ViewBag.ClassName = ActionMessages.warningClass;
-            ViewBag.Message = ActionMessages.errorMessage;
+
             return View(townModel);
         }
 
         // GET: Town/Edit/5
-        public ActionResult Edit(int? id)
+        public ActionResult Edit(long? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            TownGUIMapper mapper = new TownGUIMapper();
-            TownModel townModel = mapper.DTOToModelMapper(_app.getRecordById(id.Value));
+            TownModel townModel = db.TownModels.Find(id);
             if (townModel == null)
             {
                 return HttpNotFound();
@@ -88,33 +79,25 @@ namespace PackageDelivery.GUI.Controllers.Parameters
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,FirstName,OtherNames,FirstLastname,SecondLastname,IdentificationNumber,Cellphone,Email,IdentificationType")] TownModel townModel)
+        public ActionResult Edit([Bind(Include = "Id,name,IdDepartment")] TownModel townModel)
         {
             if (ModelState.IsValid)
             {
-                TownGUIMapper mapper = new TownGUIMapper();
-                TownDTO response = _app.updateRecord(mapper.ModelToDTOMapper(townModel));
-                if (response != null)
-                {
-                    ViewBag.ClassName = ActionMessages.successClass;
-                    ViewBag.Message = ActionMessages.successMessage;
-                    return RedirectToAction("Index");
-                }
+                db.Entry(townModel).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
             }
-            ViewBag.ClassName = ActionMessages.warningClass;
-            ViewBag.Message = ActionMessages.errorMessage;
             return View(townModel);
         }
 
         // GET: Town/Delete/5
-        public ActionResult Delete(int? id)
+        public ActionResult Delete(long? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            TownGUIMapper mapper = new TownGUIMapper();
-            TownModel townModel = mapper.DTOToModelMapper(_app.getRecordById(id.Value));
+            TownModel townModel = db.TownModels.Find(id);
             if (townModel == null)
             {
                 return HttpNotFound();
@@ -125,19 +108,21 @@ namespace PackageDelivery.GUI.Controllers.Parameters
         // POST: Town/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(long id)
         {
-            bool response = _app.deleteRecordById(id);
-            if (response)
-            {   
-                ViewBag.ClassName = ActionMessages.successClass;
-                ViewBag.Message = ActionMessages.successMessage;
-                return RedirectToAction("Index");
+            TownModel townModel = db.TownModels.Find(id);
+            db.TownModels.Remove(townModel);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
             }
-            ViewBag.ClassName = ActionMessages.warningClass;
-            ViewBag.Message = ActionMessages.errorMessage;
-            return View();
+            base.Dispose(disposing);
         }
     }
 }
-
