@@ -1,0 +1,64 @@
+﻿@model PackageDelivery.GUI.Models.Core.HistoryModel
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>HistoryModel</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.entryDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.entryDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.departureDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.departureDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.idPackage)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.idPackage)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.idWarehouse)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.idWarehouse)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>
