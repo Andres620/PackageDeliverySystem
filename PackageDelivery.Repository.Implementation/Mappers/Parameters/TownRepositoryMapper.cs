@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace PackageDelivery.Repository.Implementation.Mappers.Parameters
 {
-    public class TowmRepositoryMapper : DbModelMapperBase<TownDbModel, municipio>
+    public class TownRepositoryMapper : DbModelMapperBase<TownDbModel, municipio>
     {
         public override TownDbModel DatabaseToDbModelMapper(municipio input)
         {

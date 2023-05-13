@@ -1,34 +1,36 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Linq;
-using System.Net;
-using System.Web;
-using System.Web.Mvc;
-using PackageDelivery.GUI.Models;
+﻿using PackageDelivery.Application.Contracts.DTO.ParametersDTO;
+using PackageDelivery.Application.Contracts.Interfaces.Parameters;
+using PackageDelivery.Application.Implementation.Implementation.Parameters;
+using PackageDelivery.GUI.Helpers;
+using PackageDelivery.GUI.Mappers.Parameters;
 using PackageDelivery.GUI.Models.Parameters;
+using System.Collections.Generic;
+using System.Net;
+using System.Web.Mvc;
 
 namespace PackageDelivery.GUI.Controllers.Parameters
 {
     public class TownController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        private ITownApplication _app = new TownImpApplication();
 
         // GET: Town
-        public ActionResult Index()
+        public ActionResult Index(string filter = "")
         {
-            return View(db.TownModels.ToList());
+            TownGUIMapper mapper = new TownGUIMapper();
+            IEnumerable<TownModel> list = mapper.DTOToModelMapper(_app.getRecordsList(filter));
+            return View(list);
         }
 
         // GET: Town/Details/5
-        public ActionResult Details(long? id)
+        public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            TownModel townModel = db.TownModels.Find(id);
+            TownGUIMapper mapper = new TownGUIMapper();
+            TownModel townModel = mapper.DTOToModelMapper(_app.getRecordById(id.Value));
             if (townModel == null)
             {
                 return HttpNotFound();
@@ -49,24 +51,34 @@ namespace PackageDelivery.GUI.Controllers.Parameters
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,name,IdDepartment")] TownModel townModel)
         {
-            if (ModelState.IsValid)
+            if(ModelState.IsValid)
             {
-                db.TownModels.Add(townModel);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                TownGUIMapper mapper = new TownGUIMapper();
+                TownDTO response = _app.createRecord(mapper.ModelToDTOMapper(townModel));
+                if (response != null)
+                {
+                    ViewBag.ClassName = ActionMessages.successClass;
+                    ViewBag.Message = ActionMessages.successMessage;
+                    return RedirectToAction("Index");
+                }
+                ViewBag.ClassName = ActionMessages.warningClass;
+                ViewBag.Message = ActionMessages.alreadyExistsMessage;
+                return View(townModel);
             }
-
+            ViewBag.ClassName = ActionMessages.warningClass;
+            ViewBag.Message = ActionMessages.errorMessage;
             return View(townModel);
         }
 
         // GET: Town/Edit/5
-        public ActionResult Edit(long? id)
+        public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            TownModel townModel = db.TownModels.Find(id);
+            TownGUIMapper mapper = new TownGUIMapper();
+            TownModel townModel = mapper.DTOToModelMapper(_app.getRecordById(id.Value));
             if (townModel == null)
             {
                 return HttpNotFound();
@@ -83,21 +95,29 @@ namespace PackageDelivery.GUI.Controllers.Parameters
         {
             if (ModelState.IsValid)
             {
-                db.Entry(townModel).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                TownGUIMapper mapper = new TownGUIMapper();
+                TownDTO response = _app.updateRecord(mapper.ModelToDTOMapper(townModel));
+                if (response != null)
+                {
+                    ViewBag.ClassName = ActionMessages.successClass;
+                    ViewBag.Message = ActionMessages.successMessage;
+                    return RedirectToAction("Index");
+                }
             }
+            ViewBag.ClassName = ActionMessages.warningClass;
+            ViewBag.Message = ActionMessages.errorMessage;
             return View(townModel);
         }
 
         // GET: Town/Delete/5
-        public ActionResult Delete(long? id)
+        public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            TownModel townModel = db.TownModels.Find(id);
+            TownGUIMapper mapper = new TownGUIMapper();
+            TownModel townModel = mapper.DTOToModelMapper(_app.getRecordById(id.Value));
             if (townModel == null)
             {
                 return HttpNotFound();
@@ -108,21 +128,19 @@ namespace PackageDelivery.GUI.Controllers.Parameters
         // POST: Town/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(long id)
+        public ActionResult DeleteConfirmed(int id)
         {
-            TownModel townModel = db.TownModels.Find(id);
-            db.TownModels.Remove(townModel);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            bool response = _app.deleteRecordById(id);
+            if (response)
+            {
+                ViewBag.ClassName = ActionMessages.successClass;
+                ViewBag.Message = ActionMessages.successMessage;
+                return RedirectToAction("Index");
+            }
+            ViewBag.ClassName = ActionMessages.warningClass;
+            ViewBag.Message = ActionMessages.errorMessage;
+            return View();
         }
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
     }
 }

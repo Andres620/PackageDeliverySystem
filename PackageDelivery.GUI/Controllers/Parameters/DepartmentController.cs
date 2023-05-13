@@ -1,34 +1,36 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Linq;
-using System.Net;
-using System.Web;
-using System.Web.Mvc;
-using PackageDelivery.GUI.Models;
+﻿using PackageDelivery.Application.Contracts.DTO.ParametersDTO;
+using PackageDelivery.Application.Contracts.Interfaces.Parameters;
+using PackageDelivery.Application.Implementation.Implementation.Parameters;
+using PackageDelivery.GUI.Helpers;
+using PackageDelivery.GUI.Mappers.Parameters;
 using PackageDelivery.GUI.Models.Parameters;
+using System.Collections.Generic;
+using System.Net;
+using System.Web.Mvc;
 
 namespace PackageDelivery.GUI.Controllers.Parameters
 {
     public class DepartmentController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        private IDepartmentApplication _app = new DepartmentImpApplication();
 
         // GET: Department
-        public ActionResult Index()
+        public ActionResult Index(string filter = "")
         {
-            return View(db.DepartmentModels.ToList());
+            DepartmentGUIMapper mapper = new DepartmentGUIMapper();
+            IEnumerable<DepartmentModel> list = mapper.DTOToModelMapper(_app.getRecordsList(filter));
+            return View(list);
         }
 
         // GET: Department/Details/5
-        public ActionResult Details(long? id)
+        public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            DepartmentModel departmentModel = db.DepartmentModels.Find(id);
+            DepartmentGUIMapper mapper = new DepartmentGUIMapper();
+            DepartmentModel departmentModel = mapper.DTOToModelMapper(_app.getRecordById(id.Value));
             if (departmentModel == null)
             {
                 return HttpNotFound();
@@ -51,22 +53,32 @@ namespace PackageDelivery.GUI.Controllers.Parameters
         {
             if (ModelState.IsValid)
             {
-                db.DepartmentModels.Add(departmentModel);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                DepartmentGUIMapper mapper = new DepartmentGUIMapper();
+                DepartmentDTO response = _app.createRecord(mapper.ModelToDTOMapper(departmentModel));
+                if (response != null)
+                {
+                    ViewBag.ClassName = ActionMessages.successClass;
+                    ViewBag.Message = ActionMessages.successMessage;
+                    return RedirectToAction("Index");
+                }
+                ViewBag.ClassName = ActionMessages.warningClass;
+                ViewBag.Message = ActionMessages.alreadyExistsMessage;
+                return View(departmentModel);
             }
-
+            ViewBag.ClassName = ActionMessages.warningClass;
+            ViewBag.Message = ActionMessages.errorMessage;
             return View(departmentModel);
         }
 
         // GET: Department/Edit/5
-        public ActionResult Edit(long? id)
+        public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            DepartmentModel departmentModel = db.DepartmentModels.Find(id);
+            DepartmentGUIMapper mapper = new DepartmentGUIMapper();
+            DepartmentModel departmentModel = mapper.DTOToModelMapper(_app.getRecordById(id.Value));
             if (departmentModel == null)
             {
                 return HttpNotFound();
@@ -83,21 +95,29 @@ namespace PackageDelivery.GUI.Controllers.Parameters
         {
             if (ModelState.IsValid)
             {
-                db.Entry(departmentModel).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                DepartmentGUIMapper mapper = new DepartmentGUIMapper();
+                DepartmentDTO response = _app.updateRecord(mapper.ModelToDTOMapper(departmentModel));
+                if (response != null)
+                {
+                    ViewBag.ClassName = ActionMessages.successClass;
+                    ViewBag.Message = ActionMessages.successMessage;
+                    return RedirectToAction("Index");
+                }
             }
+            ViewBag.ClassName = ActionMessages.warningClass;
+            ViewBag.Message = ActionMessages.errorMessage;
             return View(departmentModel);
         }
 
         // GET: Department/Delete/5
-        public ActionResult Delete(long? id)
+        public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            DepartmentModel departmentModel = db.DepartmentModels.Find(id);
+            DepartmentGUIMapper mapper = new DepartmentGUIMapper();
+            DepartmentModel departmentModel = mapper.DTOToModelMapper(_app.getRecordById(id.Value));
             if (departmentModel == null)
             {
                 return HttpNotFound();
@@ -108,21 +128,18 @@ namespace PackageDelivery.GUI.Controllers.Parameters
         // POST: Department/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(long id)
+        public ActionResult DeleteConfirmed(int id)
         {
-            DepartmentModel departmentModel = db.DepartmentModels.Find(id);
-            db.DepartmentModels.Remove(departmentModel);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
+            bool response = _app.deleteRecordById(id);
+            if (response)
             {
-                db.Dispose();
+                ViewBag.ClassName = ActionMessages.successClass;
+                ViewBag.Message = ActionMessages.successMessage;
+                return RedirectToAction("Index");
             }
-            base.Dispose(disposing);
+            ViewBag.ClassName = ActionMessages.warningClass;
+            ViewBag.Message = ActionMessages.errorMessage;
+            return View();
         }
     }
 }

@@ -27,7 +27,6 @@ namespace PackageDelivery.GUI.Controllers.Parameters
         {
             if (id == null)
             {   
-
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             DocumentTypeGUIMapper mapper = new DocumentTypeGUIMapper();
