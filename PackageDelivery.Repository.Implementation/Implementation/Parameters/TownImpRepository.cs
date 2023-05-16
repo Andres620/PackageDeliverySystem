@@ -1,12 +1,10 @@
 ﻿using PackageDelivery.Repository.Contracts.DbModels.Parameters;
 using PackageDelivery.Repository.Contracts.Interfaces.Parameters;
 using PackageDelivery.Repository.Implementation.DataModel;
-using PackageDelivery.Repository.Implementation.Mappers.Parameters;
-using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using PackageDelivery.Repository.Implementation.Mappers.Parameters;
 
 namespace PackageDelivery.Repository.Implementation.Implementation.Parameters
 {
@@ -14,9 +12,26 @@ namespace PackageDelivery.Repository.Implementation.Implementation.Parameters
     {
         public TownDbModel createRecord(TownDbModel record)
         {
-            throw new NotImplementedException();
+            using (PackageDeliveryEntities db = new PackageDeliveryEntities())
+            {
+                municipio townType = db.municipio.Where(x => x.nombre.ToUpper().Trim().Equals(record.name.ToUpper())).FirstOrDefault();
+                if (townType != null)
+                {
+                    return null;
+                }
+                TownRepositoryMapper mapper = new TownRepositoryMapper();
+                municipio dt = mapper.DbModelToDatabaseMapper(record);
+                db.municipio.Add(dt);
+                db.SaveChanges();
+                return mapper.DatabaseToDbModelMapper(dt);
+            }
         }
 
+        /// <summary>
+        /// Eliminación de un registro en la base de datos por Id
+        /// </summary>
+        /// <param name="id">Id del registro a eliminar</param>
+        /// <returns>Booleano, true cuando se elimina y false cuando no se encuentra o está asociado como FK</returns>
         public bool deleteRecordById(int id)
         {
             using (PackageDeliveryEntities db = new PackageDeliveryEntities())
@@ -39,6 +54,11 @@ namespace PackageDelivery.Repository.Implementation.Implementation.Parameters
             }
         }
 
+        /// <summary>
+        /// Obtiene el registro por Id
+        /// </summary>
+        /// <param name="id">Id del registro a buscar</param>
+        /// <returns>null cuando no lo encuentra o el objeto cunado si lo encuentra</returns>
         public TownDbModel getRecordById(int id)
         {
             using (PackageDeliveryEntities db = new PackageDeliveryEntities())
@@ -48,24 +68,45 @@ namespace PackageDelivery.Repository.Implementation.Implementation.Parameters
                 {
                     return null;
                 }
-                TowmRepositoryMapper mapper = new TowmRepositoryMapper();
+                TownRepositoryMapper mapper = new TownRepositoryMapper();
                 return mapper.DatabaseToDbModelMapper(record);
             }
         }
 
+        /// <summary>
+        /// Buscar la lista de registros
+        /// </summary>
+        /// <param name="filter">Filtro a aplicar en la lista</param>
+        /// <returns>Lista de registros filtrados</returns>
         public IEnumerable<TownDbModel> getRecordsList(string filter)
         {
             using (PackageDeliveryEntities db = new PackageDeliveryEntities())
             {
                 IEnumerable<municipio> list = db.municipio.Where(x => x.nombre.Contains(filter));
-                TowmRepositoryMapper mapper = new TowmRepositoryMapper();
+                TownRepositoryMapper mapper = new TownRepositoryMapper();
                 return mapper.DatabaseToDbModelMapper(list);
             }
         }
 
         public TownDbModel updateRecord(TownDbModel record)
         {
-            throw new NotImplementedException();
+            using (PackageDeliveryEntities db = new PackageDeliveryEntities())
+            {
+                municipio td = db.municipio.Where(x => x.id == record.Id).FirstOrDefault();
+                if (td == null)
+                {
+                    return null;
+                }
+                else
+                {
+                    td.nombre = record.name;
+                    db.Entry(td).State = EntityState.Modified;
+                    db.SaveChanges();
+                    TownRepositoryMapper mapper = new TownRepositoryMapper();
+
+                    return mapper.DatabaseToDbModelMapper(td);
+                }
+            }
         }
     }
 }

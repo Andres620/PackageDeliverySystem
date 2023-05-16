@@ -2,11 +2,9 @@
 using PackageDelivery.Repository.Contracts.Interfaces.Parameters;
 using PackageDelivery.Repository.Implementation.DataModel;
 using PackageDelivery.Repository.Implementation.Mappers.Parameters;
-using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PackageDelivery.Repository.Implementation.Implementation.Parameters
 {
@@ -14,9 +12,22 @@ namespace PackageDelivery.Repository.Implementation.Implementation.Parameters
     {
         public AddressDbModel createRecord(AddressDbModel record)
         {
-            throw new NotImplementedException();
+            using (PackageDeliveryEntities db = new PackageDeliveryEntities())
+            {
+                
+                AddressRepositoryMapper mapper = new AddressRepositoryMapper();
+                direccion dt = mapper.DbModelToDatabaseMapper(record);
+                db.direccion.Add(dt);
+                db.SaveChanges();
+                return mapper.DatabaseToDbModelMapper(dt);
+            }
         }
 
+        /// <summary>
+        /// Eliminación de un registro en la base de datos por Id
+        /// </summary>
+        /// <param name="id">Id del registro a eliminar</param>
+        /// <returns>Booleano, true cuando se elimina y false cuando no se encuentra o está asociado como FK</returns>
         public bool deleteRecordById(int id)
         {
             using (PackageDeliveryEntities db = new PackageDeliveryEntities())
@@ -39,6 +50,11 @@ namespace PackageDelivery.Repository.Implementation.Implementation.Parameters
             }
         }
 
+        /// <summary>
+        /// Obtiene el registro por Id
+        /// </summary>
+        /// <param name="id">Id del registro a buscar</param>
+        /// <returns>null cuando no lo encuentra o el objeto cunado si lo encuentra</returns>
         public AddressDbModel getRecordById(int id)
         {
             using (PackageDeliveryEntities db = new PackageDeliveryEntities())
@@ -53,11 +69,16 @@ namespace PackageDelivery.Repository.Implementation.Implementation.Parameters
             }
         }
 
+        /// <summary>
+        /// Buscar la lista de registros
+        /// </summary>
+        /// <param name="filter">Filtro a aplicar en la lista</param>
+        /// <returns>Lista de registros filtrados</returns>
         public IEnumerable<AddressDbModel> getRecordsList(string filter)
         {
             using (PackageDeliveryEntities db = new PackageDeliveryEntities())
             {
-                IEnumerable<direccion> list = db.direccion.Where(x => x.observaciones.Contains(filter));
+                IEnumerable<direccion> list = db.direccion.Where(x => x.tipoCalle.Contains(filter));
                 AddressRepositoryMapper mapper = new AddressRepositoryMapper();
                 return mapper.DatabaseToDbModelMapper(list);
             }
@@ -65,7 +86,22 @@ namespace PackageDelivery.Repository.Implementation.Implementation.Parameters
 
         public AddressDbModel updateRecord(AddressDbModel record)
         {
-            throw new NotImplementedException();
+            using (PackageDeliveryEntities db = new PackageDeliveryEntities())
+            {
+                direccion td = db.direccion.Where(x => x.id == record.Id).FirstOrDefault();
+                if (td == null)
+                {
+                    return null;
+                }
+                else
+                {
+                    td.tipoCalle = record.streetType;
+                    db.Entry(td).State = EntityState.Modified;
+                    db.SaveChanges();
+                    AddressRepositoryMapper mapper = new AddressRepositoryMapper();
+                    return mapper.DatabaseToDbModelMapper(td);
+                }
+            }
         }
     }
 }

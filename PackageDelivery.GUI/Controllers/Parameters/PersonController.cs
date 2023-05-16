@@ -1,34 +1,36 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Linq;
-using System.Net;
-using System.Web;
-using System.Web.Mvc;
-using PackageDelivery.GUI.Models;
+﻿using PackageDelivery.Application.Contracts.DTO.ParametersDTO;
+using PackageDelivery.Application.Contracts.Interfaces.Parameters;
+using PackageDelivery.Application.Implementation.Implementation.Parameters;
+using PackageDelivery.GUI.Helpers;
+using PackageDelivery.GUI.Implementation.Mappers.Parameters;
 using PackageDelivery.GUI.Models.Parameters;
+using System.Collections.Generic;
+using System.Net;
+using System.Web.Mvc;
 
 namespace PackageDelivery.GUI.Controllers.Parameters
 {
     public class PersonController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        private IPersonApplication _app = new PersonImpApplication();
 
         // GET: Person
-        public ActionResult Index()
+        public ActionResult Index(string filter = "")
         {
-            return View(db.PersonModels.ToList());
+            PersonGUIMapper mapper = new PersonGUIMapper();
+            IEnumerable<PersonModel> list = mapper.DTOToModelMapper(_app.getRecordsList(filter));
+            return View(list);
         }
 
         // GET: Person/Details/5
-        public ActionResult Details(long? id)
+        public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            PersonModel personModel = db.PersonModels.Find(id);
+            PersonGUIMapper mapper = new PersonGUIMapper();
+            PersonModel personModel = mapper.DTOToModelMapper(_app.getRecordById(id.Value));
             if (personModel == null)
             {
                 return HttpNotFound();
@@ -51,22 +53,32 @@ namespace PackageDelivery.GUI.Controllers.Parameters
         {
             if (ModelState.IsValid)
             {
-                db.PersonModels.Add(personModel);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                PersonGUIMapper mapper = new PersonGUIMapper();
+                PersonDTO response = _app.createRecord(mapper.ModelToDTOMapper(personModel));
+                if (response != null)
+                {
+                    ViewBag.ClassName = ActionMessages.successClass;
+                    ViewBag.Message = ActionMessages.successMessage;
+                    return RedirectToAction("Index");
+                }
+                ViewBag.ClassName = ActionMessages.warningClass;
+                ViewBag.Message = ActionMessages.alreadyExistsMessage;
+                return View(personModel);
             }
-
+            ViewBag.ClassName = ActionMessages.warningClass;
+            ViewBag.Message = ActionMessages.errorMessage;
             return View(personModel);
         }
 
         // GET: Person/Edit/5
-        public ActionResult Edit(long? id)
+        public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            PersonModel personModel = db.PersonModels.Find(id);
+            PersonGUIMapper mapper = new PersonGUIMapper();
+            PersonModel personModel = mapper.DTOToModelMapper(_app.getRecordById(id.Value));
             if (personModel == null)
             {
                 return HttpNotFound();
@@ -83,21 +95,29 @@ namespace PackageDelivery.GUI.Controllers.Parameters
         {
             if (ModelState.IsValid)
             {
-                db.Entry(personModel).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                PersonGUIMapper mapper = new PersonGUIMapper();
+                PersonDTO response = _app.updateRecord(mapper.ModelToDTOMapper(personModel));
+                if (response != null)
+                {
+                    ViewBag.ClassName = ActionMessages.successClass;
+                    ViewBag.Message = ActionMessages.successMessage;
+                    return RedirectToAction("Index");
+                }
             }
+            ViewBag.ClassName = ActionMessages.warningClass;
+            ViewBag.Message = ActionMessages.errorMessage;
             return View(personModel);
         }
 
         // GET: Person/Delete/5
-        public ActionResult Delete(long? id)
+        public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            PersonModel personModel = db.PersonModels.Find(id);
+            PersonGUIMapper mapper = new PersonGUIMapper();
+            PersonModel personModel = mapper.DTOToModelMapper(_app.getRecordById(id.Value));
             if (personModel == null)
             {
                 return HttpNotFound();
@@ -108,21 +128,18 @@ namespace PackageDelivery.GUI.Controllers.Parameters
         // POST: Person/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(long id)
+        public ActionResult DeleteConfirmed(int id)
         {
-            PersonModel personModel = db.PersonModels.Find(id);
-            db.PersonModels.Remove(personModel);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
+            bool response = _app.deleteRecordById(id);
+            if (response)
             {
-                db.Dispose();
+                ViewBag.ClassName = ActionMessages.successClass;
+                ViewBag.Message = ActionMessages.successMessage;
+                return RedirectToAction("Index");
             }
-            base.Dispose(disposing);
+            ViewBag.ClassName = ActionMessages.warningClass;
+            ViewBag.Message = ActionMessages.errorMessage;
+            return View();
         }
     }
 }
