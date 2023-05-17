@@ -349,19 +349,6 @@
     <Content Include="Views\Person\Details.cshtml" />
     <Content Include="Views\Person\Edit.cshtml" />
     <Content Include="Views\Person\Index.cshtml" />
-<<<<<<< HEAD
-    <Content Include="Views\Town\Create.cshtml" />
-    <Content Include="Views\Town\Delete.cshtml" />
-    <Content Include="Views\Town\Details.cshtml" />
-    <Content Include="Views\Town\Edit.cshtml" />
-    <Content Include="Views\Town\Index.cshtml" />
-    <Content Include="Views\Department\Create.cshtml" />
-    <Content Include="Views\Department\Delete.cshtml" />
-    <Content Include="Views\Department\Details.cshtml" />
-    <Content Include="Views\Department\Edit.cshtml" />
-    <Content Include="Views\Department\Index.cshtml" />
-=======
->>>>>>> 197e68a0439ed5ea76c986118d7f6c06a49cfa40
     <Content Include="Views\Address\Create.cshtml" />
     <Content Include="Views\Address\Delete.cshtml" />
     <Content Include="Views\Address\Details.cshtml" />
@@ -412,15 +399,11 @@
     <Content Include="Views\Vehicle\Details.cshtml" />
     <Content Include="Views\Vehicle\Edit.cshtml" />
     <Content Include="Views\Vehicle\Index.cshtml" />
-<<<<<<< HEAD
-    <Content Include="Web.config" />
-=======
     <Content Include="Views\Warehouse\Create.cshtml" />
     <Content Include="Views\Warehouse\Delete.cshtml" />
     <Content Include="Views\Warehouse\Details.cshtml" />
     <Content Include="Views\Warehouse\Edit.cshtml" />
     <Content Include="Views\Warehouse\Index.cshtml" />
->>>>>>> 197e68a0439ed5ea76c986118d7f6c06a49cfa40
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
