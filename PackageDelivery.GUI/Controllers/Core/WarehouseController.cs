@@ -1,24 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Linq;
-using System.Net;
-using System.Web;
-using System.Web.Mvc;
-using PackageDelivery.GUI.Models;
+﻿using PackageDelivery.Application.Contracts.DTO.CoreDTO;
+using PackageDelivery.Application.Contracts.Interfaces.Core;
+using PackageDelivery.Application.Implementation.Implementation.Core;
+using PackageDelivery.GUI.Helpers;
+using PackageDelivery.GUI.Mappers.Core;
 using PackageDelivery.GUI.Models.Core;
+using System.Collections.Generic;
+using System.Net;
+using System.Web.Mvc;
 
 namespace PackageDelivery.GUI.Controllers.Core
 {
     public class WarehouseController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        private IWarehouseApplication _app = new WarehouseImpApplication();
 
         // GET: Warehouse
-        public ActionResult Index()
+        public ActionResult Index(string filter = "")
         {
-            return View(db.WarehouseModels.ToList());
+            WarehouseGUIMapper mapper = new WarehouseGUIMapper();
+            IEnumerable<WarehouseModel> list = mapper.DTOToModelMapper(_app.getRecordsList(filter));
+            return View(list);
         }
 
         // GET: Warehouse/Details/5
@@ -28,7 +29,8 @@ namespace PackageDelivery.GUI.Controllers.Core
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            WarehouseModel warehouseModel = db.WarehouseModels.Find(id);
+            WarehouseGUIMapper mapper = new WarehouseGUIMapper();
+            WarehouseModel warehouseModel = mapper.DTOToModelMapper(_app.getRecordById(id.Value));
             if (warehouseModel == null)
             {
                 return HttpNotFound();
@@ -51,11 +53,20 @@ namespace PackageDelivery.GUI.Controllers.Core
         {
             if (ModelState.IsValid)
             {
-                db.WarehouseModels.Add(warehouseModel);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                WarehouseGUIMapper mapper = new WarehouseGUIMapper();
+                WarehouseDTO response = _app.createRecord(mapper.ModelToDTOMapper(warehouseModel));
+                if (response != null)
+                {
+                    ViewBag.ClassName = ActionMessages.successClass;
+                    ViewBag.Message = ActionMessages.successMessage;
+                    return RedirectToAction("Index");
+                }
+                ViewBag.ClassName = ActionMessages.warningClass;
+                ViewBag.Message = ActionMessages.alreadyExistsMessage;
+                return View(warehouseModel);
             }
-
+            ViewBag.ClassName = ActionMessages.warningClass;
+            ViewBag.Message = ActionMessages.errorMessage;
             return View(warehouseModel);
         }
 
@@ -66,7 +77,8 @@ namespace PackageDelivery.GUI.Controllers.Core
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            WarehouseModel warehouseModel = db.WarehouseModels.Find(id);
+            WarehouseGUIMapper mapper = new WarehouseGUIMapper();
+            WarehouseModel warehouseModel = mapper.DTOToModelMapper(_app.getRecordById(id.Value));
             if (warehouseModel == null)
             {
                 return HttpNotFound();
@@ -83,10 +95,17 @@ namespace PackageDelivery.GUI.Controllers.Core
         {
             if (ModelState.IsValid)
             {
-                db.Entry(warehouseModel).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                WarehouseGUIMapper mapper = new WarehouseGUIMapper();
+                WarehouseDTO response = _app.updateRecord(mapper.ModelToDTOMapper(warehouseModel));
+                if (response != null)
+                {
+                    ViewBag.ClassName = ActionMessages.successClass;
+                    ViewBag.Message = ActionMessages.successMessage;
+                    return RedirectToAction("Index");
+                }
             }
+            ViewBag.ClassName = ActionMessages.warningClass;
+            ViewBag.Message = ActionMessages.errorMessage;
             return View(warehouseModel);
         }
 
@@ -97,7 +116,8 @@ namespace PackageDelivery.GUI.Controllers.Core
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            WarehouseModel warehouseModel = db.WarehouseModels.Find(id);
+            WarehouseGUIMapper mapper = new WarehouseGUIMapper();
+            WarehouseModel warehouseModel = mapper.DTOToModelMapper(_app.getRecordById(id.Value));
             if (warehouseModel == null)
             {
                 return HttpNotFound();
@@ -110,19 +130,16 @@ namespace PackageDelivery.GUI.Controllers.Core
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            WarehouseModel warehouseModel = db.WarehouseModels.Find(id);
-            db.WarehouseModels.Remove(warehouseModel);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
+            bool response = _app.deleteRecordById(id);
+            if (response)
             {
-                db.Dispose();
+                ViewBag.ClassName = ActionMessages.successClass;
+                ViewBag.Message = ActionMessages.successMessage;
+                return RedirectToAction("Index");
             }
-            base.Dispose(disposing);
+            ViewBag.ClassName = ActionMessages.warningClass;
+            ViewBag.Message = ActionMessages.errorMessage;
+            return View();
         }
     }
 }

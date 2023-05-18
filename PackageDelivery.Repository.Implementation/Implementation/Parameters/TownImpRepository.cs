@@ -1,10 +1,10 @@
 ﻿using PackageDelivery.Repository.Contracts.DbModels.Parameters;
 using PackageDelivery.Repository.Contracts.Interfaces.Parameters;
 using PackageDelivery.Repository.Implementation.DataModel;
+using PackageDelivery.Repository.Implementation.Mappers.Parameters;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using PackageDelivery.Repository.Implementation.Mappers.Parameters;
 
 namespace PackageDelivery.Repository.Implementation.Implementation.Parameters
 {

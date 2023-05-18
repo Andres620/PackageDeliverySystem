@@ -3,17 +3,12 @@ using PackageDelivery.Application.Contracts.Interfaces.Parameters;
 using PackageDelivery.Application.Implementation.Mappers.Parameters;
 using PackageDelivery.Repository.Contracts.DbModels.Parameters;
 using PackageDelivery.Repository.Contracts.Interfaces.Parameters;
-using PackageDelivery.Repository.DbModels.Parameters;
 using PackageDelivery.Repository.Implementation.Implementation.Parameters;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PackageDelivery.Application.Implementation.Implementation.Parameters
 {
-	public class TownImpApplication : ITownApplication
+    public class TownImpApplication : ITownApplication
 	{
 		ITownRepository _repository = new TownImpRepository();
 		public TownDTO createRecord(TownDTO record)

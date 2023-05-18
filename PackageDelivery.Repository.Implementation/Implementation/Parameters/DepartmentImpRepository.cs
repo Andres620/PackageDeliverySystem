@@ -103,7 +103,6 @@ namespace PackageDelivery.Repository.Implementation.Implementation.Parameters
                     db.Entry(td).State = EntityState.Modified;
                     db.SaveChanges();
                     DepartmentRepositoryMapper mapper = new DepartmentRepositoryMapper();
-
                     return mapper.DatabaseToDbModelMapper(td);
                 }
             }

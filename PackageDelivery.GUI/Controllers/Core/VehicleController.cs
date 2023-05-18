@@ -1,24 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Linq;
-using System.Net;
-using System.Web;
-using System.Web.Mvc;
-using PackageDelivery.GUI.Models;
+﻿using PackageDelivery.Application.Contracts.DTO.CoreDTO;
+using PackageDelivery.Application.Contracts.Interfaces.Core;
+using PackageDelivery.Application.Implementation.Implementation.Core;
+using PackageDelivery.GUI.Helpers;
+using PackageDelivery.GUI.Mappers.Core;
 using PackageDelivery.GUI.Models.Core;
+using System.Collections.Generic;
+using System.Net;
+using System.Web.Mvc;
 
 namespace PackageDelivery.GUI.Controllers.Core
 {
     public class VehicleController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        private IVehicleApplication _app = new VehicleImpApplication();
 
         // GET: Vehicle
-        public ActionResult Index()
+        public ActionResult Index(string filter = "")
         {
-            return View(db.VehicleModels.ToList());
+            VehicleGUIMapper mapper = new VehicleGUIMapper();
+            IEnumerable<VehicleModel> list = mapper.DTOToModelMapper(_app.getRecordsList(filter));
+            return View(list);
         }
 
         // GET: Vehicle/Details/5
@@ -28,7 +29,8 @@ namespace PackageDelivery.GUI.Controllers.Core
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            VehicleModel vehicleModel = db.VehicleModels.Find(id);
+            VehicleGUIMapper mapper = new VehicleGUIMapper();
+            VehicleModel vehicleModel = mapper.DTOToModelMapper(_app.getRecordById(id.Value));
             if (vehicleModel == null)
             {
                 return HttpNotFound();
@@ -51,11 +53,20 @@ namespace PackageDelivery.GUI.Controllers.Core
         {
             if (ModelState.IsValid)
             {
-                db.VehicleModels.Add(vehicleModel);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                VehicleGUIMapper mapper = new VehicleGUIMapper();
+                VehicleDTO response = _app.createRecord(mapper.ModelToDTOMapper(vehicleModel));
+                if (response != null)
+                {
+                    ViewBag.ClassName = ActionMessages.successClass;
+                    ViewBag.Message = ActionMessages.successMessage;
+                    return RedirectToAction("Index");
+                }
+                ViewBag.ClassName = ActionMessages.warningClass;
+                ViewBag.Message = ActionMessages.alreadyExistsMessage;
+                return View(vehicleModel);
             }
-
+            ViewBag.ClassName = ActionMessages.warningClass;
+            ViewBag.Message = ActionMessages.errorMessage;
             return View(vehicleModel);
         }
 
@@ -66,7 +77,8 @@ namespace PackageDelivery.GUI.Controllers.Core
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            VehicleModel vehicleModel = db.VehicleModels.Find(id);
+            VehicleGUIMapper mapper = new VehicleGUIMapper();
+            VehicleModel vehicleModel = mapper.DTOToModelMapper(_app.getRecordById(id.Value));
             if (vehicleModel == null)
             {
                 return HttpNotFound();
@@ -83,10 +95,17 @@ namespace PackageDelivery.GUI.Controllers.Core
         {
             if (ModelState.IsValid)
             {
-                db.Entry(vehicleModel).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                VehicleGUIMapper mapper = new VehicleGUIMapper();
+                VehicleDTO response = _app.updateRecord(mapper.ModelToDTOMapper(vehicleModel));
+                if (response != null)
+                {
+                    ViewBag.ClassName = ActionMessages.successClass;
+                    ViewBag.Message = ActionMessages.successMessage;
+                    return RedirectToAction("Index");
+                }
             }
+            ViewBag.ClassName = ActionMessages.warningClass;
+            ViewBag.Message = ActionMessages.errorMessage;
             return View(vehicleModel);
         }
 
@@ -97,7 +116,8 @@ namespace PackageDelivery.GUI.Controllers.Core
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            VehicleModel vehicleModel = db.VehicleModels.Find(id);
+            VehicleGUIMapper mapper = new VehicleGUIMapper();
+            VehicleModel vehicleModel = mapper.DTOToModelMapper(_app.getRecordById(id.Value));
             if (vehicleModel == null)
             {
                 return HttpNotFound();
@@ -110,19 +130,16 @@ namespace PackageDelivery.GUI.Controllers.Core
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            VehicleModel vehicleModel = db.VehicleModels.Find(id);
-            db.VehicleModels.Remove(vehicleModel);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
+            bool response = _app.deleteRecordById(id);
+            if (response)
             {
-                db.Dispose();
+                ViewBag.ClassName = ActionMessages.successClass;
+                ViewBag.Message = ActionMessages.successMessage;
+                return RedirectToAction("Index");
             }
-            base.Dispose(disposing);
+            ViewBag.ClassName = ActionMessages.warningClass;
+            ViewBag.Message = ActionMessages.errorMessage;
+            return View();
         }
     }
 }

@@ -2,11 +2,9 @@
 using PackageDelivery.Repository.Contracts.Interfaces.Core;
 using PackageDelivery.Repository.Implementation.DataModel;
 using PackageDelivery.Repository.Implementation.Mappers.Parameters;
-using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PackageDelivery.Repository.Implementation.Implementation.Core
 {
@@ -14,7 +12,19 @@ namespace PackageDelivery.Repository.Implementation.Implementation.Core
     {
         public VehicleDbModel createRecord(VehicleDbModel record)
         {
-            throw new NotImplementedException();
+            using (PackageDeliveryEntities db = new PackageDeliveryEntities())
+            {
+                vehiculo vehicleType = db.vehiculo.Where(x => x.placa.ToUpper().Trim().Equals(record.plate.ToUpper())).FirstOrDefault();
+                if (vehicleType != null)
+                {
+                    return null;
+                }
+                VehicleRepositoryMapper mapper = new VehicleRepositoryMapper();
+                vehiculo dt = mapper.DbModelToDatabaseMapper(record);
+                db.vehiculo.Add(dt);
+                db.SaveChanges();
+                return mapper.DatabaseToDbModelMapper(dt);
+            }
         }
 
         public bool deleteRecordById(int id)
@@ -65,7 +75,22 @@ namespace PackageDelivery.Repository.Implementation.Implementation.Core
 
         public VehicleDbModel updateRecord(VehicleDbModel record)
         {
-            throw new NotImplementedException();
+            using (PackageDeliveryEntities db = new PackageDeliveryEntities())
+            {
+                vehiculo td = db.vehiculo.Where(x => x.id == record.Id).FirstOrDefault();
+                if (td == null)
+                {
+                    return null;
+                }
+                else
+                {
+                    td.placa = record.plate;
+                    db.Entry(td).State = EntityState.Modified;
+                    db.SaveChanges();
+                    VehicleRepositoryMapper mapper = new VehicleRepositoryMapper();
+                    return mapper.DatabaseToDbModelMapper(td);
+                }
+            }
         }
     }
 }
