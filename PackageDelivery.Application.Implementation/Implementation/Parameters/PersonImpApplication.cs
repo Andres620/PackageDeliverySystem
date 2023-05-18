@@ -4,12 +4,11 @@ using PackageDelivery.Application.Implementation.Mappers.Parameters;
 using PackageDelivery.Repository.Contracts.Interfaces.Parameters;
 using PackageDelivery.Repository.DbModels.Parameters;
 using PackageDelivery.Repository.Implementation.Implementation.Parameters;
-using System;
 using System.Collections.Generic;
 
 namespace PackageDelivery.Application.Implementation.Implementation.Parameters
 {
-	public class PersonImpApplication : IPersonApplication
+    public class PersonImpApplication : IPersonApplication
     {
 		IPersonRepository _repository = new PersonImpRepository();
 		public PersonDTO createRecord(PersonDTO record)
