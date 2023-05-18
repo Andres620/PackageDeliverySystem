@@ -6,6 +6,11 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using PackageDelivery.Application.Contracts.DTO.CoreDTO;
+using PackageDelivery.Application.Contracts.Interfaces.Core;
+using PackageDelivery.Application.Implementation.Implementation.Core;
+using PackageDelivery.GUI.Helpers;
+using PackageDelivery.GUI.Mappers.Core;
 using PackageDelivery.GUI.Models;
 using PackageDelivery.GUI.Models.Core;
 
@@ -13,28 +18,32 @@ namespace PackageDelivery.GUI.Controllers.Core
 {
     public class OfficeController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+		private IOfficeApplication _app = new OfficeImpApplication();
 
-        // GET: Office
-        public ActionResult Index()
+		// GET: Office
+		public ActionResult Index(string filter = "")
         {
-            return View(db.OfficeModels.ToList());
-        }
+			var dtoList = _app.getRecordsList(filter);
+			OfficeGUIMapper mapper = new OfficeGUIMapper();
+			IEnumerable<OfficeModel> model = mapper.DTOToModelMapper(dtoList);
+			return View(model);
+		}
 
         // GET: Office/Details/5
         public ActionResult Details(int? id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            OfficeModel officeModel = db.OfficeModels.Find(id);
-            if (officeModel == null)
-            {
-                return HttpNotFound();
-            }
-            return View(officeModel);
-        }
+			if (id == null)
+			{
+				return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+			}
+			OfficeGUIMapper mapper = new OfficeGUIMapper();
+			OfficeModel officeModel = mapper.DTOToModelMapper(_app.getRecordById(id.Value));
+			if (officeModel == null)
+			{
+				return HttpNotFound();
+			}
+			return View(officeModel);
+		}
 
         // GET: Office/Create
         public ActionResult Create()
@@ -49,30 +58,40 @@ namespace PackageDelivery.GUI.Controllers.Core
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,name,code,cellphone,address,latitude,longitude,idTown")] OfficeModel officeModel)
         {
-            if (ModelState.IsValid)
-            {
-                db.OfficeModels.Add(officeModel);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-
-            return View(officeModel);
-        }
+			if (ModelState.IsValid)
+			{
+				OfficeGUIMapper mapper = new OfficeGUIMapper();
+				OfficeDTO response = _app.createRecord(mapper.ModelToDTOMapper(officeModel));
+				if (response != null)
+				{
+					ViewBag.ClassName = ActionMessages.successClass;
+					ViewBag.Message = ActionMessages.successMessage;
+					return RedirectToAction("Index");
+				}
+				ViewBag.ClassName = ActionMessages.warningClass;
+				ViewBag.Message = ActionMessages.alreadyExistsMessage;
+				return RedirectToAction("Index");
+			}
+			ViewBag.ClassName = ActionMessages.warningClass;
+			ViewBag.Message = ActionMessages.errorMessage;
+			return View(officeModel);
+		}
 
         // GET: Office/Edit/5
         public ActionResult Edit(int? id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            OfficeModel officeModel = db.OfficeModels.Find(id);
-            if (officeModel == null)
-            {
-                return HttpNotFound();
-            }
-            return View(officeModel);
-        }
+			if (id == null)
+			{
+				return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+			}
+			OfficeGUIMapper mapper = new OfficeGUIMapper();
+			OfficeModel officeModel = mapper.DTOToModelMapper(_app.getRecordById(id.Value));
+			if (officeModel == null)
+			{
+				return HttpNotFound();
+			}
+			return View(officeModel);
+		}
 
         // POST: Office/Edit/5
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que quiere enlazarse. Para obtener 
@@ -81,48 +100,47 @@ namespace PackageDelivery.GUI.Controllers.Core
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,name,code,cellphone,address,latitude,longitude,idTown")] OfficeModel officeModel)
         {
-            if (ModelState.IsValid)
-            {
-                db.Entry(officeModel).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(officeModel);
-        }
+			if (ModelState.IsValid)
+			{
+				OfficeGUIMapper mapper = new OfficeGUIMapper();
+				OfficeDTO response = _app.updateRecord(mapper.ModelToDTOMapper(officeModel));
+				if (response != null)
+				{
+					return RedirectToAction("Index");
+				}
+			}
+			ViewBag.Message = ActionMessages.errorMessage;
+			return View(officeModel);
+		}
 
         // GET: Office/Delete/5
         public ActionResult Delete(int? id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            OfficeModel officeModel = db.OfficeModels.Find(id);
-            if (officeModel == null)
-            {
-                return HttpNotFound();
-            }
-            return View(officeModel);
-        }
+			if (id == null)
+			{
+				return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+			}
+			OfficeGUIMapper mapper = new OfficeGUIMapper();
+			OfficeModel officeModel = mapper.DTOToModelMapper(_app.getRecordById(id.Value));
+			if (officeModel == null)
+			{
+				return HttpNotFound();
+			}
+			return View(officeModel);
+		}
 
         // POST: Office/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            OfficeModel officeModel = db.OfficeModels.Find(id);
-            db.OfficeModels.Remove(officeModel);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+			bool response = _app.deleteRecordById(id);
+			if (response)
+			{
+				return RedirectToAction("Index");
+			}
+			ViewBag.Message = ActionMessages.errorMessage;
+			return View();
+		}
     }
 }

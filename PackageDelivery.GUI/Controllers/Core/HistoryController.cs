@@ -6,6 +6,12 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI.WebControls;
+using PackageDelivery.Application.Contracts.DTO.CoreDTO;
+using PackageDelivery.Application.Contracts.Interfaces.Core;
+using PackageDelivery.Application.Implementation.Implementation.Core;
+using PackageDelivery.GUI.Helpers;
+using PackageDelivery.GUI.Mappers.Core;
 using PackageDelivery.GUI.Models;
 using PackageDelivery.GUI.Models.Core;
 
@@ -13,12 +19,15 @@ namespace PackageDelivery.GUI.Controllers.Core
 {
     public class HistoryController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        private IHistoryApplication _app = new HistoryImpApplication();
 
         // GET: History
-        public ActionResult Index()
+        public ActionResult Index(string filter = "")
         {
-            return View(db.HistoryModels.ToList());
+            var dtoList = _app.getRecordsList(filter);
+            HistoryGUIMapper mapper = new HistoryGUIMapper();
+            IEnumerable<HistoryModel> model = mapper.DTOToModelMapper(dtoList);
+            return View(model);
         }
 
         // GET: History/Details/5
@@ -28,7 +37,8 @@ namespace PackageDelivery.GUI.Controllers.Core
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            HistoryModel historyModel = db.HistoryModels.Find(id);
+			HistoryGUIMapper mapper = new HistoryGUIMapper();
+            HistoryModel historyModel = mapper.DTOToModelMapper(_app.getRecordById(id.Value));
             if (historyModel == null)
             {
                 return HttpNotFound();
@@ -39,7 +49,7 @@ namespace PackageDelivery.GUI.Controllers.Core
         // GET: History/Create
         public ActionResult Create()
         {
-            return View();
+			return View();
         }
 
         // POST: History/Create
@@ -51,12 +61,21 @@ namespace PackageDelivery.GUI.Controllers.Core
         {
             if (ModelState.IsValid)
             {
-                db.HistoryModels.Add(historyModel);
-                db.SaveChanges();
+				HistoryGUIMapper mapper = new HistoryGUIMapper();
+                HistoryDTO response = _app.createRecord(mapper.ModelToDTOMapper(historyModel));
+                if (response != null) 
+                {
+					ViewBag.ClassName = ActionMessages.successClass;
+					ViewBag.Message = ActionMessages.successMessage;
+					return RedirectToAction("Index");
+				}
+				ViewBag.ClassName = ActionMessages.warningClass;
+				ViewBag.Message = ActionMessages.alreadyExistsMessage;
                 return RedirectToAction("Index");
             }
-
-            return View(historyModel);
+			ViewBag.ClassName = ActionMessages.warningClass;
+			ViewBag.Message = ActionMessages.errorMessage;
+			return View(historyModel);
         }
 
         // GET: History/Edit/5
@@ -66,7 +85,8 @@ namespace PackageDelivery.GUI.Controllers.Core
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            HistoryModel historyModel = db.HistoryModels.Find(id);
+			HistoryGUIMapper mapper = new HistoryGUIMapper();
+			HistoryModel historyModel = mapper.DTOToModelMapper(_app.getRecordById(id.Value));
             if (historyModel == null)
             {
                 return HttpNotFound();
@@ -83,11 +103,15 @@ namespace PackageDelivery.GUI.Controllers.Core
         {
             if (ModelState.IsValid)
             {
-                db.Entry(historyModel).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+				HistoryGUIMapper mapper = new HistoryGUIMapper();
+				HistoryDTO response = _app.updateRecord(mapper.ModelToDTOMapper(historyModel));
+                if (response != null)
+                {
+					return RedirectToAction("Index");
+				}
             }
-            return View(historyModel);
+			ViewBag.Message = ActionMessages.errorMessage;
+			return View(historyModel);
         }
 
         // GET: History/Delete/5
@@ -97,8 +121,9 @@ namespace PackageDelivery.GUI.Controllers.Core
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            HistoryModel historyModel = db.HistoryModels.Find(id);
-            if (historyModel == null)
+			HistoryGUIMapper mapper = new HistoryGUIMapper();
+			HistoryModel historyModel = mapper.DTOToModelMapper(_app.getRecordById(id.Value));
+			if (historyModel == null)
             {
                 return HttpNotFound();
             }
@@ -110,19 +135,13 @@ namespace PackageDelivery.GUI.Controllers.Core
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            HistoryModel historyModel = db.HistoryModels.Find(id);
-            db.HistoryModels.Remove(historyModel);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+			bool response = _app.deleteRecordById(id);
+			if (response)
+			{
+				return RedirectToAction("Index");
+			}
+			ViewBag.Message = ActionMessages.errorMessage;
+			return View();
+		}
     }
 }

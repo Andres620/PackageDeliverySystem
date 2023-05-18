@@ -4,6 +4,7 @@ using PackageDelivery.Repository.Implementation.DataModel;
 using PackageDelivery.Repository.Implementation.Mappers.Parameters;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,8 +15,20 @@ namespace PackageDelivery.Repository.Implementation.Implementation.Core
     {
         public ShipmentDbModel createRecord(ShipmentDbModel record)
         {
-            throw new NotImplementedException();
-        }
+			using (PackageDeliveryEntities db = new PackageDeliveryEntities())
+			{
+				envio shipment = db.envio.Where(x => x.idPaquete == record.idPackage).FirstOrDefault();
+				if (shipment != null)
+				{
+					return null;
+				}
+				ShipmentRepositoryMapper mapper = new ShipmentRepositoryMapper();
+				envio sh = mapper.DbModelToDatabaseMapper(record);
+				db.envio.Add(sh);
+				db.SaveChanges();
+				return mapper.DatabaseToDbModelMapper(sh);
+			}
+		}
 
         public bool deleteRecordById(int id)
         {
@@ -65,7 +78,23 @@ namespace PackageDelivery.Repository.Implementation.Implementation.Core
 
         public ShipmentDbModel updateRecord(ShipmentDbModel record)
         {
-            throw new NotImplementedException();
-        }
+			using (PackageDeliveryEntities db = new PackageDeliveryEntities())
+			{
+				envio shipment = db.envio.Where(x => x.id == record.Id).FirstOrDefault();
+				if (shipment == null)
+				{
+					return null;
+				}
+				else
+				{
+					shipment.precio = record.price;
+					db.Entry(shipment).State = EntityState.Modified;
+					db.SaveChanges();
+					ShipmentRepositoryMapper mapper = new ShipmentRepositoryMapper();
+
+					return mapper.DatabaseToDbModelMapper(shipment);
+				}
+			}
+		}
     }
 }

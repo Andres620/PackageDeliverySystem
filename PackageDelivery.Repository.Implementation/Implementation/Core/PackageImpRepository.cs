@@ -4,6 +4,7 @@ using PackageDelivery.Repository.Implementation.DataModel;
 using PackageDelivery.Repository.Implementation.Mappers.Parameters;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,8 +15,20 @@ namespace PackageDelivery.Repository.Implementation.Implementation.Core
     {
         public PackageDbModel createRecord(PackageDbModel record)
         {
-            throw new NotImplementedException();
-        }
+			using (PackageDeliveryEntities db = new PackageDeliveryEntities())
+			{
+				paquete package = db.paquete.Where(x => x.id == record.Id).FirstOrDefault();
+				if (package != null)
+				{
+					return null;
+				}
+				PackageRepositoryMapper mapper = new PackageRepositoryMapper();
+				paquete pk = mapper.DbModelToDatabaseMapper(record);
+				db.paquete.Add(pk);
+				db.SaveChanges();
+				return mapper.DatabaseToDbModelMapper(pk);
+			}
+		}
 
         public bool deleteRecordById(int id)
         {
@@ -65,7 +78,23 @@ namespace PackageDelivery.Repository.Implementation.Implementation.Core
 
         public PackageDbModel updateRecord(PackageDbModel record)
         {
-            throw new NotImplementedException();
-        }
+			using (PackageDeliveryEntities db = new PackageDeliveryEntities())
+			{
+				paquete package = db.paquete.Where(x => x.id == record.Id).FirstOrDefault();
+				if (package == null)
+				{
+					return null;
+				}
+				else
+				{
+					package.altura = record.height;
+					db.Entry(package).State = EntityState.Modified;
+					db.SaveChanges();
+					PackageRepositoryMapper mapper = new PackageRepositoryMapper();
+
+					return mapper.DatabaseToDbModelMapper(package);
+				}
+			}
+		}
     }
 }
