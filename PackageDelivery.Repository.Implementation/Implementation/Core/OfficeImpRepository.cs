@@ -4,6 +4,7 @@ using PackageDelivery.Repository.Implementation.DataModel;
 using PackageDelivery.Repository.Implementation.Mappers.Parameters;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,8 +15,20 @@ namespace PackageDelivery.Repository.Implementation.Implementation.Core
     {
         public OfficeDbModel createRecord(OfficeDbModel record)
         {
-            throw new NotImplementedException();
-        }
+			using (PackageDeliveryEntities db = new PackageDeliveryEntities())
+			{
+				oficina office = db.oficina.Where(x => x.nombre.ToUpper().Trim().Equals(record.name.ToUpper())).FirstOrDefault();
+				if (office != null)
+				{
+					return null;
+				}
+				OfficeRepositoryMapper mapper = new OfficeRepositoryMapper();
+				oficina of = mapper.DbModelToDatabaseMapper(record);
+				db.oficina.Add(of);
+				db.SaveChanges();
+				return mapper.DatabaseToDbModelMapper(of);
+			}
+		}
 
         public bool deleteRecordById(int id)
         {
@@ -65,7 +78,23 @@ namespace PackageDelivery.Repository.Implementation.Implementation.Core
 
         public OfficeDbModel updateRecord(OfficeDbModel record)
         {
-            throw new NotImplementedException();
-        }
+			using (PackageDeliveryEntities db = new PackageDeliveryEntities())
+			{
+				oficina office = db.oficina.Where(x => x.id == record.Id).FirstOrDefault();
+				if (office == null)
+				{
+					return null;
+				}
+				else
+				{
+					office.nombre = record.name;
+					db.Entry(office).State = EntityState.Modified;
+					db.SaveChanges();
+					OfficeRepositoryMapper mapper = new OfficeRepositoryMapper();
+
+					return mapper.DatabaseToDbModelMapper(office);
+				}
+			}
+		}
     }
 }
