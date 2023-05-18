@@ -5,15 +5,25 @@
     {
         @Html.AntiForgeryToken()
 
-        <ul class="nav navbar-nav navbar-right">
-            <li>
-                @Html.ActionLink("Hola " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
-            </li>
-            <li>
-                @Html.ActionLink("Tipo de Documento", "Index", "DocumentType")
-            </li>   
-            <li><a href="javascript:document.getElementById('logoutForm').submit()">Cerrar sesión</a></li>
-        </ul>
+<ul class="nav navbar-nav navbar-right">
+    <li>
+        @Html.ActionLink("Hola " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+    </li>
+    <li>
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Menú<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+                <li>@Html.ActionLink("Tipo de Documento", "Index", "DocumentType")</li>
+                <li>@Html.ActionLink("Persona", "Index", "Person")</li>
+                <li>@Html.ActionLink("Oficina", "Index", "Office")</li>
+                <li>@Html.ActionLink("Historial", "Index", "History")</li>
+                <li>@Html.ActionLink("Paquete", "Index", "Package")</li>
+                <li>@Html.ActionLink("Envio", "Index", "Shipment")</li>
+            </ul>
+        </li>
+    </li>
+    <li><a href="javascript:document.getElementById('logoutForm').submit()">Cerrar sesión</a></li>
+</ul>
     }
 }
 else
