@@ -67,7 +67,7 @@ namespace PackageDelivery.Repository.Implementation.Implementation.Core
         {
             using (PackageDeliveryEntities db = new PackageDeliveryEntities())
             {
-                IEnumerable<envio> list = db.envio;
+                IEnumerable<envio> list = db.envio.Where(x => x.idPaquete == filter);
                 ShipmentRepositoryMapper mapper = new ShipmentRepositoryMapper();
                 return mapper.DatabaseToDbModelMapper(list);
             }
