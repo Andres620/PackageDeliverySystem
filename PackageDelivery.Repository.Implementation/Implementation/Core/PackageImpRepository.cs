@@ -67,7 +67,7 @@ namespace PackageDelivery.Repository.Implementation.Implementation.Core
         {
             using (PackageDeliveryEntities db = new PackageDeliveryEntities())
             {
-                IEnumerable<paquete> list = db.paquete.Where(x => x.peso == filter);
+                IEnumerable<paquete> list = db.paquete.Where(x => x.peso != null);
                 PackageRepositoryMapper mapper = new PackageRepositoryMapper();
                 return mapper.DatabaseToDbModelMapper(list);
             }
