@@ -4,6 +4,7 @@ using PackageDelivery.Repository.Implementation.DataModel;
 using PackageDelivery.Repository.Implementation.Mappers.Parameters;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,8 +15,20 @@ namespace PackageDelivery.Repository.Implementation.Implementation.Core
     {
         public HistoryDbModel createRecord(HistoryDbModel record)
         {
-            throw new NotImplementedException();
-        }
+			using (PackageDeliveryEntities db = new PackageDeliveryEntities())
+			{
+				historial history = db.historial.Where(x => x.idPaquete == record.idPackage).FirstOrDefault();
+				if (history != null)
+				{
+					return null;
+				}
+				HistoryRepositoryMapper mapper = new HistoryRepositoryMapper();
+				historial hs = mapper.DbModelToDatabaseMapper(record);
+				db.historial.Add(hs);
+				db.SaveChanges();
+				return mapper.DatabaseToDbModelMapper(hs);
+			}
+		}
 
         public bool deleteRecordById(int id)
         {
@@ -65,7 +78,23 @@ namespace PackageDelivery.Repository.Implementation.Implementation.Core
 
         public HistoryDbModel updateRecord(HistoryDbModel record)
         {
-            throw new NotImplementedException();
-        }
+			using (PackageDeliveryEntities db = new PackageDeliveryEntities())
+			{
+				historial history = db.historial.Where(x => x.id == record.Id).FirstOrDefault();
+				if (history == null)
+				{
+					return null;
+				}
+				else
+				{
+					history.descripcion = record.description;
+					db.Entry(history).State = EntityState.Modified;
+					db.SaveChanges();
+					HistoryRepositoryMapper mapper = new HistoryRepositoryMapper();
+
+					return mapper.DatabaseToDbModelMapper(history);
+				}
+			}
+		}
     }
 }
