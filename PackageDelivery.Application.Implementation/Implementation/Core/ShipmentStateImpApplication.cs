@@ -4,15 +4,11 @@ using PackageDelivery.Application.Implementation.Mappers.Core;
 using PackageDelivery.Repository.Contracts.DbModels.Core;
 using PackageDelivery.Repository.Contracts.Interfaces.Core;
 using PackageDelivery.Repository.Implementation.Implementation.Core;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PackageDelivery.Application.Implementation.Implementation.Core
 {
-	public class ShipmentStateImpApplication : IShipmentStateApplication
+    public class ShipmentStateImpApplication : IShipmentStateApplication
 	{
 		IShipmentStateRepository _repository = new ShipmentStateImpRepository();
 		public ShipmentStateDTO createRecord(ShipmentStateDTO record)

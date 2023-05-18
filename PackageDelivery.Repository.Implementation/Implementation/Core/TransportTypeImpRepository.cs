@@ -2,11 +2,9 @@
 using PackageDelivery.Repository.Contracts.Interfaces.Core;
 using PackageDelivery.Repository.Implementation.DataModel;
 using PackageDelivery.Repository.Implementation.Mappers.Parameters;
-using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PackageDelivery.Repository.Implementation.Implementation.Core
 {
@@ -14,7 +12,19 @@ namespace PackageDelivery.Repository.Implementation.Implementation.Core
     {
         public TransportTypeDbModel createRecord(TransportTypeDbModel record)
         {
-            throw new NotImplementedException();
+            using (PackageDeliveryEntities db = new PackageDeliveryEntities())
+            {
+                tipoTransporte transportType = db.tipoTransporte.Where(x => x.nombre.ToUpper().Trim().Equals(record.name.ToUpper())).FirstOrDefault();
+                if (transportType != null)
+                {
+                    return null;
+                }
+                TransportTypeRepositoryMapper mapper = new TransportTypeRepositoryMapper();
+                tipoTransporte dt = mapper.DbModelToDatabaseMapper(record);
+                db.tipoTransporte.Add(dt);
+                db.SaveChanges();
+                return mapper.DatabaseToDbModelMapper(dt);
+            }
         }
 
         public bool deleteRecordById(int id)
@@ -65,7 +75,22 @@ namespace PackageDelivery.Repository.Implementation.Implementation.Core
 
         public TransportTypeDbModel updateRecord(TransportTypeDbModel record)
         {
-            throw new NotImplementedException();
+            using (PackageDeliveryEntities db = new PackageDeliveryEntities())
+            {
+                tipoTransporte td = db.tipoTransporte.Where(x => x.id == record.Id).FirstOrDefault();
+                if (td == null)
+                {
+                    return null;
+                }
+                else
+                {
+                    td.nombre = record.name;
+                    db.Entry(td).State = EntityState.Modified;
+                    db.SaveChanges();
+                    TransportTypeRepositoryMapper mapper = new TransportTypeRepositoryMapper();
+                    return mapper.DatabaseToDbModelMapper(td);
+                }
+            }
         }
     }
 }

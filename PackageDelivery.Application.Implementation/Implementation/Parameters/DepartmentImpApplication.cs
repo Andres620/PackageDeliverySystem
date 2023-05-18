@@ -4,15 +4,11 @@ using PackageDelivery.Application.Implementation.Mappers.Parameters;
 using PackageDelivery.Repository.Contracts.DbModels.Parameters;
 using PackageDelivery.Repository.Contracts.Interfaces.Parameters;
 using PackageDelivery.Repository.Implementation.Implementation.Parameters;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PackageDelivery.Application.Implementation.Implementation.Parameters
 {
-	public class DepartmentImpApplication : IDepartmentApplication
+    public class DepartmentImpApplication : IDepartmentApplication
 	{
 		IDepartmentRepository _repository = new DepartmentImpRepository();
 		public DepartmentDTO createRecord(DepartmentDTO record)

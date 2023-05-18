@@ -2,11 +2,9 @@
 using PackageDelivery.Repository.Contracts.Interfaces.Core;
 using PackageDelivery.Repository.Implementation.DataModel;
 using PackageDelivery.Repository.Implementation.Mappers.Parameters;
-using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PackageDelivery.Repository.Implementation.Implementation.Core
 {
@@ -14,7 +12,19 @@ namespace PackageDelivery.Repository.Implementation.Implementation.Core
     {
         public WarehouseDbModel createRecord(WarehouseDbModel record)
         {
-            throw new NotImplementedException();
+            using (PackageDeliveryEntities db = new PackageDeliveryEntities())
+            {
+                bodega warehouseType = db.bodega.Where(x => x.nombre.ToUpper().Trim().Equals(record.name.ToUpper())).FirstOrDefault();
+                if (warehouseType != null)
+                {
+                    return null;
+                }
+                WarehouseRepositoryMapper mapper = new WarehouseRepositoryMapper();
+                bodega dt = mapper.DbModelToDatabaseMapper(record);
+                db.bodega.Add(dt);
+                db.SaveChanges();
+                return mapper.DatabaseToDbModelMapper(dt);
+            }
         }
 
         public bool deleteRecordById(int id)
@@ -65,7 +75,22 @@ namespace PackageDelivery.Repository.Implementation.Implementation.Core
 
         public WarehouseDbModel updateRecord(WarehouseDbModel record)
         {
-            throw new NotImplementedException();
+            using (PackageDeliveryEntities db = new PackageDeliveryEntities())
+            {
+                bodega td = db.bodega.Where(x => x.id == record.Id).FirstOrDefault();
+                if (td == null)
+                {
+                    return null;
+                }
+                else
+                {
+                    td.nombre = record.name;
+                    db.Entry(td).State = EntityState.Modified;
+                    db.SaveChanges();
+                    WarehouseRepositoryMapper mapper = new WarehouseRepositoryMapper();
+                    return mapper.DatabaseToDbModelMapper(td);
+                }
+            }
         }
     }
 }

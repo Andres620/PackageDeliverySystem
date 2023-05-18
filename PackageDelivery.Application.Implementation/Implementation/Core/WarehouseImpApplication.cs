@@ -1,22 +1,14 @@
 ﻿using PackageDelivery.Application.Contracts.DTO.CoreDTO;
 using PackageDelivery.Application.Contracts.Interfaces.Core;
 using PackageDelivery.Application.Implementation.Mappers.Core;
-using PackageDelivery.Application.Implementation.Mappers.Parameters;
 using PackageDelivery.Repository.Contracts.DbModels.Core;
-using PackageDelivery.Repository.Contracts.DbModels.Parameters;
 using PackageDelivery.Repository.Contracts.Interfaces.Core;
-using PackageDelivery.Repository.Contracts.Interfaces.Parameters;
 using PackageDelivery.Repository.Implementation.Implementation.Core;
-using PackageDelivery.Repository.Implementation.Implementation.Parameters;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PackageDelivery.Application.Implementation.Implementation.Core
 {
-	public class WarehouseImpApplication : IWarehouseApplication
+    public class WarehouseImpApplication : IWarehouseApplication
 	{
 		IWarehouseRepository _repository = new WarehouseImpRepository();
 		public WarehouseDTO createRecord(WarehouseDTO record)

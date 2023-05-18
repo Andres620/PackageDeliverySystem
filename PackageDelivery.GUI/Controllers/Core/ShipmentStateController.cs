@@ -1,24 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Linq;
-using System.Net;
-using System.Web;
-using System.Web.Mvc;
-using PackageDelivery.GUI.Models;
+﻿using PackageDelivery.Application.Contracts.DTO.CoreDTO;
+using PackageDelivery.Application.Contracts.Interfaces.Core;
+using PackageDelivery.Application.Implementation.Implementation.Core;
+using PackageDelivery.GUI.Helpers;
+using PackageDelivery.GUI.Mappers.Core;
 using PackageDelivery.GUI.Models.Core;
+using System.Collections.Generic;
+using System.Net;
+using System.Web.Mvc;
 
 namespace PackageDelivery.GUI.Controllers.Core
 {
     public class ShipmentStateController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        private IShipmentStateApplication _app = new ShipmentStateImpApplication();
+
 
         // GET: ShipmentState
-        public ActionResult Index()
+        public ActionResult Index(string filter = "")
         {
-            return View(db.ShipmentStateModels.ToList());
+            ShipmentStateGUIMapper mapper = new ShipmentStateGUIMapper();
+            IEnumerable<ShipmentStateModel> list = mapper.DTOToModelMapper(_app.getRecordsList(filter));
+            return View(list);
         }
 
         // GET: ShipmentState/Details/5
@@ -28,12 +30,13 @@ namespace PackageDelivery.GUI.Controllers.Core
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ShipmentStateModel shipmentStateModel = db.ShipmentStateModels.Find(id);
-            if (shipmentStateModel == null)
+            ShipmentStateGUIMapper mapper = new ShipmentStateGUIMapper();
+            ShipmentStateModel ShipmentStateModel = mapper.DTOToModelMapper(_app.getRecordById(id.Value));
+            if (ShipmentStateModel == null)
             {
                 return HttpNotFound();
             }
-            return View(shipmentStateModel);
+            return View(ShipmentStateModel);
         }
 
         // GET: ShipmentState/Create
@@ -47,16 +50,25 @@ namespace PackageDelivery.GUI.Controllers.Core
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,name")] ShipmentStateModel shipmentStateModel)
+        public ActionResult Create([Bind(Include = "Id,name")] ShipmentStateModel ShipmentStateModel)
         {
             if (ModelState.IsValid)
             {
-                db.ShipmentStateModels.Add(shipmentStateModel);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                ShipmentStateGUIMapper mapper = new ShipmentStateGUIMapper();
+                ShipmentStateDTO response = _app.createRecord(mapper.ModelToDTOMapper(ShipmentStateModel));
+                if (response != null)
+                {
+                    ViewBag.ClassName = ActionMessages.successClass;
+                    ViewBag.Message = ActionMessages.successMessage;
+                    return RedirectToAction("Index");
+                }
+                ViewBag.ClassName = ActionMessages.warningClass;
+                ViewBag.Message = ActionMessages.alreadyExistsMessage;
+                return View(ShipmentStateModel);
             }
-
-            return View(shipmentStateModel);
+            ViewBag.ClassName = ActionMessages.warningClass;
+            ViewBag.Message = ActionMessages.errorMessage;
+            return View(ShipmentStateModel);
         }
 
         // GET: ShipmentState/Edit/5
@@ -66,7 +78,8 @@ namespace PackageDelivery.GUI.Controllers.Core
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ShipmentStateModel shipmentStateModel = db.ShipmentStateModels.Find(id);
+            ShipmentStateGUIMapper mapper = new ShipmentStateGUIMapper();
+            ShipmentStateModel shipmentStateModel = mapper.DTOToModelMapper(_app.getRecordById(id.Value));
             if (shipmentStateModel == null)
             {
                 return HttpNotFound();
@@ -83,10 +96,17 @@ namespace PackageDelivery.GUI.Controllers.Core
         {
             if (ModelState.IsValid)
             {
-                db.Entry(shipmentStateModel).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                ShipmentStateGUIMapper mapper = new ShipmentStateGUIMapper();
+                ShipmentStateDTO response = _app.updateRecord(mapper.ModelToDTOMapper(shipmentStateModel));
+                if (response != null)
+                {
+                    ViewBag.ClassName = ActionMessages.successClass;
+                    ViewBag.Message = ActionMessages.successMessage;
+                    return RedirectToAction("Index");
+                }
             }
+            ViewBag.ClassName = ActionMessages.warningClass;
+            ViewBag.Message = ActionMessages.errorMessage;
             return View(shipmentStateModel);
         }
 
@@ -97,7 +117,8 @@ namespace PackageDelivery.GUI.Controllers.Core
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ShipmentStateModel shipmentStateModel = db.ShipmentStateModels.Find(id);
+            ShipmentStateGUIMapper mapper = new ShipmentStateGUIMapper();
+            ShipmentStateModel shipmentStateModel = mapper.DTOToModelMapper(_app.getRecordById(id.Value));
             if (shipmentStateModel == null)
             {
                 return HttpNotFound();
@@ -110,19 +131,16 @@ namespace PackageDelivery.GUI.Controllers.Core
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            ShipmentStateModel shipmentStateModel = db.ShipmentStateModels.Find(id);
-            db.ShipmentStateModels.Remove(shipmentStateModel);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
+            bool response = _app.deleteRecordById(id);
+            if (response)
             {
-                db.Dispose();
+                ViewBag.ClassName = ActionMessages.successClass;
+                ViewBag.Message = ActionMessages.successMessage;
+                return RedirectToAction("Index");
             }
-            base.Dispose(disposing);
+            ViewBag.ClassName = ActionMessages.warningClass;
+            ViewBag.Message = ActionMessages.errorMessage;
+            return View();
         }
     }
 }

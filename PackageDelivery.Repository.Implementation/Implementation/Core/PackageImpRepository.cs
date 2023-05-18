@@ -2,12 +2,9 @@
 using PackageDelivery.Repository.Contracts.Interfaces.Core;
 using PackageDelivery.Repository.Implementation.DataModel;
 using PackageDelivery.Repository.Implementation.Mappers.Parameters;
-using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PackageDelivery.Repository.Implementation.Implementation.Core
 {
@@ -70,7 +67,7 @@ namespace PackageDelivery.Repository.Implementation.Implementation.Core
         {
             using (PackageDeliveryEntities db = new PackageDeliveryEntities())
             {
-                IEnumerable<paquete> list = db.paquete.Where(x => x.peso == filter);
+                IEnumerable<paquete> list = db.paquete.Where(x => x.peso != null);
                 PackageRepositoryMapper mapper = new PackageRepositoryMapper();
                 return mapper.DatabaseToDbModelMapper(list);
             }

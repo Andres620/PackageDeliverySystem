@@ -2,8 +2,8 @@
 using PackageDelivery.Repository.Contracts.Interfaces.Core;
 using PackageDelivery.Repository.Implementation.DataModel;
 using PackageDelivery.Repository.Implementation.Mappers.Parameters;
-using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 
 namespace PackageDelivery.Repository.Implementation.Implementation.Core
@@ -12,7 +12,19 @@ namespace PackageDelivery.Repository.Implementation.Implementation.Core
     {
         public ShipmentStateDbModel createRecord(ShipmentStateDbModel record)
         {
-            throw new NotImplementedException();
+            using (PackageDeliveryEntities db = new PackageDeliveryEntities())
+            {
+                estadoEnvio shipmentStateType = db.estadoEnvio.Where(x => x.nombre.ToUpper().Trim().Equals(record.name.ToUpper())).FirstOrDefault();
+                if (shipmentStateType != null)
+                {
+                    return null;
+                }
+                ShipmentStateRepositoryMapper mapper = new ShipmentStateRepositoryMapper();
+                estadoEnvio dt = mapper.DbModelToDatabaseMapper(record);
+                db.estadoEnvio.Add(dt);
+                db.SaveChanges();
+                return mapper.DatabaseToDbModelMapper(dt);
+            }
         }
 
         public bool deleteRecordById(int id)
@@ -66,7 +78,22 @@ namespace PackageDelivery.Repository.Implementation.Implementation.Core
 
         public ShipmentStateDbModel updateRecord(ShipmentStateDbModel record)
         {
-            throw new NotImplementedException();
+            using (PackageDeliveryEntities db = new PackageDeliveryEntities())
+            {
+                estadoEnvio td = db.estadoEnvio.Where(x => x.id == record.Id).FirstOrDefault();
+                if (td == null)
+                {
+                    return null;
+                }
+                else
+                {
+                    td.nombre = record.name;
+                    db.Entry(td).State = EntityState.Modified;
+                    db.SaveChanges();
+                    ShipmentStateRepositoryMapper mapper = new ShipmentStateRepositoryMapper();
+                    return mapper.DatabaseToDbModelMapper(td);
+                }
+            }
         }
 
     }

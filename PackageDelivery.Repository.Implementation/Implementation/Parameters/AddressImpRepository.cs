@@ -13,8 +13,7 @@ namespace PackageDelivery.Repository.Implementation.Implementation.Parameters
         public AddressDbModel createRecord(AddressDbModel record)
         {
             using (PackageDeliveryEntities db = new PackageDeliveryEntities())
-            {
-                
+            { 
                 AddressRepositoryMapper mapper = new AddressRepositoryMapper();
                 direccion dt = mapper.DbModelToDatabaseMapper(record);
                 db.direccion.Add(dt);
