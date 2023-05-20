@@ -20,13 +20,13 @@ namespace PackageDelivery.Repository.Implementation.DataModel
             this.historial = new HashSet<historial>();
         }
     
-        public long id { get; set; }
+        public int id { get; set; }
         public string nombre { get; set; }
         public string codigo { get; set; }
         public string direccion { get; set; }
         public string latitud { get; set; }
         public string longitud { get; set; }
-        public long idMunicipio { get; set; }
+        public int idMunicipio { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<historial> historial { get; set; }

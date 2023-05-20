@@ -20,14 +20,14 @@ namespace PackageDelivery.Repository.Implementation.DataModel
             this.paquete = new HashSet<paquete>();
         }
     
-        public long id { get; set; }
+        public int id { get; set; }
         public string nombre { get; set; }
         public string codigo { get; set; }
         public string telefono { get; set; }
+        public int idMunicipio { get; set; }
+        public string direccion { get; set; }
         public string latitud { get; set; }
         public string longitud { get; set; }
-        public long idMunicipio { get; set; }
-        public string direccion { get; set; }
     
         public virtual municipio municipio { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

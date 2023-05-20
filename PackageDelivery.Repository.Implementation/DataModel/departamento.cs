@@ -20,7 +20,7 @@ namespace PackageDelivery.Repository.Implementation.DataModel
             this.municipio = new HashSet<municipio>();
         }
     
-        public long id { get; set; }
+        public int id { get; set; }
         public string nombre { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
