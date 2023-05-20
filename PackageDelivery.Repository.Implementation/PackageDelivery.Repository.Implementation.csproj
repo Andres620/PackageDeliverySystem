@@ -98,9 +98,6 @@
     <Compile Include="DataModel\persona.cs">
       <DependentUpon>PackageDeliveryDataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DataModel\sysdiagrams.cs">
-      <DependentUpon>PackageDeliveryDataModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="DataModel\tipoDocumento.cs">
       <DependentUpon>PackageDeliveryDataModel.tt</DependentUpon>
     </Compile>
@@ -140,39 +137,36 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config" />
     <EntityDeploy Include="DataModel\PackageDeliveryDataModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>PackageDeliveryDataModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
     <None Include="DataModel\PackageDeliveryDataModel.edmx.diagram">
       <DependentUpon>PackageDeliveryDataModel.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PackageDelivery.Repository.Contracts\PackageDelivery.Repository.Contracts.csproj">
+      <Project>{4d69747d-2959-481f-b1e3-ef207a76cd29}</Project>
+      <Name>PackageDelivery.Repository.Contracts</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="DataModel\PackageDeliveryDataModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>PackageDeliveryDataModel.Context.cs</LastGenOutput>
       <DependentUpon>PackageDeliveryDataModel.edmx</DependentUpon>
+      <LastGenOutput>PackageDeliveryDataModel.Context.cs</LastGenOutput>
     </Content>
     <Content Include="DataModel\PackageDeliveryDataModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>PackageDeliveryDataModel.edmx</DependentUpon>
       <LastGenOutput>PackageDeliveryDataModel.cs</LastGenOutput>
     </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
-  </ItemGroup>
-  <ItemGroup />
-  <ItemGroup>
-    <ProjectReference Include="..\PackageDelivery.Repository.Contracts\PackageDelivery.Repository.Contracts.csproj">
-      <Project>{4d69747d-2959-481f-b1e3-ef207a76cd29}</Project>
-      <Name>PackageDelivery.Repository.Contracts</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

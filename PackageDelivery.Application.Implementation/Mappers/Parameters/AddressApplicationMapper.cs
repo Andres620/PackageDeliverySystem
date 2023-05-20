@@ -17,7 +17,6 @@ namespace PackageDelivery.Application.Implementation.Mappers.Parameters
                 neighborhood = input.neighborhood,
                 observations = input.observations,
                 actual = input.actual,
-                IdPerson = input.IdPerson,
                 IdTown = input.IdTown
             };
         }
@@ -43,7 +42,6 @@ namespace PackageDelivery.Application.Implementation.Mappers.Parameters
                 neighborhood = input.neighborhood,
                 observations = input.observations,
                 actual = input.actual,
-                IdPerson = input.IdPerson,
                 IdTown = input.IdTown
             };
         }

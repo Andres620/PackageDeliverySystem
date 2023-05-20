@@ -13,7 +13,7 @@ namespace PackageDelivery.GUI.Models.Core
 		public string plate { get; set; }
 
 		[Required]
-		[DisplayName("Tipo de transporte")]
+		[DisplayName("Id tipo de transporte")]
 		public int idTransportType { get; set; }
     }
 }

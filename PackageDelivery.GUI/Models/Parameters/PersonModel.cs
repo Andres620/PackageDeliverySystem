@@ -10,17 +10,17 @@ namespace PackageDelivery.GUI.Models.Parameters
         public long Id { get; set; }
 
         [Required]
-        [DisplayName("Primer Nombre")]
+        [DisplayName("Primer nombre")]
         public string FirstName { get; set; }
 
-        [DisplayName("Otros Nombres")]
+        [DisplayName("Otros nombres")]
         public string OtherNames { get; set; }
 
         [Required]
-        [DisplayName("Primer Apellido")]
+        [DisplayName("Primer apellido")]
         public string FirstLastname { get; set; }
 
-        [DisplayName("Segundo Apellido")]
+        [DisplayName("Segundo apellido")]
         public string SecondLastname { get; set; }
 
         [Required]
@@ -32,15 +32,15 @@ namespace PackageDelivery.GUI.Models.Parameters
         public string Cellphone { get; set; }
 
         [Required]
-        [DisplayName("Correo Electrónico")]
+        [DisplayName("Correo electrónico")]
         public string Email { get; set; }
 
 		[Required]
-		[DisplayName("Dirección")]
-		public string Address { get; set; }
+		[DisplayName("Id dirección")]
+		public int Address { get; set; }
 
         [Required]
-        [DisplayName("Tipo de Documento")]
+        [DisplayName("Id tipo de documento")]
         public int IdentificationType { get; set; }
 
     }

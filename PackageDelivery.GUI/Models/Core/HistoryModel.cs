@@ -21,7 +21,7 @@ namespace PackageDelivery.GUI.Models.Core
 		public string description { get; set; }
 
 		[Required]
-		[DisplayName("Id de Paquete")]
+		[DisplayName("Id de paquete")]
 		public int idPackage { get; set; }
 
 		[Required]

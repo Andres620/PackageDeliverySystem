@@ -14,14 +14,14 @@ namespace PackageDelivery.Repository.Implementation.DataModel
     
     public partial class envio
     {
-        public long id { get; set; }
+        public int id { get; set; }
         public System.DateTime fechaEnvio { get; set; }
-        public decimal precio { get; set; }
-        public Nullable<long> idRemitente { get; set; }
-        public Nullable<long> idDireccionDestino { get; set; }
-        public Nullable<long> idPaquete { get; set; }
-        public Nullable<long> idEstado { get; set; }
-        public Nullable<long> idTipoTransporte { get; set; }
+        public int precio { get; set; }
+        public int idRemitente { get; set; }
+        public int idDireccionDestino { get; set; }
+        public int idPaquete { get; set; }
+        public int idEstado { get; set; }
+        public int idTipoTransporte { get; set; }
     
         public virtual direccion direccion { get; set; }
         public virtual estadoEnvio estadoEnvio { get; set; }

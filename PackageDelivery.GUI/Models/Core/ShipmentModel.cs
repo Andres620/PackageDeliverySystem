@@ -22,19 +22,19 @@ namespace PackageDelivery.GUI.Models.Core
 		public int idSender { get; set; }
 
 		[Required]
-		[DisplayName("Dirección destino")]
+		[DisplayName("Id dirección destino")]
 		public int idDestinationAddress { get; set; }
 
 		[Required]
-		[DisplayName("Paquete")]
+		[DisplayName("Id paquete")]
 		public int idPackage { get; set; }
 
 		[Required]
-		[DisplayName("Estado de envio")]
+		[DisplayName("Id estado de envio")]
 		public int idShipmentState { get; set; }
 
 		[Required]
-		[DisplayName("Tipo de transporte")]
+		[DisplayName("Id tipo de transporte")]
 		public int idTransportType { get; set; }
     }
 }
