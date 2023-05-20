@@ -13,7 +13,6 @@ namespace PackageDelivery.GUI.Mappers.Parameters
             {
                 Id = input.Id,
                 actual = input.actual,
-                IdPerson = (int)input.IdPerson,
                 IdTown = (int)input.IdTown,
                 immovableType = input.immovableType,
                 neighborhood = input.neighborhood,
@@ -39,7 +38,6 @@ namespace PackageDelivery.GUI.Mappers.Parameters
             {
                 Id = input.Id,
                 actual = input.actual,
-                IdPerson = input.IdPerson,
                 IdTown = input.IdTown,
                 immovableType = input.immovableType,
                 neighborhood = input.neighborhood,

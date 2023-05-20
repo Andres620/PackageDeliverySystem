@@ -31,7 +31,7 @@ namespace PackageDelivery.Repository.Implementation.Mappers.Parameters
         {
             return new municipio()
             {
-                id = input.Id,
+                id = (int)input.Id,
                 nombre = input.name,
                 idDepartamento = input.IdDepartment
             };

@@ -35,7 +35,7 @@ namespace PackageDelivery.Repository.Implementation.Mappers.Parameters
         {
             return new bodega()
             {
-                id = input.Id,
+                id = (int)input.Id,
                 direccion = input.address,
                 codigo = input.code,
                 idMunicipio = input.idTown,

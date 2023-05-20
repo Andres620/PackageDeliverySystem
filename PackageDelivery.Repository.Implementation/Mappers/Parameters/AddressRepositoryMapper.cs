@@ -13,7 +13,6 @@ namespace PackageDelivery.Repository.Implementation.Mappers.Parameters
             {
                 Id = input.id,
                 actual = input.actual,
-                IdPerson = (int)input.idPersona,
                 IdTown = (int)input.idMunicipio,
                 immovableType = input.tipoInmueble,
                 neighborhood = input.barrio,
@@ -37,8 +36,7 @@ namespace PackageDelivery.Repository.Implementation.Mappers.Parameters
         {
             return new direccion()
             {
-                id = input.Id,
-                idPersona = input.IdPerson,
+                id = (int)input.Id,
                 idMunicipio = input.IdTown,
                 actual = input.actual,
                 barrio = input.neighborhood,
