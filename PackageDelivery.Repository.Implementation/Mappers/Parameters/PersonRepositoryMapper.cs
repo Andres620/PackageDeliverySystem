@@ -16,9 +16,10 @@ namespace PackageDelivery.Repository.Implementation.Mappers.Parameters
                 OtherNames = input.otrosNombres,
                 FirstLastname = input.primerApellido,
                 SecondLastname = input.segundoApellido,
+                IdentificationNumber = input.documento,
                 Cellphone = input.telefono,
                 Email = input.correo,
-                IdentificationNumber = input.documento,
+                Address = input.idDireccion,
                 IdentificationType = input.idTipoDocumento
             };
         }
@@ -37,14 +38,15 @@ namespace PackageDelivery.Repository.Implementation.Mappers.Parameters
         {
             return new persona()
             {
-                id = input.Id,
+                id = (int)input.Id,
                 primerNombre = input.FirstName,
                 otrosNombres = input.OtherNames,
                 primerApellido = input.FirstLastname,
                 segundoApellido = input.SecondLastname,
+                documento = input.IdentificationNumber,
                 telefono = input.Cellphone,
                 correo = input.Email,
-                documento = input.IdentificationNumber,
+                idDireccion = input.Address,
                 idTipoDocumento = input.IdentificationType
             };
         }

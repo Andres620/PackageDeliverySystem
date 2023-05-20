@@ -10,7 +10,8 @@
         public string IdentificationNumber { get; set; }
         public string Cellphone { get; set; }
         public string Email { get; set; }
+        public int Address { get; set; }
         public int IdentificationType { get; set; }
-
+        
     }
 }

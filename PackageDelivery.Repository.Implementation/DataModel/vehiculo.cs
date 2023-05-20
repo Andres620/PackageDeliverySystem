@@ -14,9 +14,9 @@ namespace PackageDelivery.Repository.Implementation.DataModel
     
     public partial class vehiculo
     {
-        public long id { get; set; }
+        public int id { get; set; }
         public string placa { get; set; }
-        public Nullable<long> idTipoTransporte { get; set; }
+        public int idTipoTransporte { get; set; }
     
         public virtual tipoTransporte tipoTransporte { get; set; }
     }

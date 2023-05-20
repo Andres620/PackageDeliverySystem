@@ -17,11 +17,10 @@ namespace PackageDelivery.Repository.Implementation.DataModel
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public persona()
         {
-            this.direccion = new HashSet<direccion>();
             this.envio = new HashSet<envio>();
         }
     
-        public long id { get; set; }
+        public int id { get; set; }
         public string primerNombre { get; set; }
         public string otrosNombres { get; set; }
         public string primerApellido { get; set; }
@@ -29,10 +28,10 @@ namespace PackageDelivery.Repository.Implementation.DataModel
         public string documento { get; set; }
         public string telefono { get; set; }
         public string correo { get; set; }
+        public int idDireccion { get; set; }
         public int idTipoDocumento { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<direccion> direccion { get; set; }
+        public virtual direccion direccion { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<envio> envio { get; set; }
         public virtual tipoDocumento tipoDocumento { get; set; }

@@ -9,7 +9,7 @@ namespace PackageDelivery.GUI.Models.Parameters
         public int Id { get; set; }
 
         [Required]
-        [DisplayName("Tipo de Documento")]
+        [DisplayName("Tipo de documento")]
         public string Name { get; set; }
     }
 }

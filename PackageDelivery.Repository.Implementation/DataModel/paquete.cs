@@ -21,12 +21,12 @@ namespace PackageDelivery.Repository.Implementation.DataModel
             this.historial = new HashSet<historial>();
         }
     
-        public long id { get; set; }
-        public double peso { get; set; }
-        public double altura { get; set; }
-        public double profundidad { get; set; }
-        public double ancho { get; set; }
-        public Nullable<long> idOficina { get; set; }
+        public int id { get; set; }
+        public Nullable<double> peso { get; set; }
+        public Nullable<double> altura { get; set; }
+        public Nullable<double> profundidad { get; set; }
+        public Nullable<double> ancho { get; set; }
+        public int idOficina { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<envio> envio { get; set; }

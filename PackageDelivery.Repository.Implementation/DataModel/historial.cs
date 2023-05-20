@@ -14,12 +14,12 @@ namespace PackageDelivery.Repository.Implementation.DataModel
     
     public partial class historial
     {
-        public long id { get; set; }
+        public int id { get; set; }
         public System.DateTime fechaIngreso { get; set; }
         public System.DateTime fechaSalida { get; set; }
         public string descripcion { get; set; }
-        public Nullable<long> idPaquete { get; set; }
-        public Nullable<long> idBodega { get; set; }
+        public int idPaquete { get; set; }
+        public int idBodega { get; set; }
     
         public virtual bodega bodega { get; set; }
         public virtual paquete paquete { get; set; }

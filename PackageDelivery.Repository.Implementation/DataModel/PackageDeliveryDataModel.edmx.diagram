@@ -4,36 +4,35 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="9c65b410188c4290bce3f3dc8193db5c" Name="Diagram1">
-        <EntityTypeShape EntityType="PackageDeliveryModel.bodega" Width="1.5" PointX="3.75" PointY="14" IsExpanded="true" />
-        <EntityTypeShape EntityType="PackageDeliveryModel.departamento" Width="1.5" PointX="1.5" PointY="17.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="PackageDeliveryModel.direccion" Width="1.5" PointX="0.75" PointY="9.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="PackageDeliveryModel.envio" Width="1.5" PointX="3" PointY="2.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="PackageDeliveryModel.estadoEnvio" Width="1.5" PointX="0.75" PointY="7.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="PackageDeliveryModel.historial" Width="1.5" PointX="6" PointY="21" IsExpanded="true" />
-        <EntityTypeShape EntityType="PackageDeliveryModel.municipio" Width="1.5" PointX="1.5" PointY="14.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="PackageDeliveryModel.oficina" Width="1.5" PointX="1.5" PointY="31.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="PackageDeliveryModel.paquete" Width="1.5" PointX="0.75" PointY="27.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="PackageDeliveryModel.persona" Width="1.5" PointX="1.5" PointY="20.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="PackageDeliveryModel.sysdiagrams" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="PackageDeliveryModel.tipoDocumento" Width="1.5" PointX="1.5" PointY="25.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="PackageDeliveryModel.tipoTransporte" Width="1.5" PointX="0.75" PointY="3.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="PackageDeliveryModel.vehiculo" Width="1.5" PointX="3" PointY="7.5" IsExpanded="true" />
-        <AssociationConnector Association="PackageDeliveryModel.FK__historial__idBod__4AB81AF0" ManuallyRouted="false" />
-        <AssociationConnector Association="PackageDeliveryModel.FK_bodega_municipio" ManuallyRouted="false" />
-        <AssociationConnector Association="PackageDeliveryModel.FK__municipio__idDep__37A5467C" ManuallyRouted="false" />
-        <AssociationConnector Association="PackageDeliveryModel.FK__direccion__idMun__3A81B327" ManuallyRouted="false" />
-        <AssociationConnector Association="PackageDeliveryModel.FK__envio__idDirecci__534D60F1" ManuallyRouted="false" />
-        <AssociationConnector Association="PackageDeliveryModel.IdPersonaDireccion_FK" ManuallyRouted="false" />
-        <AssociationConnector Association="PackageDeliveryModel.FK__envio__idEstado__5535A963" ManuallyRouted="false" />
-        <AssociationConnector Association="PackageDeliveryModel.FK__envio__idPaquete__5441852A" ManuallyRouted="false" />
-        <AssociationConnector Association="PackageDeliveryModel.FK__envio__idRemiten__52593CB8" ManuallyRouted="false" />
-        <AssociationConnector Association="PackageDeliveryModel.FK__envio__idTipoTra__5629CD9C" ManuallyRouted="false" />
-        <AssociationConnector Association="PackageDeliveryModel.FK__historial__idPaq__49C3F6B7" ManuallyRouted="false" />
-        <AssociationConnector Association="PackageDeliveryModel.FK__oficina__idMunic__3F466844" ManuallyRouted="false" />
-        <AssociationConnector Association="PackageDeliveryModel.FK__paquete__idOfici__46E78A0C" ManuallyRouted="false" />
-        <AssociationConnector Association="PackageDeliveryModel.fk_tipo_doc_persona_id" ManuallyRouted="false" />
-        <AssociationConnector Association="PackageDeliveryModel.FK__vehiculo__idTipo__440B1D61" ManuallyRouted="false" />
+      <Diagram DiagramId="96ac0ea95ab649adb814c91ec95157b0" Name="Diagram1">
+        <EntityTypeShape EntityType="PackageDeliveryDataModel.bodega" Width="1.5" PointX="3.75" PointY="12.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="PackageDeliveryDataModel.departamento" Width="1.5" PointX="1.5" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PackageDeliveryDataModel.direccion" Width="1.5" PointX="0.75" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="PackageDeliveryDataModel.envio" Width="1.5" PointX="3" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="PackageDeliveryDataModel.estadoEnvio" Width="1.5" PointX="0.75" PointY="18.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="PackageDeliveryDataModel.historial" Width="1.5" PointX="6" PointY="16.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="PackageDeliveryDataModel.municipio" Width="1.5" PointX="1.5" PointY="12.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="PackageDeliveryDataModel.oficina" Width="1.5" PointX="1.5" PointY="25.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="PackageDeliveryDataModel.paquete" Width="1.5" PointX="0.75" PointY="21.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="PackageDeliveryDataModel.persona" Width="1.5" PointX="0.75" PointY="29" IsExpanded="true" />
+        <EntityTypeShape EntityType="PackageDeliveryDataModel.tipoDocumento" Width="1.5" PointX="1.5" PointY="33.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="PackageDeliveryDataModel.tipoTransporte" Width="1.5" PointX="0.75" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="PackageDeliveryDataModel.vehiculo" Width="1.5" PointX="3" PointY="7.5" IsExpanded="true" />
+        <AssociationConnector Association="PackageDeliveryDataModel.FK__historial__idBod__5812160E" ManuallyRouted="false" />
+        <AssociationConnector Association="PackageDeliveryDataModel.idMunicipio_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="PackageDeliveryDataModel.FK__municipio__idDep__59FA5E80" ManuallyRouted="false" />
+        <AssociationConnector Association="PackageDeliveryDataModel.FK__direccion__idMun__52593CB8" ManuallyRouted="false" />
+        <AssociationConnector Association="PackageDeliveryDataModel.FK__envio__idDirecci__534D60F1" ManuallyRouted="false" />
+        <AssociationConnector Association="PackageDeliveryDataModel.FK__persona__idDirec__5CD6CB2B" ManuallyRouted="false" />
+        <AssociationConnector Association="PackageDeliveryDataModel.FK__envio__idEstado__5441852A" ManuallyRouted="false" />
+        <AssociationConnector Association="PackageDeliveryDataModel.FK__envio__idPaquete__5535A963" ManuallyRouted="false" />
+        <AssociationConnector Association="PackageDeliveryDataModel.FK__envio__idRemiten__5629CD9C" ManuallyRouted="false" />
+        <AssociationConnector Association="PackageDeliveryDataModel.FK__envio__idTipoTra__571DF1D5" ManuallyRouted="false" />
+        <AssociationConnector Association="PackageDeliveryDataModel.FK__historial__idPaq__59063A47" ManuallyRouted="false" />
+        <AssociationConnector Association="PackageDeliveryDataModel.FK__oficina__idMunic__5AEE82B9" ManuallyRouted="false" />
+        <AssociationConnector Association="PackageDeliveryDataModel.FK__paquete__idOfici__5BE2A6F2" ManuallyRouted="false" />
+        <AssociationConnector Association="PackageDeliveryDataModel.fk_tipo_doc_persona_id" ManuallyRouted="false" />
+        <AssociationConnector Association="PackageDeliveryDataModel.FK__vehiculo__idTipo__5EBF139D" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
