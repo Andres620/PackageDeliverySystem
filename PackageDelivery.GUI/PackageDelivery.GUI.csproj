@@ -19,7 +19,7 @@
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
-    <IISExpressSSLPort>44332</IISExpressSSLPort>
+    <IISExpressSSLPort>44348</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
@@ -221,6 +221,10 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\aspnet-PackageDeliverySystem-20230507123337.mdf" />
+    <Content Include="App_Data\aspnet-PackageDeliverySystem-20230507123337_log.ldf">
+      <DependentUpon>aspnet-PackageDeliverySystem-20230507123337.mdf</DependentUpon>
+    </Content>
     <Content Include="bin\es\EntityFramework.resources.dll" />
     <Content Include="bin\es\EntityFramework.SqlServer.resources.dll" />
     <Content Include="bin\es\Microsoft.AspNet.Identity.Core.resources.dll" />
@@ -412,7 +416,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
     <Folder Include="obj\Debug\TempPE\" />
   </ItemGroup>
   <ItemGroup>
