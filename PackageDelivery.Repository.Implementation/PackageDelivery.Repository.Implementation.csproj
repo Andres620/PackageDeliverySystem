@@ -54,38 +54,38 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataModel\bodega.cs">
-      <DependentUpon>PackageDeliveryDataModel.tt</DependentUpon>
+      <DependentUpon>PackageDeliveryEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="DataModel\departamento.cs">
-      <DependentUpon>PackageDeliveryDataModel.tt</DependentUpon>
+      <DependentUpon>PackageDeliveryEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="DataModel\direccion.cs">
-      <DependentUpon>PackageDeliveryDataModel.tt</DependentUpon>
+      <DependentUpon>PackageDeliveryEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="DataModel\envio.cs">
-      <DependentUpon>PackageDeliveryDataModel.tt</DependentUpon>
+      <DependentUpon>PackageDeliveryEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="DataModel\estadoEnvio.cs">
-      <DependentUpon>PackageDeliveryDataModel.tt</DependentUpon>
+      <DependentUpon>PackageDeliveryEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="DataModel\historial.cs">
-      <DependentUpon>PackageDeliveryDataModel.tt</DependentUpon>
+      <DependentUpon>PackageDeliveryEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="DataModel\municipio.cs">
-      <DependentUpon>PackageDeliveryDataModel.tt</DependentUpon>
+      <DependentUpon>PackageDeliveryEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="DataModel\oficina.cs">
-      <DependentUpon>PackageDeliveryDataModel.tt</DependentUpon>
+      <DependentUpon>PackageDeliveryEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="DataModel\PackageDeliveryDataModel.Context.cs">
+    <Compile Include="DataModel\PackageDeliveryEntities.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>PackageDeliveryDataModel.Context.tt</DependentUpon>
+      <DependentUpon>PackageDeliveryEntities.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="DataModel\PackageDeliveryDataModel.cs">
+    <Compile Include="DataModel\PackageDeliveryEntities.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>PackageDeliveryDataModel.tt</DependentUpon>
+      <DependentUpon>PackageDeliveryEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="DataModel\PackageDeliveryDataModel.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -93,19 +93,19 @@
       <DependentUpon>PackageDeliveryDataModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="DataModel\paquete.cs">
-      <DependentUpon>PackageDeliveryDataModel.tt</DependentUpon>
+      <DependentUpon>PackageDeliveryEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="DataModel\persona.cs">
-      <DependentUpon>PackageDeliveryDataModel.tt</DependentUpon>
+      <DependentUpon>PackageDeliveryEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="DataModel\tipoDocumento.cs">
-      <DependentUpon>PackageDeliveryDataModel.tt</DependentUpon>
+      <DependentUpon>PackageDeliveryEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="DataModel\tipoTransporte.cs">
-      <DependentUpon>PackageDeliveryDataModel.tt</DependentUpon>
+      <DependentUpon>PackageDeliveryEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="DataModel\vehiculo.cs">
-      <DependentUpon>PackageDeliveryDataModel.tt</DependentUpon>
+      <DependentUpon>PackageDeliveryEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Implementation\Core\HistoryImpRepository.cs" />
     <Compile Include="Implementation\Core\OfficeImpRepository.cs" />
@@ -157,15 +157,15 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="DataModel\PackageDeliveryDataModel.Context.tt">
+    <Content Include="DataModel\PackageDeliveryEntities.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>PackageDeliveryDataModel.edmx</DependentUpon>
-      <LastGenOutput>PackageDeliveryDataModel.Context.cs</LastGenOutput>
+      <LastGenOutput>PackageDeliveryEntities.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="DataModel\PackageDeliveryDataModel.tt">
+    <Content Include="DataModel\PackageDeliveryEntities.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>PackageDeliveryDataModel.edmx</DependentUpon>
-      <LastGenOutput>PackageDeliveryDataModel.cs</LastGenOutput>
+      <LastGenOutput>PackageDeliveryEntities.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
