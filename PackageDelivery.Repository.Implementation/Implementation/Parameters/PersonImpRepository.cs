@@ -107,6 +107,7 @@ namespace PackageDelivery.Repository.Implementation.Implementation.Parameters
                     td.idTipoDocumento = record.IdentificationType;
                     td.documento = record.IdentificationNumber;
                     td.telefono = record.Cellphone;
+                    td.idDireccion = record.Address;
                     db.Entry(td).State = EntityState.Modified;
                     db.SaveChanges();
                     PersonRepositoryMapper mapper = new PersonRepositoryMapper();

@@ -85,6 +85,7 @@ namespace PackageDelivery.Repository.Implementation.Implementation.Core
                 else
                 {
                     td.placa = record.plate;
+                    td.idTipoTransporte = record.idTransportType;
                     db.Entry(td).State = EntityState.Modified;
                     db.SaveChanges();
                     VehicleRepositoryMapper mapper = new VehicleRepositoryMapper();

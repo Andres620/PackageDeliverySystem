@@ -84,7 +84,11 @@ namespace PackageDelivery.Repository.Implementation.Implementation.Core
 				}
 				else
 				{
+                    package.peso = record.weight;
 					package.altura = record.height;
+                    package.profundidad = record.depth;
+                    package.ancho = record.width;
+                    package.idOficina = record.idOffice;
 					db.Entry(package).State = EntityState.Modified;
 					db.SaveChanges();
 					PackageRepositoryMapper mapper = new PackageRepositoryMapper();

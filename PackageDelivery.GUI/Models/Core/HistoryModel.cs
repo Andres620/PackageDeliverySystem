@@ -4,17 +4,17 @@ using System.ComponentModel.DataAnnotations;
 
 namespace PackageDelivery.GUI.Models.Core
 {
-    public class HistoryModel
-    {
-        [Key]
-        public int Id { get; set; }
+	public class HistoryModel
+	{
+		[Key]
+		public int Id { get; set; }
 
 		[Required]
-		[DisplayName("Fecha de ingreso")]
+        [DisplayName("Fecha de ingreso")]
 		public DateTime entryDate { get; set; }
 
 		[Required]
-		[DisplayName("Fecha de salida")]
+        [DisplayName("Fecha de salida")]
 		public DateTime departureDate { get; set; }
 
 		[DisplayName("Descripción")]

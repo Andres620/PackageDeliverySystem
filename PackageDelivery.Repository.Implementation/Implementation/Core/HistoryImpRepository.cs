@@ -84,7 +84,11 @@ namespace PackageDelivery.Repository.Implementation.Implementation.Core
 				}
 				else
 				{
+                    history.fechaIngreso = record.entryDate;
+                    history.fechaSalida = record.departureDate;
 					history.descripcion = record.description;
+                    history.idPaquete = record.idPackage;
+                    history.idBodega = record.idWarehouse;
 					db.Entry(history).State = EntityState.Modified;
 					db.SaveChanges();
 					HistoryRepositoryMapper mapper = new HistoryRepositoryMapper();
