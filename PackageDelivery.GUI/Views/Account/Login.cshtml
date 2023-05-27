@@ -3,6 +3,17 @@
 @{
     ViewBag.Title = "Iniciar sesión";
 }
+<html>
+
+<style>
+    body, html {
+        height: 100%;
+        line-height: 1.8;
+        background-size: cover;
+        background-image: url("https://img.freepik.com/free-vector/paper-style-white-monochrome-background_52683-66443.jpg");
+    }
+</style>
+
 
 <h2>@ViewBag.Title.</h2>
 <div class="row">
@@ -51,12 +62,9 @@
             }
         </section>
     </div>
-    <div class="col-md-4">
-        <section id="socialLoginForm">
-            @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
-        </section>
-    </div>
 </div>
+
+</html>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
