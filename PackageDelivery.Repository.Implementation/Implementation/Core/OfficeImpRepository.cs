@@ -85,7 +85,13 @@ namespace PackageDelivery.Repository.Implementation.Implementation.Core
 				else
 				{
 					office.nombre = record.name;
-					db.Entry(office).State = EntityState.Modified;
+				    office.codigo = record.code;
+                    office.direccion = record.address;
+                    office.telefono = record.cellphone;
+                    office.latitud = record.latitude;
+                    office.longitud = record.longitude;
+                    office.idMunicipio = record.idTown;
+                    db.Entry(office).State = EntityState.Modified;
 					db.SaveChanges();
 					OfficeRepositoryMapper mapper = new OfficeRepositoryMapper();
 

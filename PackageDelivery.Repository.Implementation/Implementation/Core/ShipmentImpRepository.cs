@@ -84,7 +84,14 @@ namespace PackageDelivery.Repository.Implementation.Implementation.Core
 				}
 				else
 				{
+                    shipment.fechaEnvio = record.shippingDate;
 					shipment.precio = record.price;
+                    shipment.idRemitente = record.idSender;
+                    shipment.idDireccionDestino = record.idDestinationAddress;
+                    shipment.idPaquete = record.idPackage;
+                    shipment.idEstado = record.idShipmentState;
+                    shipment.idTipoTransporte = record.idTransportType;
+
 					db.Entry(shipment).State = EntityState.Modified;
 					db.SaveChanges();
 					ShipmentRepositoryMapper mapper = new ShipmentRepositoryMapper();

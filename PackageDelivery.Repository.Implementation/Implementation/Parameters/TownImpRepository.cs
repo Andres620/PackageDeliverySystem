@@ -100,6 +100,7 @@ namespace PackageDelivery.Repository.Implementation.Implementation.Parameters
                 else
                 {
                     td.nombre = record.name;
+                    td.idDepartamento = record.IdDepartment;
                     db.Entry(td).State = EntityState.Modified;
                     db.SaveChanges();
                     TownRepositoryMapper mapper = new TownRepositoryMapper();

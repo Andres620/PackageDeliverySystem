@@ -85,6 +85,11 @@ namespace PackageDelivery.Repository.Implementation.Implementation.Core
                 else
                 {
                     td.nombre = record.name;
+                    td.codigo = record.code;
+                    td.direccion = record.address;
+                    td.latitud = record.latitude;
+                    td.longitud = record.longitude;
+                    td.idMunicipio = record.idTown;
                     db.Entry(td).State = EntityState.Modified;
                     db.SaveChanges();
                     WarehouseRepositoryMapper mapper = new WarehouseRepositoryMapper();

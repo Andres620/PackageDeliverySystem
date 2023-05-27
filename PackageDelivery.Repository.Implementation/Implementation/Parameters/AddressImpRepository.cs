@@ -95,6 +95,12 @@ namespace PackageDelivery.Repository.Implementation.Implementation.Parameters
                 else
                 {
                     td.tipoCalle = record.streetType;
+                    td.numero = record.number;
+                    td.tipoInmueble = record.immovableType;
+                    td.barrio = record.neighborhood;
+                    td.observaciones = record.observations;
+                    td.actual = record.actual;
+                    td.idMunicipio = record.IdTown;
                     db.Entry(td).State = EntityState.Modified;
                     db.SaveChanges();
                     AddressRepositoryMapper mapper = new AddressRepositoryMapper();
