@@ -4,6 +4,7 @@ using PackageDelivery.Application.Implementation.Implementation.Core;
 using PackageDelivery.GUI.Helpers;
 using PackageDelivery.GUI.Mappers.Core;
 using PackageDelivery.GUI.Models.Core;
+using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Web.Mvc;
@@ -53,8 +54,10 @@ namespace PackageDelivery.GUI.Controllers.Core
         public ActionResult Create([Bind(Include = "Id,entryDate,departureDate,description,idPackage,idWarehouse")] HistoryModel historyModel)
         {
             if (ModelState.IsValid)
-            {
+            { 
 				HistoryGUIMapper mapper = new HistoryGUIMapper();
+                DateTime.ParseExact(historyModel.entryDate.ToString(), "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
+                DateTime.ParseExact(historyModel.departureDate.ToString(), "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
                 HistoryDTO response = _app.createRecord(mapper.ModelToDTOMapper(historyModel));
                 if (response != null) 
                 {

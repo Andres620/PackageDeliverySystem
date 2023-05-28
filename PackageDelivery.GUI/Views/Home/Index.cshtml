@@ -2,11 +2,220 @@
     ViewBag.Title = "Home Page";
 }
 
-<div class="jumbotron">
-    <h1>Package Delivery</h1>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
+<!DOCTYPE html>
+<html>
 
-<div class="row">
-    
-</div>
+<title>W3.CSS Template</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+    body, h1, h2, h3, h4, h5, h6 {
+        font-family: "Raleway", sans-serif
+    }
+
+    body, html {
+        height: 100%;
+        line-height: 1.8;
+        background-size: cover;
+        background-image: url("https://images.pexels.com/photos/4498128/pexels-photo-4498128.jpeg");
+    }
+    /* Full height image header */
+    .bgimg-1 {
+        background-position: center;
+        
+        min-height: 100%;
+    }
+
+    .w3-bar .w3-button {
+        padding: 16px;
+    }
+
+    .column {
+        float: left;
+        width: 33.33%;
+    }
+
+    /* Clear floats after the columns */
+    .row:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+</style>
+<body>
+
+    <!-- Navbar (sit on top) -->
+    <div class="w3-top">
+        <div class="w3-bar w3-white w3-card" id="myNavbar">
+            <a href="#home" class="w3-bar-item w3-button w3-wide">LOGO</a>
+            <!-- Right-sided navbar links -->
+            <!-- Hide right-floated links on small screens and replace them with a menu icon -->
+
+            <a href="javascript:void(0)" class="w3-bar-item w3-button w3-right w3-hide-large w3-hide-medium" onclick="w3_open()">
+                <i class="fa fa-bars"></i>
+            </a>
+        </div>
+    </div>
+    <!-- Header with full-height image -->
+    <header class="bgimg-1 w3-display-container w3-grayscale-min" id="home">
+        <div class="w3-display-bottomleft w3-text-grey w3-large" style="padding:24px 48px">
+            <i class="fa fa-facebook-official w3-hover-opacity"></i>
+            <i class="fa fa-instagram w3-hover-opacity"></i>
+            <i class="fa fa-snapchat w3-hover-opacity"></i>
+            <i class="fa fa-pinterest-p w3-hover-opacity"></i>
+            <i class="fa fa-twitter w3-hover-opacity"></i>
+            <i class="fa fa-linkedin w3-hover-opacity"></i>
+        </div>
+    </header>
+
+    <!-- About Section -->
+    <div class="w3-container" style="padding:128px 16px" id="about">
+        <h3 class="w3-center">ACERCA DE LA COMPAÑÍA DE ENTREGA DE PEDIDOS</h3>
+        <p class="w3-center w3-large">Principales valores que rigen la compañía</p>
+        <div class="w3-row-padding w3-center" style="margin-top:64px">
+            <div class="w3-quarter">
+                <i class="fa fa-desktop w3-margin-bottom w3-jumbo w3-center"></i>
+                <p class="w3-large">Responsabilidad</p>
+                <p>
+                    En Package System Delivery, nos comprometemos a ofrecerte un servicio de entrega de pedidos confiable y responsable. Sabemos lo
+                    importante que es para ti recibir tus productos a tiempo y en perfectas condiciones. Nuestro equipo se asegurará de
+                    que cada pedido sea entregado puntualmente y de manera segura, asumiendo la responsabilidad de resolver cualquier
+                    inconveniente que pueda surgir en el proceso. Tu satisfacción es nuestra máxima prioridad..
+                </p>
+            </div>
+            <div class="w3-quarter">
+                <i class="fa fa-heart w3-margin-bottom w3-jumbo"></i>
+                <p class="w3-large">Pasión</p>
+                <p>
+                    En Package System Delivery, estamos apasionados por lo que hacemos. Nos emociona ser parte de tus experiencias de
+                    compra y entrega de pedidos. Cada miembro de nuestro equipo comparte una pasión por brindarte un servicio excepcional.
+                    Desde el momento en que realizas tu pedido hasta que llega a tus manos, trabajamos con dedicación y entusiasmo para
+                    asegurarnos de que tu experiencia sea memorable. Tu satisfacción es nuestra mayor recompensa.
+                </p>
+            </div>
+            <div class="w3-quarter">
+                <i class="fa fa-diamond w3-margin-bottom w3-jumbo"></i>
+                <p class="w3-large">Diseño o valor agregado</p>
+                <p>
+                    En PackageSystemDelivery, nos esforzamos por ofrecerte algo más que una simple entrega de pedidos. Nos preocupamos
+                    por agregar valor a cada experiencia de compra que tengas con nosotros. Nos aseguramos de seleccionar cuidadosamente
+                    los productos y servicios que ofrecemos, buscando siempre brindarte opciones de alta calidad y una amplia gama de
+                    productos para satisfacer tus necesidades. Además, trabajamos constantemente en mejorar nuestra plataforma y
+                    procesos para ofrecerte una experiencia de usuario intuitiva y agradable. Queremos que sientas que cada vez que
+                    eliges Package System Delivery, obtienes algo más que un pedido entregado: obtienes una experiencia excepcional.
+                </p>
+            </div>
+            <div class="w3-quarter">
+                <i class="fa fa-cog w3-margin-bottom w3-jumbo"></i>
+                <p class="w3-large">Soporte o acompañamiento</p>
+                <p>
+                    En Package System Delivery, no solo te ofrecemos un servicio de entrega de pedidos, sino también un acompañamiento en
+                    todo el proceso. Sabemos que pueden surgir preguntas, inquietudes o problemas durante el proceso de entrega, y estamos aquí
+                    para ayudarte en cada paso del camino. Nuestro equipo de soporte está disponible para responder a tus preguntas y brindarte
+                    asistencia personalizada. Queremos que te sientas respaldado(a) y confiado(a) en todo momento. Tu satisfacción es nuestra prioridad,
+                    y nuestro compromiso es brindarte un servicio de entrega de pedidos con un soporte excepcional.
+                </p>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Team Section -->
+    <div class="w3-container" style="padding:128px 16px" id="team">
+        <h3 class="w3-center">El equipo de desarrollo</h3>
+        <p class="w3-center w3-large">Quienes trabajan en pro del crecimiento de la compañía</p>
+        <div class="w3-row-padding w3-center" style="margin-top:64px">
+            <div class="w3-col l3 m6 w3-margin-bottom ">
+                <div class="w3-card">
+                    <img src="../../Images/Andres.png" alt="Andres" style="width:100%">
+                    <div class="w3-container">
+                        <h3>Andres Castrillon</h3>
+                        <p class="w3">Expert Developer</p>
+                        <p>
+                            Andres es nuestro talentoso desarrollador, reconocido por su dedicación inquebrantable y sus impresionantes 
+                            habilidades técnicas. Apasionado por la programación, se desafía constantemente para superar los límites 
+                            y entregar resultados de alta calidad.
+                        </p>
+                        <p><button class="w3-button w3-light-grey w3-block"><i class="fa fa-envelope"></i> Contact</button></p>
+                    </div>
+                </div>
+            </div>
+            <div class="w3-col l3 m6 w3-margin-bottom ">
+                <div class="w3-card">
+                    <img src="../../Images/Lucas.png" alt="Lucas" style="width:100%">
+                    <div class="w3-container">
+                        <h3>Lucas Bohorquez</h3>
+                        <p class="w3">Solutions Architect</p>
+                            Nuestro talentoso Arquitecto de Soluciones, Lucas, es un experto en brindar una visión estratégica y guiar 
+                            nuestros proyectos hacia el éxito. Con una vasta experiencia en el diseño y desarrollo de soluciones tecnológicas, 
+                            Lucas aporta un profundo conocimiento y una perspectiva única a nuestro equipo.
+                        <p><button class="w3-button w3-light-grey w3-block"><i class="fa fa-envelope"></i> Contact</button></p>
+                    </div>
+                </div>
+            </div>
+            <div class="w3-col l3 m6 w3-margin-bottom ">
+                <div class="w3-card">
+                    <img src="../../Images/Cristian.png" alt="Cristian" style="width:100%">
+                    <div class="w3-container">
+                        <h3>Cristian Guerrero</h3>
+                        <p class="w3">Product Owner</p>
+                        <p>
+                            Cristian es nuestro talentoso Product Owner, una pieza clave en la planificación y ejecución exitosa de nuestros proyectos. 
+                            Con su profundo conocimiento y experiencia, Cristian es experto en definir el paso a paso del proyecto y en asegurarse de 
+                            que cada aspecto se lleve a cabo de manera eficiente y efectiva. 
+                        </p>                        
+                        <p><button class="w3-button w3-light-grey w3-block"><i class="fa fa-envelope"></i> Contact</button></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- Footer -->
+    <footer class="w3-center w3-black w3-padding-64">
+        <a href="#home" class="w3-button w3-light-grey"><i class="fa fa-arrow-up w3-margin-right"></i>Ir al inicio</a>
+        <div class="w3-xlarge w3-section">
+            <i class="fa fa-facebook-official w3-hover-opacity"></i>
+            <i class="fa fa-instagram w3-hover-opacity"></i>
+            <i class="fa fa-snapchat w3-hover-opacity"></i>
+            <i class="fa fa-pinterest-p w3-hover-opacity"></i>
+            <i class="fa fa-twitter w3-hover-opacity"></i>
+            <i class="fa fa-linkedin w3-hover-opacity"></i>
+        </div>
+        <p>Powered by <a href="https://www.ucaldas.edu.co/portal/" title="IUC" target="_blank" class="w3-hover-text-green">IUC.org</a></p>
+    </footer>
+
+    <script>
+        // Modal Image Gallery
+        function onClick(element) {
+            document.getElementById("img01").src = element.src;
+            document.getElementById("modal01").style.display = "block";
+            var captionText = document.getElementById("caption");
+            captionText.innerHTML = element.alt;
+        }
+
+
+        // Toggle between showing and hiding the sidebar when clicking the menu icon
+        var mySidebar = document.getElementById("mySidebar");
+
+        function w3_open() {
+            if (mySidebar.style.display === 'block') {
+                mySidebar.style.display = 'none';
+            } else {
+                mySidebar.style.display = 'block';
+            }
+        }
+
+        // Close the sidebar with the close button
+        function w3_close() {
+            mySidebar.style.display = "none";
+        }
+    </script>
+
+</body>
+</html>

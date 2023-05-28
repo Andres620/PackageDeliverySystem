@@ -11,10 +11,12 @@ namespace PackageDelivery.GUI.Models.Core
 
 		[Required]
         [DisplayName("Fecha de ingreso")]
-		public DateTime entryDate { get; set; }
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        public DateTime entryDate { get; set; }
 
 		[Required]
         [DisplayName("Fecha de salida")]
+		[DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
 		public DateTime departureDate { get; set; }
 
 		[DisplayName("Descripción")]
