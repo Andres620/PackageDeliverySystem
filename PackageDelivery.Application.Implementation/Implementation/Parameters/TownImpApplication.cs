@@ -3,15 +3,19 @@ using PackageDelivery.Application.Contracts.Interfaces.Parameters;
 using PackageDelivery.Application.Implementation.Mappers.Parameters;
 using PackageDelivery.Repository.Contracts.DbModels.Parameters;
 using PackageDelivery.Repository.Contracts.Interfaces.Parameters;
-using PackageDelivery.Repository.Implementation.Implementation.Parameters;
 using System.Collections.Generic;
 
 namespace PackageDelivery.Application.Implementation.Implementation.Parameters
 {
     public class TownImpApplication : ITownApplication
 	{
-		ITownRepository _repository = new TownImpRepository();
-		public TownDTO createRecord(TownDTO record)
+		ITownRepository _repository;
+
+        public TownImpApplication(ITownRepository repository)
+        {
+			this._repository = repository;
+        }
+        public TownDTO createRecord(TownDTO record)
 		{
 			TownApplicationMapper mapper = new TownApplicationMapper();
 			TownDbModel dbModel = mapper.DTOToDbModelMapper(record);

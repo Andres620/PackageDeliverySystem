@@ -19,7 +19,7 @@
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
-    <IISExpressSSLPort>44348</IISExpressSSLPort>
+    <IISExpressSSLPort>44332</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
@@ -64,6 +64,15 @@
     </Reference>
     <Reference Include="Microsoft.Web.Infrastructure, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Web.Infrastructure.2.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="SimpleInjector, Version=5.0.0.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
+      <HintPath>..\packages\SimpleInjector.5.4.1\lib\net461\SimpleInjector.dll</HintPath>
+    </Reference>
+    <Reference Include="SimpleInjector.Integration.Web, Version=5.0.0.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
+      <HintPath>..\packages\SimpleInjector.Integration.Web.5.0.0\lib\net45\SimpleInjector.Integration.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="SimpleInjector.Integration.Web.Mvc, Version=5.0.0.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
+      <HintPath>..\packages\SimpleInjector.Integration.Web.Mvc.5.0.0\lib\net45\SimpleInjector.Integration.Web.Mvc.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -117,6 +126,9 @@
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="WebActivator, Version=1.4.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebActivator.1.4.4\lib\net40\WebActivator.dll</HintPath>
+    </Reference>
     <Reference Include="WebGrease">
       <Private>True</Private>
       <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
@@ -166,6 +178,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\SimpleInjectorInitializer.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\Core\HistoryController.cs" />
@@ -376,6 +389,14 @@
     <ProjectReference Include="..\PackageDelivery.Application.Implementation\PackageDelivery.Application.Implementation.csproj">
       <Project>{b0be8dbf-b528-4bf0-b4c9-47be53ac2a21}</Project>
       <Name>PackageDelivery.Application.Implementation</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PackageDelivery.Repository.Contracts\PackageDelivery.Repository.Contracts.csproj">
+      <Project>{4d69747d-2959-481f-b1e3-ef207a76cd29}</Project>
+      <Name>PackageDelivery.Repository.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PackageDelivery.Repository.Implementation\PackageDelivery.Repository.Implementation.csproj">
+      <Project>{f95e6cf3-256a-4519-86d1-f9430c515554}</Project>
+      <Name>PackageDelivery.Repository.Implementation</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

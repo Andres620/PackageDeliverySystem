@@ -3,15 +3,20 @@ using PackageDelivery.Application.Contracts.Interfaces.Parameters;
 using PackageDelivery.Application.Implementation.Mappers.Parameters;
 using PackageDelivery.Repository.Contracts.DbModels.Parameters;
 using PackageDelivery.Repository.Contracts.Interfaces.Parameters;
-using PackageDelivery.Repository.Implementation.Implementation.Parameters;
 using System.Collections.Generic;
 
 namespace PackageDelivery.Application.Implementation.Implementation.Parameters
 {
     public class AddressImpApplication : IAddressApplication
 	{
-		IAddressRepository _repository = new AddressImpRepository();
-		public AddressDTO createRecord(AddressDTO record)
+		IAddressRepository _repository;
+
+        public AddressImpApplication(IAddressRepository repository)
+        {
+			this._repository = repository;
+        }
+
+        public AddressDTO createRecord(AddressDTO record)
 		{
 			AddressApplicationMapper mapper = new AddressApplicationMapper();
 			AddressDbModel dbModel = mapper.DTOToDbModelMapper(record);

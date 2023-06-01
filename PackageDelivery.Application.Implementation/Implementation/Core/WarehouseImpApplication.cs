@@ -3,15 +3,19 @@ using PackageDelivery.Application.Contracts.Interfaces.Core;
 using PackageDelivery.Application.Implementation.Mappers.Core;
 using PackageDelivery.Repository.Contracts.DbModels.Core;
 using PackageDelivery.Repository.Contracts.Interfaces.Core;
-using PackageDelivery.Repository.Implementation.Implementation.Core;
 using System.Collections.Generic;
 
 namespace PackageDelivery.Application.Implementation.Implementation.Core
 {
     public class WarehouseImpApplication : IWarehouseApplication
 	{
-		IWarehouseRepository _repository = new WarehouseImpRepository();
-		public WarehouseDTO createRecord(WarehouseDTO record)
+		IWarehouseRepository _repository;
+
+        public WarehouseImpApplication(IWarehouseRepository repository)
+        {
+            this._repository = repository;
+        }
+        public WarehouseDTO createRecord(WarehouseDTO record)
 		{
 			WarehouseApplicationMapper mapper = new WarehouseApplicationMapper();
 			WarehouseDbModel dbModel = mapper.DTOToDbModelMapper(record);

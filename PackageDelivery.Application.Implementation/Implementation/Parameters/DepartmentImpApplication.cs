@@ -3,15 +3,20 @@ using PackageDelivery.Application.Contracts.Interfaces.Parameters;
 using PackageDelivery.Application.Implementation.Mappers.Parameters;
 using PackageDelivery.Repository.Contracts.DbModels.Parameters;
 using PackageDelivery.Repository.Contracts.Interfaces.Parameters;
-using PackageDelivery.Repository.Implementation.Implementation.Parameters;
 using System.Collections.Generic;
 
 namespace PackageDelivery.Application.Implementation.Implementation.Parameters
 {
     public class DepartmentImpApplication : IDepartmentApplication
 	{
-		IDepartmentRepository _repository = new DepartmentImpRepository();
-		public DepartmentDTO createRecord(DepartmentDTO record)
+		IDepartmentRepository _repository;
+
+        public DepartmentImpApplication(IDepartmentRepository repository)
+        {
+            this._repository = repository;
+        }
+
+        public DepartmentDTO createRecord(DepartmentDTO record)
 		{
 			DepartmentApplicationMapper mapper = new DepartmentApplicationMapper();
 			DepartmentDbModel dbModel = mapper.DTOToDbModelMapper(record);

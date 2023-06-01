@@ -1,6 +1,5 @@
 ﻿using PackageDelivery.Application.Contracts.DTO.ParametersDTO;
 using PackageDelivery.Application.Contracts.Interfaces.Parameters;
-using PackageDelivery.Application.Implementation.Implementation.Parameters;
 using PackageDelivery.GUI.Helpers;
 using PackageDelivery.GUI.Mappers.Parameters;
 using PackageDelivery.GUI.Models.Parameters;
@@ -12,7 +11,12 @@ namespace PackageDelivery.GUI.Controllers.Parameters
 {
     public class AddressController : Controller
     {
-        private IAddressApplication _app = new AddressImpApplication();
+        private IAddressApplication _app;
+
+        public AddressController(IAddressApplication app)
+        {
+            this._app = app;
+        }
 
         // GET: Address
         public ActionResult Index(string filter = "")

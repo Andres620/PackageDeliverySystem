@@ -3,15 +3,19 @@ using PackageDelivery.Application.Contracts.Interfaces.Core;
 using PackageDelivery.Application.Implementation.Mappers.Core;
 using PackageDelivery.Repository.Contracts.DbModels.Core;
 using PackageDelivery.Repository.Contracts.Interfaces.Core;
-using PackageDelivery.Repository.Implementation.Implementation.Core;
 using System.Collections.Generic;
 
 namespace PackageDelivery.Application.Implementation.Implementation.Core
 {
     public class TransportTypeImpApplication : ITransportTypeApplication
 	{
-		ITransportTypeRepository _repository = new TransportTypeImpRepository();
-		public TransportTypeDTO createRecord(TransportTypeDTO record)
+		ITransportTypeRepository _repository;
+
+        public TransportTypeImpApplication(ITransportTypeRepository repository)
+        {
+			this._repository = repository;
+        }
+        public TransportTypeDTO createRecord(TransportTypeDTO record)
 		{
 			TransportTypeApplicationMapper mapper = new TransportTypeApplicationMapper();
 			TransportTypeDbModel dbModel = mapper.DTOToDbModelMapper(record);

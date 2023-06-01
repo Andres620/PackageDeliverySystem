@@ -1,6 +1,5 @@
 ﻿using PackageDelivery.Application.Contracts.DTO.CoreDTO;
 using PackageDelivery.Application.Contracts.Interfaces.Core;
-using PackageDelivery.Application.Implementation.Implementation.Core;
 using PackageDelivery.GUI.Helpers;
 using PackageDelivery.GUI.Mappers.Core;
 using PackageDelivery.GUI.Models.Core;
@@ -13,7 +12,12 @@ namespace PackageDelivery.GUI.Controllers.Core
 {
     public class HistoryController : Controller
     {
-        private IHistoryApplication _app = new HistoryImpApplication();
+        private IHistoryApplication _app;
+
+        public HistoryController(IHistoryApplication app)
+        {
+            this._app = app;
+        }
 
         // GET: History
         public ActionResult Index(string filter = "")

@@ -3,15 +3,20 @@ using PackageDelivery.Application.Contracts.Interfaces.Core;
 using PackageDelivery.Application.Implementation.Mappers.Core;
 using PackageDelivery.Repository.Contracts.DbModels.Core;
 using PackageDelivery.Repository.Contracts.Interfaces.Core;
-using PackageDelivery.Repository.Implementation.Implementation.Core;
 using System.Collections.Generic;
 
 namespace PackageDelivery.Application.Implementation.Implementation.Core
 {
     public class ShipmentStateImpApplication : IShipmentStateApplication
 	{
-		IShipmentStateRepository _repository = new ShipmentStateImpRepository();
-		public ShipmentStateDTO createRecord(ShipmentStateDTO record)
+		IShipmentStateRepository _repository;
+
+        public ShipmentStateImpApplication(IShipmentStateRepository repository)
+        {
+			this._repository = repository;
+        }
+
+        public ShipmentStateDTO createRecord(ShipmentStateDTO record)
 		{
 			ShipmentStateApplicationMapper mapper = new ShipmentStateApplicationMapper();
 			ShipmentStateDbModel dbModel = mapper.DTOToDbModelMapper(record);

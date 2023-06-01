@@ -1,6 +1,5 @@
 ﻿using PackageDelivery.Application.Contracts.DTO.CoreDTO;
 using PackageDelivery.Application.Contracts.Interfaces.Core;
-using PackageDelivery.Application.Implementation.Implementation.Core;
 using PackageDelivery.GUI.Helpers;
 using PackageDelivery.GUI.Mappers.Core;
 using PackageDelivery.GUI.Models.Core;
@@ -12,7 +11,12 @@ namespace PackageDelivery.GUI.Controllers.Core
 {
     public class TransportTypeController : Controller
     {
-        private ITransportTypeApplication _app = new TransportTypeImpApplication();
+        private ITransportTypeApplication _app;
+
+        public TransportTypeController(ITransportTypeApplication app)
+        {
+            this._app = app;
+        }
 
         // GET: TransportType
         public ActionResult Index(string filter = "")

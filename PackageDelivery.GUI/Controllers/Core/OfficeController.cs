@@ -1,6 +1,5 @@
 ﻿using PackageDelivery.Application.Contracts.DTO.CoreDTO;
 using PackageDelivery.Application.Contracts.Interfaces.Core;
-using PackageDelivery.Application.Implementation.Implementation.Core;
 using PackageDelivery.GUI.Helpers;
 using PackageDelivery.GUI.Mappers.Core;
 using PackageDelivery.GUI.Models.Core;
@@ -12,10 +11,15 @@ namespace PackageDelivery.GUI.Controllers.Core
 {
     public class OfficeController : Controller
     {
-		private IOfficeApplication _app = new OfficeImpApplication();
+		private IOfficeApplication _app;
 
-		// GET: Office
-		public ActionResult Index(string filter = "")
+        public OfficeController(IOfficeApplication app)
+        {
+            this._app = app;
+        }
+
+        // GET: Office
+        public ActionResult Index(string filter = "")
         {
 			var dtoList = _app.getRecordsList(filter);
 			OfficeGUIMapper mapper = new OfficeGUIMapper();

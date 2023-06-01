@@ -1,6 +1,5 @@
 ﻿using PackageDelivery.Application.Contracts.DTO.ParametersDTO;
 using PackageDelivery.Application.Contracts.Interfaces.Parameters;
-using PackageDelivery.Application.Implementation.Implementation.Parameters;
 using PackageDelivery.GUI.Helpers;
 using PackageDelivery.GUI.Mappers.Parameters;
 using PackageDelivery.GUI.Models.Parameters;
@@ -12,7 +11,12 @@ namespace PackageDelivery.GUI.Controllers.Parameters
 {
     public class TownController : Controller
     {
-        private ITownApplication _app = new TownImpApplication();
+        private ITownApplication _app;
+
+        public TownController(ITownApplication app)
+        {
+            this._app = app;
+        }
 
         // GET: Town
         public ActionResult Index(string filter = "")
