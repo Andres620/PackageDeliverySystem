@@ -3,15 +3,20 @@ using PackageDelivery.Application.Contracts.Interfaces.Core;
 using PackageDelivery.Application.Implementation.Mappers.Core;
 using PackageDelivery.Repository.Contracts.DbModels.Core;
 using PackageDelivery.Repository.Contracts.Interfaces.Core;
-using PackageDelivery.Repository.Implementation.Implementation.Core;
 using System.Collections.Generic;
 
 namespace PackageDelivery.Application.Implementation.Implementation.Core
 {
     public class HistoryImpApplication : IHistoryApplication
 	{
-		IHistoryRepository _repository = new HistoryImpRepository();
-		public HistoryDTO createRecord(HistoryDTO record)
+		IHistoryRepository _repository;
+
+        public HistoryImpApplication(IHistoryRepository repository)
+        {
+            this._repository = repository;
+        }
+
+        public HistoryDTO createRecord(HistoryDTO record)
 		{
 			HistoryApplicationMapper mapper = new HistoryApplicationMapper();
 			HistoryDbModel dbModel = mapper.DTOToDbModelMapper(record);

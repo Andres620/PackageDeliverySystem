@@ -1,6 +1,5 @@
 ﻿using PackageDelivery.Application.Contracts.DTO.ParametersDTO;
 using PackageDelivery.Application.Contracts.Interfaces.Parameters;
-using PackageDelivery.Application.Implementation.Implementation.Parameters;
 using PackageDelivery.GUI.Helpers;
 using PackageDelivery.GUI.Mappers.Parameters;
 using PackageDelivery.GUI.Models.Parameters;
@@ -12,7 +11,12 @@ namespace PackageDelivery.GUI.Controllers.Parameters
 {
     public class DepartmentController : Controller
     {
-        private IDepartmentApplication _app = new DepartmentImpApplication();
+        private IDepartmentApplication _app;
+
+        public DepartmentController(IDepartmentApplication app)
+        {
+            this._app = app;
+        }
 
         // GET: Department
         public ActionResult Index(string filter = "")

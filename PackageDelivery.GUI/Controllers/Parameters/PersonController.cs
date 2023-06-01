@@ -1,6 +1,5 @@
 ﻿using PackageDelivery.Application.Contracts.DTO.ParametersDTO;
 using PackageDelivery.Application.Contracts.Interfaces.Parameters;
-using PackageDelivery.Application.Implementation.Implementation.Parameters;
 using PackageDelivery.GUI.Helpers;
 using PackageDelivery.GUI.Implementation.Mappers.Parameters;
 using PackageDelivery.GUI.Models.Parameters;
@@ -12,7 +11,12 @@ namespace PackageDelivery.GUI.Controllers.Parameters
 {
     public class PersonController : Controller
     {
-        private IPersonApplication _app = new PersonImpApplication();
+        private IPersonApplication _app;
+
+        public PersonController(IPersonApplication app)
+        {
+            this._app = app;
+        }
 
         // GET: Person
         public ActionResult Index(string filter = "")

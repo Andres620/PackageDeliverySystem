@@ -1,6 +1,5 @@
 ﻿using PackageDelivery.Application.Contracts.DTO.ParametersDTO;
 using PackageDelivery.Application.Contracts.Interfaces.Parameters;
-using PackageDelivery.Application.Implementation.Implementation.Parameters;
 using PackageDelivery.GUI.Helpers;
 using PackageDelivery.GUI.Implementation.Mappers.Parameters;
 using PackageDelivery.GUI.Models.Parameters;
@@ -12,7 +11,12 @@ namespace PackageDelivery.GUI.Controllers.Parameters
 {
     public class DocumentTypeController : Controller
     {
-        private IDocumentTypeApplication _app = new DocumentTypeImpApplication();
+        private IDocumentTypeApplication _app;
+
+        public DocumentTypeController(IDocumentTypeApplication app)
+        {
+            this._app = app;
+        }
 
         // GET: DocumentType
         public ActionResult Index(string filter = "")

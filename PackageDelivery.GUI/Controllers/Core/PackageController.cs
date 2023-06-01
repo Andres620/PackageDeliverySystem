@@ -1,6 +1,5 @@
 ﻿using PackageDelivery.Application.Contracts.DTO.CoreDTO;
 using PackageDelivery.Application.Contracts.Interfaces.Core;
-using PackageDelivery.Application.Implementation.Implementation.Core;
 using PackageDelivery.GUI.Helpers;
 using PackageDelivery.GUI.Mappers.Core;
 using PackageDelivery.GUI.Models.Core;
@@ -12,10 +11,15 @@ namespace PackageDelivery.GUI.Controllers.Core
 {
     public class PackageController : Controller
     {
-		private IPackageApplication _app = new PackageImpApplication();
+		private IPackageApplication _app;
 
-		// GET: Package
-		public ActionResult Index(double filter = 0)
+        public PackageController(IPackageApplication app)
+        {
+            this._app = app;
+        }
+
+        // GET: Package
+        public ActionResult Index(double filter = 0)
         {
 			var dtoList = _app.getRecordsList(filter);
 			PackageGUIMapper mapper = new PackageGUIMapper();
