@@ -4,6 +4,17 @@
     ViewBag.Title = "Delete";
 }
 
+<html>
+
+<style>
+    body, html {
+        height: 100%;
+        line-height: 1.8;
+        background-size: cover;
+        background-image: url("https://images.pexels.com/photos/7641303/pexels-photo-7641303.jpeg");
+    }
+</style>
+
 <h2>Delete</h2>
 
 <h3>Are you sure you want to delete this?</h3>
@@ -68,7 +79,8 @@
 
     </dl>
 
-    @using (Html.BeginForm()) {
+    @using (Html.BeginForm())
+    {
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
@@ -77,3 +89,5 @@
         </div>
     }
 </div>
+
+</html>
