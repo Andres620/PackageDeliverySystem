@@ -44,10 +44,10 @@ namespace PackageDelivery.Application.Implementation.Implementation.Core
 			return mapper.DbModelToDTOMapper(dbModel);
 		}
 
-		public IEnumerable<OfficeDTO> getRecordsList(string filter)
+		public IEnumerable<OfficeDTO> getRecordsList()
 		{
 			OfficeApplicationMapper mapper = new OfficeApplicationMapper();
-			IEnumerable<OfficeDbModel> dbModelList = _repository.getRecordsList(filter);
+			IEnumerable<OfficeDbModel> dbModelList = _repository.getRecordsList();
 			return mapper.DbModelToDTOMapper(dbModelList);
 		}
 

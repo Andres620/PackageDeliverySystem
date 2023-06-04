@@ -1,5 +1,6 @@
 ﻿using PackageDelivery.Application.Contracts.DTO.CoreDTO;
 using PackageDelivery.Application.Contracts.Interfaces.Core;
+using PackageDelivery.Application.Contracts.Interfaces.Parameters;
 using PackageDelivery.GUI.Helpers;
 using PackageDelivery.GUI.Mappers.Core;
 using PackageDelivery.GUI.Models.Core;
@@ -12,17 +13,19 @@ namespace PackageDelivery.GUI.Controllers.Core
     public class WarehouseController : Controller
     {
         private IWarehouseApplication _app;
+        private ITownApplication _appTown;
 
-        public WarehouseController(IWarehouseApplication app)
+        public WarehouseController(IWarehouseApplication app, ITownApplication townApplication)
         {
             this._app = app;
+            this._appTown = townApplication;
         }
 
         // GET: Warehouse
-        public ActionResult Index(string filter = "")
+        public ActionResult Index()
         {
             WarehouseGUIMapper mapper = new WarehouseGUIMapper();
-            IEnumerable<WarehouseModel> list = mapper.DTOToModelMapper(_app.getRecordsList(filter));
+            IEnumerable<WarehouseModel> list = mapper.DTOToModelMapper(_app.getRecordsList());
             return View(list);
         }
 
@@ -45,6 +48,7 @@ namespace PackageDelivery.GUI.Controllers.Core
         // GET: Warehouse/Create
         public ActionResult Create()
         {
+            this.getTownListToSelect();
             return View();
         }
 
@@ -71,6 +75,7 @@ namespace PackageDelivery.GUI.Controllers.Core
             }
             ViewBag.ClassName = ActionMessages.warningClass;
             ViewBag.Message = ActionMessages.errorMessage;
+            this.getTownListToSelect();
             return View(warehouseModel);
         }
 
@@ -87,6 +92,7 @@ namespace PackageDelivery.GUI.Controllers.Core
             {
                 return HttpNotFound();
             }
+            this.getTownListToSelect();
             return View(warehouseModel);
         }
 
@@ -110,6 +116,7 @@ namespace PackageDelivery.GUI.Controllers.Core
             }
             ViewBag.ClassName = ActionMessages.warningClass;
             ViewBag.Message = ActionMessages.errorMessage;
+            this.getTownListToSelect();
             return View(warehouseModel);
         }
 
@@ -144,6 +151,11 @@ namespace PackageDelivery.GUI.Controllers.Core
             ViewBag.ClassName = ActionMessages.warningClass;
             ViewBag.Message = ActionMessages.errorMessage;
             return View();
+        }
+
+        private void getTownListToSelect()
+        {
+            ViewBag.idTown = new SelectList(_appTown.getRecordsList(), "Id", "name");
         }
     }
 }

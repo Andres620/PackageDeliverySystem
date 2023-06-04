@@ -63,11 +63,11 @@ namespace PackageDelivery.Repository.Implementation.Implementation.Core
             }
         }
 
-        public IEnumerable<VehicleDbModel> getRecordsList(string filter)
+        public IEnumerable<VehicleDbModel> getRecordsList()
         {
             using (PackageDeliveryEntities db = new PackageDeliveryEntities())
             {
-                IEnumerable<vehiculo> list = db.vehiculo.Where(x => x.placa.Contains(filter));
+                IEnumerable<vehiculo> list = db.vehiculo.Where(x => x.id != null);
                 VehicleRepositoryMapper mapper = new VehicleRepositoryMapper();
                 return mapper.DatabaseToDbModelMapper(list);
             }

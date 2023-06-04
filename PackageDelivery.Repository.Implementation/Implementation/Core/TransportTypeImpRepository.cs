@@ -63,11 +63,11 @@ namespace PackageDelivery.Repository.Implementation.Implementation.Core
             }
         }
 
-        public IEnumerable<TransportTypeDbModel> getRecordsList(string filter)
+        public IEnumerable<TransportTypeDbModel> getRecordsList()
         {
             using (PackageDeliveryEntities db = new PackageDeliveryEntities())
             {
-                IEnumerable<tipoTransporte> list = db.tipoTransporte.Where(x => x.nombre.Contains(filter));
+                IEnumerable<tipoTransporte> list = db.tipoTransporte.Where(x => x.id != null);
                 TransportTypeRepositoryMapper mapper = new TransportTypeRepositoryMapper();
                 return mapper.DatabaseToDbModelMapper(list);
             }

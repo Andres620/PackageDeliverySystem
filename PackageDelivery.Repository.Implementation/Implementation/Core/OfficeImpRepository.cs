@@ -63,11 +63,11 @@ namespace PackageDelivery.Repository.Implementation.Implementation.Core
             }
         }
 
-        public IEnumerable<OfficeDbModel> getRecordsList(string filter)
+        public IEnumerable<OfficeDbModel> getRecordsList()
         {
             using (PackageDeliveryEntities db = new PackageDeliveryEntities())
             {
-                IEnumerable<oficina> list = db.oficina.Where(x => x.direccion.Contains(filter));
+                IEnumerable<oficina> list = db.oficina.Where(x => x.id != null);
                 OfficeRepositoryMapper mapper = new OfficeRepositoryMapper();
                 return mapper.DatabaseToDbModelMapper(list);
             }

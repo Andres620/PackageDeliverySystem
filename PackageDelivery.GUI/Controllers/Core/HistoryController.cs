@@ -13,16 +13,20 @@ namespace PackageDelivery.GUI.Controllers.Core
     public class HistoryController : Controller
     {
         private IHistoryApplication _app;
+        private IPackageApplication _appPackage;
+        private IWarehouseApplication _appWarehouse;
 
-        public HistoryController(IHistoryApplication app)
+        public HistoryController(IHistoryApplication app, IPackageApplication appPackage, IWarehouseApplication appWarehouse)
         {
             this._app = app;
+            this._appPackage = appPackage;
+            this._appWarehouse = appWarehouse;
         }
 
         // GET: History
-        public ActionResult Index(string filter = "")
+        public ActionResult Index()
         {
-            var dtoList = _app.getRecordsList(filter);
+            var dtoList = _app.getRecordsList();
             HistoryGUIMapper mapper = new HistoryGUIMapper();
             IEnumerable<HistoryModel> model = mapper.DTOToModelMapper(dtoList);
             return View(model);
@@ -47,6 +51,8 @@ namespace PackageDelivery.GUI.Controllers.Core
         // GET: History/Create
         public ActionResult Create()
         {
+            this.getPackageListToSelect();
+            this.getWarehouseListToSelect();
 			return View();
         }
 
@@ -60,8 +66,6 @@ namespace PackageDelivery.GUI.Controllers.Core
             if (ModelState.IsValid)
             { 
 				HistoryGUIMapper mapper = new HistoryGUIMapper();
-                DateTime.ParseExact(historyModel.entryDate.ToString(), "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
-                DateTime.ParseExact(historyModel.departureDate.ToString(), "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
                 HistoryDTO response = _app.createRecord(mapper.ModelToDTOMapper(historyModel));
                 if (response != null) 
                 {
@@ -75,6 +79,8 @@ namespace PackageDelivery.GUI.Controllers.Core
             }
 			ViewBag.ClassName = ActionMessages.warningClass;
 			ViewBag.Message = ActionMessages.errorMessage;
+            this.getPackageListToSelect();
+            this.getWarehouseListToSelect();
 			return View(historyModel);
         }
 
@@ -91,6 +97,8 @@ namespace PackageDelivery.GUI.Controllers.Core
             {
                 return HttpNotFound();
             }
+            this.getPackageListToSelect();
+            this.getWarehouseListToSelect();
             return View(historyModel);
         }
 
@@ -111,6 +119,8 @@ namespace PackageDelivery.GUI.Controllers.Core
 				}
             }
 			ViewBag.Message = ActionMessages.errorMessage;
+            this.getPackageListToSelect();
+            this.getWarehouseListToSelect();
 			return View(historyModel);
         }
 
@@ -143,5 +153,15 @@ namespace PackageDelivery.GUI.Controllers.Core
 			ViewBag.Message = ActionMessages.errorMessage;
 			return View();
 		}
+
+        private void getPackageListToSelect()
+        {
+            ViewBag.idPackage = new SelectList(_appPackage.getRecordsList(), "Id", "Id");
+        }
+
+        private void getWarehouseListToSelect()
+        {
+            ViewBag.idWarehouse = new SelectList(_appWarehouse.getRecordsList(), "Id", "name");
+        }
     }
 }

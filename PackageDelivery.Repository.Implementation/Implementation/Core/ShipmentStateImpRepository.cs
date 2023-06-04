@@ -63,12 +63,12 @@ namespace PackageDelivery.Repository.Implementation.Implementation.Core
             }
         }
 
-        public IEnumerable<ShipmentStateDbModel> getRecordsList(string filter)
+        public IEnumerable<ShipmentStateDbModel> getRecordsList()
         {
             {
                 using (PackageDeliveryEntities db = new PackageDeliveryEntities())
                 {
-                    IEnumerable<estadoEnvio> list = db.estadoEnvio.Where(x => x.nombre.Contains(filter));
+                    IEnumerable<estadoEnvio> list = db.estadoEnvio.Where(x => x.id != null);
                     ShipmentStateRepositoryMapper mapper = new ShipmentStateRepositoryMapper();
                     return mapper.DatabaseToDbModelMapper(list);
                 }

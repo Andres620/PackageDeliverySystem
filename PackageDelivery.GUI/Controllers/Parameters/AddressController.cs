@@ -19,10 +19,10 @@ namespace PackageDelivery.GUI.Controllers.Parameters
         }
 
         // GET: Address
-        public ActionResult Index(string filter = "")
+        public ActionResult Index()
         {
             AddressGUIMapper mapper = new AddressGUIMapper();
-            IEnumerable<AddressModel> list = mapper.DTOToModelMapper(_app.getRecordsList(filter));
+            IEnumerable<AddressModel> list = mapper.DTOToModelMapper(_app.getRecordsList());
             return View(list);
         }
 

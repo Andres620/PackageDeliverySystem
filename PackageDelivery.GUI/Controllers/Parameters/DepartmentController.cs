@@ -21,10 +21,10 @@ namespace PackageDelivery.GUI.Controllers.Parameters
         }
 
         // GET: Department
-        public ActionResult Index(string filter = "")
+        public ActionResult Index()
         {
             DepartmentGUIMapper mapper = new DepartmentGUIMapper();
-            IEnumerable<DepartmentModel> list = mapper.DTOToModelMapper(_app.getRecordsList(filter));
+            IEnumerable<DepartmentModel> list = mapper.DTOToModelMapper(_app.getRecordsList());
             return View(list);
         }
 

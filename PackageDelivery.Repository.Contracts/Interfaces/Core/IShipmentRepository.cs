@@ -6,7 +6,7 @@ namespace PackageDelivery.Repository.Contracts.Interfaces.Core
     public interface IShipmentRepository
     {
         ShipmentDbModel getRecordById(int id);
-        IEnumerable<ShipmentDbModel> getRecordsList(long filter);
+        IEnumerable<ShipmentDbModel> getRecordsList();
         ShipmentDbModel createRecord(ShipmentDbModel record);
         ShipmentDbModel updateRecord(ShipmentDbModel record);
         bool deleteRecordById(int id);

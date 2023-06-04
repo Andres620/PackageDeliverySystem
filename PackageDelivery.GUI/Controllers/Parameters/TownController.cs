@@ -19,10 +19,10 @@ namespace PackageDelivery.GUI.Controllers.Parameters
         }
 
         // GET: Town
-        public ActionResult Index(string filter = "")
+        public ActionResult Index()
         {
             TownGUIMapper mapper = new TownGUIMapper();
-            IEnumerable<TownModel> list = mapper.DTOToModelMapper(_app.getRecordsList(filter));
+            IEnumerable<TownModel> list = mapper.DTOToModelMapper(_app.getRecordsList());
             return View(list);
         }
 

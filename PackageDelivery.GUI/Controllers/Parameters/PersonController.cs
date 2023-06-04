@@ -19,10 +19,10 @@ namespace PackageDelivery.GUI.Controllers.Parameters
         }
 
         // GET: Person
-        public ActionResult Index(string filter = "")
+        public ActionResult Index()
         {
             PersonGUIMapper mapper = new PersonGUIMapper();
-            IEnumerable<PersonModel> list = mapper.DTOToModelMapper(_app.getRecordsList(filter));
+            IEnumerable<PersonModel> list = mapper.DTOToModelMapper(_app.getRecordsList());
             return View(list);
         }
 
