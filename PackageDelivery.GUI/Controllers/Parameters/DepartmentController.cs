@@ -1,7 +1,9 @@
 ﻿using PackageDelivery.Application.Contracts.DTO.ParametersDTO;
 using PackageDelivery.Application.Contracts.Interfaces.Parameters;
 using PackageDelivery.GUI.Helpers;
+using PackageDelivery.GUI.Mappers.Core;
 using PackageDelivery.GUI.Mappers.Parameters;
+using PackageDelivery.GUI.Models.Core;
 using PackageDelivery.GUI.Models.Parameters;
 using System.Collections.Generic;
 using System.Net;
