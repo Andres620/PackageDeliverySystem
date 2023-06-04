@@ -235,10 +235,6 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\aspnet-PackageDeliverySystem-20230507123337.mdf" />
-    <Content Include="App_Data\aspnet-PackageDeliverySystem-20230507123337_log.ldf">
-      <DependentUpon>aspnet-PackageDeliverySystem-20230507123337.mdf</DependentUpon>
-    </Content>
     <Content Include="bin\PackageDelivery.GUI.dll" />
     <Content Include="bin\PackageDelivery.GUI.pdb" />
     <Content Include="Content\bootstrap-theme.css" />
@@ -367,7 +363,9 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

@@ -1,9 +1,11 @@
-﻿using PackageDelivery.Application.Contracts.DTO.ParametersDTO;
+﻿using Microsoft.Ajax.Utilities;
+using PackageDelivery.Application.Contracts.DTO.ParametersDTO;
 using PackageDelivery.Application.Contracts.Interfaces.Parameters;
 using PackageDelivery.GUI.Helpers;
 using PackageDelivery.GUI.Mappers.Parameters;
 using PackageDelivery.GUI.Models.Parameters;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Web.Mvc;
 
@@ -12,17 +14,25 @@ namespace PackageDelivery.GUI.Controllers.Parameters
     public class TownController : Controller
     {
         private ITownApplication _app;
+        private IDepartmentApplication _appDepartment;
+        DepartmentGUIMapper departmentGUIMapper = new DepartmentGUIMapper();
 
-        public TownController(ITownApplication app)
+        public TownController(ITownApplication app, IDepartmentApplication appDepartment)
         {
             this._app = app;
+            this._appDepartment = appDepartment;
         }
 
         // GET: Town
         public ActionResult Index(string filter = "")
         {
             TownGUIMapper mapper = new TownGUIMapper();
-            IEnumerable<TownModel> list = mapper.DTOToModelMapper(_app.getRecordsList(filter));
+            
+
+            departmentGUIMapper.DTOToModelMapper(_appDepartment.getRecordsList(filter))
+                .ForEach(d => ViewData.Add(d.Id.ToString(), d.name));
+
+            IEnumerable <TownModel> list = mapper.DTOToModelMapper(_app.getRecordsList(filter));
             return View(list);
         }
 
@@ -45,6 +55,10 @@ namespace PackageDelivery.GUI.Controllers.Parameters
         // GET: Town/Create
         public ActionResult Create()
         {
+            var deparmentList = departmentGUIMapper.DTOToModelMapper(_appDepartment.getRecordsList(""))
+                .Select(d => new SelectListItem { Value = d.Id.ToString(), Text = d.name });
+
+            ViewData["Deparments"] = deparmentList;
             return View();
         }
 
