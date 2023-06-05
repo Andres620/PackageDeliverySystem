@@ -63,11 +63,11 @@ namespace PackageDelivery.Repository.Implementation.Implementation.Core
             }
         }
 
-        public IEnumerable<WarehouseDbModel> getRecordsList(string filter)
+        public IEnumerable<WarehouseDbModel> getRecordsList()
         {
             using (PackageDeliveryEntities db = new PackageDeliveryEntities())
             {
-                IEnumerable<bodega> list = db.bodega.Where(x => x.nombre.Contains(filter));
+                IEnumerable<bodega> list = db.bodega.Where(x => x.id != null);
                 WarehouseRepositoryMapper mapper = new WarehouseRepositoryMapper();
                 return mapper.DatabaseToDbModelMapper(list);
             }

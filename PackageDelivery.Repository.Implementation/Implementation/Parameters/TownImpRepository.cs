@@ -78,11 +78,11 @@ namespace PackageDelivery.Repository.Implementation.Implementation.Parameters
         /// </summary>
         /// <param name="filter">Filtro a aplicar en la lista</param>
         /// <returns>Lista de registros filtrados</returns>
-        public IEnumerable<TownDbModel> getRecordsList(string filter)
+        public IEnumerable<TownDbModel> getRecordsList()
         {
             using (PackageDeliveryEntities db = new PackageDeliveryEntities())
             {
-                IEnumerable<municipio> list = db.municipio.Where(x => x.nombre.Contains(filter));
+                IEnumerable<municipio> list = db.municipio.Where(x => x.id != null);
                 TownRepositoryMapper mapper = new TownRepositoryMapper();
                 return mapper.DatabaseToDbModelMapper(list);
             }

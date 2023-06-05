@@ -12,16 +12,18 @@ namespace PackageDelivery.GUI.Controllers.Core
     public class PackageController : Controller
     {
 		private IPackageApplication _app;
+		private IOfficeApplication _officeApplication;
 
-        public PackageController(IPackageApplication app)
+        public PackageController(IPackageApplication app, IOfficeApplication officeApplication)
         {
             this._app = app;
+			this._officeApplication = officeApplication;
         }
 
         // GET: Package
-        public ActionResult Index(double filter = 0)
+        public ActionResult Index()
         {
-			var dtoList = _app.getRecordsList(filter);
+			var dtoList = _app.getRecordsList();
 			PackageGUIMapper mapper = new PackageGUIMapper();
 			IEnumerable<PackageModel> model = mapper.DTOToModelMapper(dtoList);
 			return View(model);
@@ -46,6 +48,7 @@ namespace PackageDelivery.GUI.Controllers.Core
         // GET: Package/Create
         public ActionResult Create()
         {
+			this.getOfficeListToSelect();
             return View();
         }
 
@@ -72,6 +75,7 @@ namespace PackageDelivery.GUI.Controllers.Core
 			}
 			ViewBag.ClassName = ActionMessages.warningClass;
 			ViewBag.Message = ActionMessages.errorMessage;
+			this.getOfficeListToSelect();
 			return View(packageModel);
 		}
 
@@ -88,6 +92,7 @@ namespace PackageDelivery.GUI.Controllers.Core
 			{
 				return HttpNotFound();
 			}
+			this.getOfficeListToSelect();
 			return View(packageModel);
 		}
 
@@ -108,6 +113,7 @@ namespace PackageDelivery.GUI.Controllers.Core
 				}
 			}
 			ViewBag.Message = ActionMessages.errorMessage;
+			this.getOfficeListToSelect();
 			return View(packageModel);
 		}
 
@@ -140,5 +146,10 @@ namespace PackageDelivery.GUI.Controllers.Core
 			ViewBag.Message = ActionMessages.errorMessage;
 			return View();
 		}
+
+        private void getOfficeListToSelect()
+        {
+            ViewBag.idOffice = new SelectList(_officeApplication.getRecordsList(), "Id", "name");
+        }
     }
 }

@@ -6,7 +6,7 @@ namespace PackageDelivery.Application.Contracts.Interfaces.Parameters
     public interface ITownApplication
     {
         TownDTO getRecordById(int id);
-        IEnumerable<TownDTO> getRecordsList(string filter);
+        IEnumerable<TownDTO> getRecordsList();
         TownDTO createRecord(TownDTO record);
         TownDTO updateRecord(TownDTO record);
         bool deleteRecordById(int id);

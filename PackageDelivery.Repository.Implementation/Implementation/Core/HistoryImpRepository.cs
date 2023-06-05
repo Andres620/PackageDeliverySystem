@@ -63,11 +63,11 @@ namespace PackageDelivery.Repository.Implementation.Implementation.Core
             }
         }
 
-        public IEnumerable<HistoryDbModel> getRecordsList(string filter)
+        public IEnumerable<HistoryDbModel> getRecordsList()
         {
             using (PackageDeliveryEntities db = new PackageDeliveryEntities())
             {
-                IEnumerable<historial> list = db.historial.Where(x => x.descripcion.Contains(filter));
+                IEnumerable<historial> list = db.historial.Where(x => x.id != null);
                 HistoryRepositoryMapper mapper = new HistoryRepositoryMapper();
                 return mapper.DatabaseToDbModelMapper(list);
             }

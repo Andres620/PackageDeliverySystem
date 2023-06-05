@@ -12,17 +12,19 @@ namespace PackageDelivery.GUI.Controllers.Parameters
     public class AddressController : Controller
     {
         private IAddressApplication _app;
+        private ITownApplication _townApp;
 
-        public AddressController(IAddressApplication app)
+        public AddressController(IAddressApplication app, ITownApplication townApp)
         {
             this._app = app;
+            this._townApp = townApp;
         }
 
         // GET: Address
-        public ActionResult Index(string filter = "")
+        public ActionResult Index()
         {
             AddressGUIMapper mapper = new AddressGUIMapper();
-            IEnumerable<AddressModel> list = mapper.DTOToModelMapper(_app.getRecordsList(filter));
+            IEnumerable<AddressModel> list = mapper.DTOToModelMapper(_app.getRecordsList());
             return View(list);
         }
 
@@ -45,6 +47,7 @@ namespace PackageDelivery.GUI.Controllers.Parameters
         // GET: Address/Create
         public ActionResult Create()
         {
+            this.getTownListToSelect();
             return View();
         }
 
@@ -71,6 +74,7 @@ namespace PackageDelivery.GUI.Controllers.Parameters
             }
             ViewBag.ClassName = ActionMessages.warningClass;
             ViewBag.Message = ActionMessages.errorMessage;
+            this.getTownListToSelect();
             return View(addressModel);
         }
 
@@ -87,6 +91,7 @@ namespace PackageDelivery.GUI.Controllers.Parameters
             {
                 return HttpNotFound();
             }
+            this.getTownListToSelect();
             return View(addressModel);
         }
 
@@ -110,6 +115,7 @@ namespace PackageDelivery.GUI.Controllers.Parameters
             }
             ViewBag.ClassName = ActionMessages.warningClass;
             ViewBag.Message = ActionMessages.errorMessage;
+            this.getTownListToSelect();
             return View(addressModel);
         }
 
@@ -144,6 +150,11 @@ namespace PackageDelivery.GUI.Controllers.Parameters
             ViewBag.ClassName = ActionMessages.warningClass;
             ViewBag.Message = ActionMessages.errorMessage;
             return View();
+        }
+
+        private void getTownListToSelect()
+        {
+            ViewBag.idTown = new SelectList(_townApp.getRecordsList(), "Id", "name");
         }
     }
 }

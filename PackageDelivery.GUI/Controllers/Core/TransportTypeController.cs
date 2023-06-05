@@ -19,10 +19,10 @@ namespace PackageDelivery.GUI.Controllers.Core
         }
 
         // GET: TransportType
-        public ActionResult Index(string filter = "")
+        public ActionResult Index()
         {
             TransportTypeGUIMapper mapper = new TransportTypeGUIMapper();
-            IEnumerable<TransportTypeModel> list = mapper.DTOToModelMapper(_app.getRecordsList(filter));
+            IEnumerable<TransportTypeModel> list = mapper.DTOToModelMapper(_app.getRecordsList());
             return View(list);
         }
 

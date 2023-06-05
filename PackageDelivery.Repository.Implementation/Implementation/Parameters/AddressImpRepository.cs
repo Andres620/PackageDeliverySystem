@@ -73,11 +73,11 @@ namespace PackageDelivery.Repository.Implementation.Implementation.Parameters
         /// </summary>
         /// <param name="filter">Filtro a aplicar en la lista</param>
         /// <returns>Lista de registros filtrados</returns>
-        public IEnumerable<AddressDbModel> getRecordsList(string filter)
+        public IEnumerable<AddressDbModel> getRecordsList()
         {
             using (PackageDeliveryEntities db = new PackageDeliveryEntities())
             {
-                IEnumerable<direccion> list = db.direccion.Where(x => x.tipoCalle.Contains(filter));
+                IEnumerable<direccion> list = db.direccion.Where(x => x.id != null);
                 AddressRepositoryMapper mapper = new AddressRepositoryMapper();
                 return mapper.DatabaseToDbModelMapper(list);
             }

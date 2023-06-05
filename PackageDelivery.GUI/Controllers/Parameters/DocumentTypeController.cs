@@ -19,10 +19,10 @@ namespace PackageDelivery.GUI.Controllers.Parameters
         }
 
         // GET: DocumentType
-        public ActionResult Index(string filter = "")
+        public ActionResult Index()
         {
             DocumentTypeGUIMapper mapper = new DocumentTypeGUIMapper();
-            IEnumerable<DocumentTypeModel> list = mapper.DTOToModelMapper(_app.getRecordsList(filter));
+            IEnumerable<DocumentTypeModel> list = mapper.DTOToModelMapper(_app.getRecordsList());
             return View(list);
         }
 

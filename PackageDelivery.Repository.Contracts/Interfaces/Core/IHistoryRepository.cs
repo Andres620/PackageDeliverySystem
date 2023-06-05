@@ -6,7 +6,7 @@ namespace PackageDelivery.Repository.Contracts.Interfaces.Core
     public interface IHistoryRepository
     {
         HistoryDbModel getRecordById(int id);
-        IEnumerable<HistoryDbModel> getRecordsList(string filter);
+        IEnumerable<HistoryDbModel> getRecordsList();
         HistoryDbModel createRecord(HistoryDbModel record);
         HistoryDbModel updateRecord(HistoryDbModel record);
         bool deleteRecordById(int id);
