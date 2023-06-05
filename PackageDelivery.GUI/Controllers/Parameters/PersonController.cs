@@ -3,6 +3,7 @@ using PackageDelivery.Application.Contracts.Interfaces.Parameters;
 using PackageDelivery.GUI.Helpers;
 using PackageDelivery.GUI.Implementation.Mappers.Parameters;
 using PackageDelivery.GUI.Models.Parameters;
+using PackageDelivery.GUI.Reportes;
 using System.Collections.Generic;
 using System.Net;
 using System.Web.Mvc;
@@ -144,6 +145,18 @@ namespace PackageDelivery.GUI.Controllers.Parameters
             ViewBag.ClassName = ActionMessages.warningClass;
             ViewBag.Message = ActionMessages.errorMessage;
             return View();
+        }
+
+        public ActionResult Report(string type)
+        {
+            PersonGUIMapper mapper = new PersonGUIMapper();
+            var report = General.RenderReports(
+                Server.MapPath("~/Reportes/Personas.rdlc"),
+                new List<string> { "Personas"},
+                new List<object> { mapper.DTOToModelMapper(_app.getRecordsList("")) },
+                type
+                );
+            return File(report.Item1, report.Item2);
         }
     }
 }
