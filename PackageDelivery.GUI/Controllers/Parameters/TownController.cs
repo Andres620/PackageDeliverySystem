@@ -12,10 +12,12 @@ namespace PackageDelivery.GUI.Controllers.Parameters
     public class TownController : Controller
     {
         private ITownApplication _app;
+        private IDepartmentApplication _departmentApp;
 
-        public TownController(ITownApplication app)
+        public TownController(ITownApplication app, IDepartmentApplication departmentApp)
         {
             this._app = app;
+            this._departmentApp = departmentApp;
         }
 
         // GET: Town
@@ -45,6 +47,7 @@ namespace PackageDelivery.GUI.Controllers.Parameters
         // GET: Town/Create
         public ActionResult Create()
         {
+            this.getDepartmentListToSelect();
             return View();
         }
 
@@ -71,6 +74,7 @@ namespace PackageDelivery.GUI.Controllers.Parameters
             }
             ViewBag.ClassName = ActionMessages.warningClass;
             ViewBag.Message = ActionMessages.errorMessage;
+            this.getDepartmentListToSelect();
             return View(townModel);
         }
 
@@ -87,6 +91,7 @@ namespace PackageDelivery.GUI.Controllers.Parameters
             {
                 return HttpNotFound();
             }
+            this.getDepartmentListToSelect();
             return View(townModel);
         }
 
@@ -110,6 +115,7 @@ namespace PackageDelivery.GUI.Controllers.Parameters
             }
             ViewBag.ClassName = ActionMessages.warningClass;
             ViewBag.Message = ActionMessages.errorMessage;
+            this.getDepartmentListToSelect();
             return View(townModel);
         }
 
@@ -144,6 +150,10 @@ namespace PackageDelivery.GUI.Controllers.Parameters
             ViewBag.ClassName = ActionMessages.warningClass;
             ViewBag.Message = ActionMessages.errorMessage;
             return View();
+        }
+        private void getDepartmentListToSelect()
+        {
+            ViewBag.IdDepartment = new SelectList(_departmentApp.getRecordsList(), "Id", "name");
         }
 
     }

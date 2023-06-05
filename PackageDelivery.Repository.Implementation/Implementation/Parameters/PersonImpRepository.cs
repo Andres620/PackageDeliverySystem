@@ -104,7 +104,7 @@ namespace PackageDelivery.Repository.Implementation.Implementation.Parameters
                     td.primerApellido = record.FirstLastname;
                     td.segundoApellido = record.SecondLastname;
                     td.correo = record.Email;
-                    td.idTipoDocumento = record.IdentificationType;
+                    td.idTipoDocumento = record.IdDocumentType;
                     td.documento = record.IdentificationNumber;
                     td.telefono = record.Cellphone;
                     td.idDireccion = record.Address;

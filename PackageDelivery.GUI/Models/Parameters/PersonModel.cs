@@ -41,7 +41,7 @@ namespace PackageDelivery.GUI.Models.Parameters
 
         [Required]
         [DisplayName("Id tipo de documento")]
-        public int IdentificationType { get; set; }
+        public int IdDocumentType { get; set; }
 
     }
 }

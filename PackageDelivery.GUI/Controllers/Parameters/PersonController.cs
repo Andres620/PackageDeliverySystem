@@ -12,10 +12,12 @@ namespace PackageDelivery.GUI.Controllers.Parameters
     public class PersonController : Controller
     {
         private IPersonApplication _app;
+        private IDocumentTypeApplication _documentTypeApp;
 
-        public PersonController(IPersonApplication app)
+        public PersonController(IPersonApplication app, IDocumentTypeApplication documentTypeApp)
         {
             this._app = app;
+            this._documentTypeApp = documentTypeApp;
         }
 
         // GET: Person
@@ -44,7 +46,8 @@ namespace PackageDelivery.GUI.Controllers.Parameters
 
         // GET: Person/Create
         public ActionResult Create()
-        {
+        {   
+            this.getDocumentTypeListToSelect();
             return View();
         }
 
@@ -71,6 +74,7 @@ namespace PackageDelivery.GUI.Controllers.Parameters
             }
             ViewBag.ClassName = ActionMessages.warningClass;
             ViewBag.Message = ActionMessages.errorMessage;
+            this.getDocumentTypeListToSelect();
             return View(personModel);
         }
 
@@ -87,6 +91,7 @@ namespace PackageDelivery.GUI.Controllers.Parameters
             {
                 return HttpNotFound();
             }
+            this.getDocumentTypeListToSelect();
             return View(personModel);
         }
 
@@ -95,7 +100,7 @@ namespace PackageDelivery.GUI.Controllers.Parameters
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,FirstName,OtherNames,FirstLastname,SecondLastname,IdentificationNumber,Cellphone,Email,Address,IdentificationType")] PersonModel personModel)
+        public ActionResult Edit([Bind(Include = "Id,FirstName,OtherNames,FirstLastname,SecondLastname,IdentificationNumber,Cellphone,Email,Address,IdDocumentType")] PersonModel personModel)
         {
             if (ModelState.IsValid)
             {
@@ -110,6 +115,7 @@ namespace PackageDelivery.GUI.Controllers.Parameters
             }
             ViewBag.ClassName = ActionMessages.warningClass;
             ViewBag.Message = ActionMessages.errorMessage;
+            this.getDocumentTypeListToSelect();
             return View(personModel);
         }
 
@@ -144,6 +150,11 @@ namespace PackageDelivery.GUI.Controllers.Parameters
             ViewBag.ClassName = ActionMessages.warningClass;
             ViewBag.Message = ActionMessages.errorMessage;
             return View();
+        }
+
+        private void getDocumentTypeListToSelect()
+        {
+            ViewBag.IdDocumentType = new SelectList(_documentTypeApp.getRecordsList(), "Id", "name");
         }
     }
 }
