@@ -3,6 +3,7 @@ using PackageDelivery.Application.Contracts.Interfaces.Parameters;
 using PackageDelivery.GUI.Helpers;
 using PackageDelivery.GUI.Implementation.Mappers.Parameters;
 using PackageDelivery.GUI.Models.Parameters;
+using PackageDelivery.GUI.Reportes;
 using System.Collections.Generic;
 using System.Net;
 using System.Web.Mvc;
@@ -156,5 +157,7 @@ namespace PackageDelivery.GUI.Controllers.Parameters
         {
             ViewBag.IdDocumentType = new SelectList(_documentTypeApp.getRecordsList(), "Id", "name");
         }
+
+	
     }
 }
