@@ -142,7 +142,6 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
-                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
                 <TablixCell>
@@ -268,12 +267,6 @@
         <DataSourceName>DataSetPersonas</DataSourceName>
         <CommandText>/* Local Query */</CommandText>
       </Query>
-      <Fields>
-        <Field Name="Id">
-          <DataField>Id</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-      </Fields>
       <rd:DataSetInfo>
         <rd:DataSetName>DataSetPersonas</rd:DataSetName>
         <rd:SchemaPath>C:\Users\pista\source\repos\PackageDeliverySystem\PackageDelivery.GUI\Reportes\DataSetPersonas.xsd</rd:SchemaPath>

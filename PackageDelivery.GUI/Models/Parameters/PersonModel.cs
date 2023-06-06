@@ -37,7 +37,7 @@ namespace PackageDelivery.GUI.Models.Parameters
 
 		[Required]
 		[DisplayName("Id dirección")]
-		public int Address { get; set; }
+		public int IdAddress { get; set; }
 
         [Required]
         [DisplayName("Id tipo de documento")]

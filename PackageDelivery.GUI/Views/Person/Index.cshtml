@@ -42,7 +42,7 @@
             @Html.DisplayNameFor(model => model.Email)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Address)
+            @Html.DisplayNameFor(model => model.IdAddress)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.IdDocumentType)
@@ -75,13 +75,7 @@
                 @Html.DisplayFor(modelItem => item.Email)
             </td>
             <td>
-                @foreach (var d in ViewData)
-                {
-                    if (d.Key.ToString().Equals(item.Id.ToString()))
-                    {
-                        @Html.DisplayFor(modelItem => d.Value)
-                    }
-                }
+                @Html.DisplayFor(modelItem => item.IdAddress)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.IdDocumentType)

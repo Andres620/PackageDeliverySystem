@@ -13,12 +13,14 @@ namespace PackageDelivery.GUI.Controllers.Parameters
     public class PersonController : Controller
     {
         private IPersonApplication _app;
+        private IAddressApplication _IdAddressApp;
         private IDocumentTypeApplication _documentTypeApp;
 
-        public PersonController(IPersonApplication app, IDocumentTypeApplication documentTypeApp)
+        public PersonController(IPersonApplication app, IDocumentTypeApplication documentTypeApp, IAddressApplication IdAddressApp)
         {
             this._app = app;
             this._documentTypeApp = documentTypeApp;
+            this._IdAddressApp = IdAddressApp;
         }
 
         // GET: Person
@@ -48,6 +50,7 @@ namespace PackageDelivery.GUI.Controllers.Parameters
         // GET: Person/Create
         public ActionResult Create()
         {   
+            this.getIdAddressListToSelect();
             this.getDocumentTypeListToSelect();
             return View();
         }
@@ -57,7 +60,7 @@ namespace PackageDelivery.GUI.Controllers.Parameters
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,FirstName,OtherNames,FirstLastname,SecondLastname,IdentificationNumber,Cellphone,Email,Address,IdentificationType")] PersonModel personModel)
+        public ActionResult Create([Bind(Include = "Id,FirstName,OtherNames,FirstLastname,SecondLastname,IdentificationNumber,Cellphone,Email,IdAddress,IdDocumentType")] PersonModel personModel)
         {
             if (ModelState.IsValid)
             {
@@ -75,6 +78,7 @@ namespace PackageDelivery.GUI.Controllers.Parameters
             }
             ViewBag.ClassName = ActionMessages.warningClass;
             ViewBag.Message = ActionMessages.errorMessage;
+            this.getIdAddressListToSelect();
             this.getDocumentTypeListToSelect();
             return View(personModel);
         }
@@ -92,6 +96,7 @@ namespace PackageDelivery.GUI.Controllers.Parameters
             {
                 return HttpNotFound();
             }
+            this.getIdAddressListToSelect();
             this.getDocumentTypeListToSelect();
             return View(personModel);
         }
@@ -101,7 +106,7 @@ namespace PackageDelivery.GUI.Controllers.Parameters
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,FirstName,OtherNames,FirstLastname,SecondLastname,IdentificationNumber,Cellphone,Email,Address,IdDocumentType")] PersonModel personModel)
+        public ActionResult Edit([Bind(Include = "Id,FirstName,OtherNames,FirstLastname,SecondLastname,IdentificationNumber,Cellphone,Email,IdAddress,IdDocumentType")] PersonModel personModel)
         {
             if (ModelState.IsValid)
             {
@@ -116,6 +121,7 @@ namespace PackageDelivery.GUI.Controllers.Parameters
             }
             ViewBag.ClassName = ActionMessages.warningClass;
             ViewBag.Message = ActionMessages.errorMessage;
+            this.getIdAddressListToSelect();
             this.getDocumentTypeListToSelect();
             return View(personModel);
         }
@@ -153,11 +159,27 @@ namespace PackageDelivery.GUI.Controllers.Parameters
             return View();
         }
 
+        private void getIdAddressListToSelect()
+        {
+            ViewBag.IdAddress = new SelectList(_IdAddressApp.getRecordsList(), "Id", "streetType");
+        }
+
         private void getDocumentTypeListToSelect()
         {
             ViewBag.IdDocumentType = new SelectList(_documentTypeApp.getRecordsList(), "Id", "name");
         }
 
-	
+        public ActionResult Report(string type)
+        {
+            PersonGUIMapper mapper = new PersonGUIMapper();
+            var report = General.RenderReports(
+                Server.MapPath("~/Reportes/Personas.rdlc"),
+                new List<string> { "Personas" },
+                new List<object> { mapper.DTOToModelMapper(_app.getRecordsList()) },
+                type
+                );
+            return File(report.Item1, report.Item2);
+        }
+
     }
 }

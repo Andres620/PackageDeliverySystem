@@ -36,14 +36,7 @@
                 @Html.DisplayFor(modelItem => item.name)
             </td>
             <td>
-                @foreach (var d in ViewData)
-                {
-                    if (d.Key.ToString().Equals(item.Id.ToString()))
-                    {
-                        @Html.DisplayFor(modelItem => d.Value)
-                    }
-                }
-
+                 @Html.DisplayFor(modelItem => item.IdDepartment)
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-success" }) |
