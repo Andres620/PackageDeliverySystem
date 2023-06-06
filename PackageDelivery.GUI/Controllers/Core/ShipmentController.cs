@@ -1,11 +1,9 @@
-﻿using Microsoft.Reporting.Map.WebForms.BingMaps;
-using PackageDelivery.Application.Contracts.DTO.CoreDTO;
+﻿using PackageDelivery.Application.Contracts.DTO.CoreDTO;
 using PackageDelivery.Application.Contracts.Interfaces.Core;
 using PackageDelivery.Application.Contracts.Interfaces.Parameters;
 using PackageDelivery.GUI.Helpers;
 using PackageDelivery.GUI.Mappers.Core;
 using PackageDelivery.GUI.Models.Core;
-using PackageDelivery.Repository.Contracts.DbModels.Core;
 using System;
 using System.Collections.Generic;
 using System.Net;
