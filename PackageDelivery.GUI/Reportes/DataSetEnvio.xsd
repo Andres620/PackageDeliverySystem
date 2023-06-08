@@ -9,11 +9,16 @@
       </DataSource>
     </xs:appinfo>
   </xs:annotation>
-  <xs:element name="DataSetEnvio" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_UserDSName="DataSetEnvio" msprop:Generator_DataSetName="DataSetEnvio">
+  <xs:element name="DataSetEnvio" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_UserDSName="DataSetEnvio" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="DataSetEnvio">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
         <xs:element name="Envios" msprop:Generator_RowEvHandlerName="EnviosRowChangeEventHandler" msprop:Generator_RowDeletedName="EnviosRowDeleted" msprop:Generator_RowDeletingName="EnviosRowDeleting" msprop:Generator_RowEvArgName="EnviosRowChangeEvent" msprop:Generator_TablePropName="Envios" msprop:Generator_RowChangedName="EnviosRowChanged" msprop:Generator_RowChangingName="EnviosRowChanging" msprop:Generator_TableClassName="EnviosDataTable" msprop:Generator_RowClassName="EnviosRow" msprop:Generator_TableVarName="tableEnvios" msprop:Generator_UserTableName="Envios">
           <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Id" msprop:Generator_ColumnPropNameInRow="Id" msprop:Generator_ColumnPropNameInTable="IdColumn" msprop:Generator_ColumnVarNameInTable="columnId" msprop:Generator_UserColumnName="Id" type="xs:string" minOccurs="0" />
+              <xs:element name="shippingDate" msprop:Generator_ColumnPropNameInRow="shippingDate" msprop:Generator_ColumnPropNameInTable="shippingDateColumn" msprop:Generator_ColumnVarNameInTable="columnshippingDate" msprop:Generator_UserColumnName="shippingDate" type="xs:string" minOccurs="0" />
+              <xs:element name="price" msprop:Generator_ColumnPropNameInRow="price" msprop:Generator_ColumnPropNameInTable="priceColumn" msprop:Generator_ColumnVarNameInTable="columnprice" msprop:Generator_UserColumnName="price" type="xs:string" minOccurs="0" />
+            </xs:sequence>
           </xs:complexType>
         </xs:element>
       </xs:choice>

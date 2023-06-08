@@ -279,6 +279,12 @@ namespace PackageDelivery.GUI.Reportes {
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
         public partial class EnviosDataTable : global::System.Data.TypedTableBase<EnviosRow> {
             
+            private global::System.Data.DataColumn columnId;
+            
+            private global::System.Data.DataColumn columnshippingDate;
+            
+            private global::System.Data.DataColumn columnprice;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public EnviosDataTable() {
@@ -310,6 +316,30 @@ namespace PackageDelivery.GUI.Reportes {
             protected EnviosDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
                     base(info, context) {
                 this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn IdColumn {
+                get {
+                    return this.columnId;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn shippingDateColumn {
+                get {
+                    return this.columnshippingDate;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn priceColumn {
+                get {
+                    return this.columnprice;
+                }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -349,9 +379,12 @@ namespace PackageDelivery.GUI.Reportes {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public EnviosRow AddEnviosRow() {
+            public EnviosRow AddEnviosRow(string Id, string shippingDate, string price) {
                 EnviosRow rowEnviosRow = ((EnviosRow)(this.NewRow()));
-                object[] columnValuesArray = new object[0];
+                object[] columnValuesArray = new object[] {
+                        Id,
+                        shippingDate,
+                        price};
                 rowEnviosRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowEnviosRow);
                 return rowEnviosRow;
@@ -374,11 +407,20 @@ namespace PackageDelivery.GUI.Reportes {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             internal void InitVars() {
+                this.columnId = base.Columns["Id"];
+                this.columnshippingDate = base.Columns["shippingDate"];
+                this.columnprice = base.Columns["price"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             private void InitClass() {
+                this.columnId = new global::System.Data.DataColumn("Id", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnId);
+                this.columnshippingDate = new global::System.Data.DataColumn("shippingDate", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnshippingDate);
+                this.columnprice = new global::System.Data.DataColumn("price", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnprice);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -517,6 +559,90 @@ namespace PackageDelivery.GUI.Reportes {
             internal EnviosRow(global::System.Data.DataRowBuilder rb) : 
                     base(rb) {
                 this.tableEnvios = ((EnviosDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string Id {
+                get {
+                    try {
+                        return ((string)(this[this.tableEnvios.IdColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'Id\' de la tabla \'Envios\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableEnvios.IdColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string shippingDate {
+                get {
+                    try {
+                        return ((string)(this[this.tableEnvios.shippingDateColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'shippingDate\' de la tabla \'Envios\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableEnvios.shippingDateColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string price {
+                get {
+                    try {
+                        return ((string)(this[this.tableEnvios.priceColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'price\' de la tabla \'Envios\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableEnvios.priceColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsIdNull() {
+                return this.IsNull(this.tableEnvios.IdColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetIdNull() {
+                this[this.tableEnvios.IdColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsshippingDateNull() {
+                return this.IsNull(this.tableEnvios.shippingDateColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetshippingDateNull() {
+                this[this.tableEnvios.shippingDateColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IspriceNull() {
+                return this.IsNull(this.tableEnvios.priceColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetpriceNull() {
+                this[this.tableEnvios.priceColumn] = global::System.Convert.DBNull;
             }
         }
         

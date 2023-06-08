@@ -15,8 +15,11 @@
         <xs:element name="Personas" msprop:Generator_RowEvHandlerName="PersonasRowChangeEventHandler" msprop:Generator_RowDeletedName="PersonasRowDeleted" msprop:Generator_RowDeletingName="PersonasRowDeleting" msprop:Generator_RowEvArgName="PersonasRowChangeEvent" msprop:Generator_TablePropName="Personas" msprop:Generator_RowChangedName="PersonasRowChanged" msprop:Generator_UserTableName="Personas" msprop:Generator_RowChangingName="PersonasRowChanging" msprop:Generator_RowClassName="PersonasRow" msprop:Generator_TableClassName="PersonasDataTable" msprop:Generator_TableVarName="tablePersonas">
           <xs:complexType>
             <xs:sequence>
-              <xs:element name="Id" msprop:Generator_UserColumnName="Id" msprop:Generator_ColumnPropNameInTable="IdColumn" msprop:Generator_ColumnPropNameInRow="Id" msprop:Generator_ColumnVarNameInTable="columnId" type="xs:string" minOccurs="0" />
-              <xs:element name="firstName" msprop:Generator_ColumnPropNameInRow="firstName" msprop:Generator_ColumnPropNameInTable="firstNameColumn" msprop:Generator_ColumnVarNameInTable="columnfirstName" msprop:Generator_UserColumnName="firstName" type="xs:string" minOccurs="0" />
+              <xs:element name="IdentificationNumber" msprop:Generator_ColumnPropNameInTable="IdentificationNumberColumn" msprop:Generator_ColumnPropNameInRow="IdentificationNumber" msprop:Generator_UserColumnName="IdentificationNumber" msprop:Generator_ColumnVarNameInTable="columnIdentificationNumber" type="xs:string" minOccurs="0" />
+              <xs:element name="FirstName" msprop:Generator_UserColumnName="FirstName" msprop:Generator_ColumnPropNameInTable="FirstNameColumn" msprop:Generator_ColumnPropNameInRow="FirstName" msprop:Generator_ColumnVarNameInTable="columnFirstName" type="xs:string" minOccurs="0" />
+              <xs:element name="FirstLastName" msprop:Generator_ColumnPropNameInRow="FirstLastName" msprop:Generator_ColumnPropNameInTable="FirstLastNameColumn" msprop:Generator_ColumnVarNameInTable="columnFirstLastName" msprop:Generator_UserColumnName="FirstLastName" type="xs:string" minOccurs="0" />
+              <xs:element name="Email" msprop:Generator_ColumnPropNameInRow="Email" msprop:Generator_ColumnPropNameInTable="EmailColumn" msprop:Generator_ColumnVarNameInTable="columnEmail" msprop:Generator_UserColumnName="Email" type="xs:string" minOccurs="0" />
+              <xs:element name="Id" msprop:Generator_ColumnPropNameInRow="Id" msprop:Generator_ColumnPropNameInTable="IdColumn" msprop:Generator_ColumnVarNameInTable="columnId" msprop:Generator_UserColumnName="Id" type="xs:string" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>

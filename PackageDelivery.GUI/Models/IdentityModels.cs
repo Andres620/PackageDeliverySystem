@@ -30,30 +30,29 @@ namespace PackageDelivery.GUI.Models
             return new ApplicationDbContext();
         }
 
-        public System.Data.Entity.DbSet<PackageDelivery.GUI.Models.Parameters.DocumentTypeModel> DocumentTypeModels { get; set; }
+        public DbSet<Parameters.DocumentTypeModel> DocumentTypeModels { get; set; }
+        public DbSet<Parameters.PersonModel> PersonModels { get; set; }
 
-        public System.Data.Entity.DbSet<PackageDelivery.GUI.Models.Parameters.PersonModel> PersonModels { get; set; }
+        public DbSet<Parameters.TownModel> TownModels { get; set; }
 
-        public System.Data.Entity.DbSet<PackageDelivery.GUI.Models.Parameters.TownModel> TownModels { get; set; }
+        public DbSet<Parameters.DepartmentModel> DepartmentModels { get; set; }
 
-        public System.Data.Entity.DbSet<PackageDelivery.GUI.Models.Parameters.DepartmentModel> DepartmentModels { get; set; }
+        public DbSet<Parameters.AddressModel> AddressModels { get; set; }
 
-        public System.Data.Entity.DbSet<PackageDelivery.GUI.Models.Parameters.AddressModel> AddressModels { get; set; }
+        public DbSet<Core.HistoryModel> HistoryModels { get; set; }
 
-        public System.Data.Entity.DbSet<PackageDelivery.GUI.Models.Core.HistoryModel> HistoryModels { get; set; }
+        public DbSet<Core.OfficeModel> OfficeModels { get; set; }
 
-        public System.Data.Entity.DbSet<PackageDelivery.GUI.Models.Core.OfficeModel> OfficeModels { get; set; }
+        public DbSet<Core.PackageModel> PackageModels { get; set; }
 
-        public System.Data.Entity.DbSet<PackageDelivery.GUI.Models.Core.PackageModel> PackageModels { get; set; }
+        public DbSet<Core.ShipmentModel> ShipmentModels { get; set; }
 
-        public System.Data.Entity.DbSet<PackageDelivery.GUI.Models.Core.ShipmentModel> ShipmentModels { get; set; }
+        public DbSet<Core.ShipmentStateModel> ShipmentStateModels { get; set; }
 
-        public System.Data.Entity.DbSet<PackageDelivery.GUI.Models.Core.ShipmentStateModel> ShipmentStateModels { get; set; }
+        public DbSet<Core.TransportTypeModel> TransportTypeModels { get; set; }
 
-        public System.Data.Entity.DbSet<PackageDelivery.GUI.Models.Core.TransportTypeModel> TransportTypeModels { get; set; }
+        public DbSet<Core.WarehouseModel> WarehouseModels { get; set; }
 
-        public System.Data.Entity.DbSet<PackageDelivery.GUI.Models.Core.WarehouseModel> WarehouseModels { get; set; }
-
-        public System.Data.Entity.DbSet<PackageDelivery.GUI.Models.Core.VehicleModel> VehicleModels { get; set; }
+        public DbSet<Core.VehicleModel> VehicleModels { get; set; }
     }
 }

@@ -15,9 +15,10 @@
 </style>
 <h2>Persona</h2>
 
-<p>
+<div style="display: flex; justify-content: space-between;" >
     @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-primary" })
-</p>
+    @Html.ActionLink("Generate PDF", "Report", new { type = "PDF" }, new { @class = "btn btn-danger" })
+</div>
 <table class="table">
     <tr>
         <th>
