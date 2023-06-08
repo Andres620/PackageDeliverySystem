@@ -78,11 +78,11 @@ namespace PackageDelivery.Repository.Implementation.Parameters
         /// </summary>
         /// <param name="filter">Filtro a aplicar en la lista</param>
         /// <returns>Lista de registros filtrados</returns>
-        public IEnumerable<DocumentTypeDbModel> getRecordsList(string filter)
+        public IEnumerable<DocumentTypeDbModel> getRecordsList()
         {
             using (PackageDeliveryEntities db = new PackageDeliveryEntities())
             {
-                IEnumerable<tipoDocumento> list = db.tipoDocumento.Where(x => x.nombre.Contains(filter));
+                IEnumerable<tipoDocumento> list = db.tipoDocumento.Where(x => x.id != null);
                 DocumentTypeRepositoryMapper mapper = new DocumentTypeRepositoryMapper();
                 return mapper.DatabaseToDbModelMapper(list);
             }

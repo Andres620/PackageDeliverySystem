@@ -63,11 +63,11 @@ namespace PackageDelivery.Repository.Implementation.Implementation.Core
             }
         }
 
-        public IEnumerable<PackageDbModel> getRecordsList(double filter)
+        public IEnumerable<PackageDbModel> getRecordsList()
         {
             using (PackageDeliveryEntities db = new PackageDeliveryEntities())
             {
-                IEnumerable<paquete> list = db.paquete.Where(x => x.peso != null);
+                IEnumerable<paquete> list = db.paquete.Where(x => x.id != null);
                 PackageRepositoryMapper mapper = new PackageRepositoryMapper();
                 return mapper.DatabaseToDbModelMapper(list);
             }

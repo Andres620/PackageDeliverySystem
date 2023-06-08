@@ -20,10 +20,10 @@ namespace PackageDelivery.GUI.Controllers.Core
 
 
         // GET: ShipmentState
-        public ActionResult Index(string filter = "")
+        public ActionResult Index()
         {
             ShipmentStateGUIMapper mapper = new ShipmentStateGUIMapper();
-            IEnumerable<ShipmentStateModel> list = mapper.DTOToModelMapper(_app.getRecordsList(filter));
+            IEnumerable<ShipmentStateModel> list = mapper.DTOToModelMapper(_app.getRecordsList());
             return View(list);
         }
 

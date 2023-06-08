@@ -6,7 +6,7 @@ namespace PackageDelivery.Repository.Contracts.Interfaces.Parameters
     public interface IAddressRepository
     {
         AddressDbModel getRecordById(int id);
-        IEnumerable<AddressDbModel> getRecordsList(string filter);
+        IEnumerable<AddressDbModel> getRecordsList();
         AddressDbModel createRecord(AddressDbModel record);
         AddressDbModel updateRecord(AddressDbModel record);
         bool deleteRecordById(int id);

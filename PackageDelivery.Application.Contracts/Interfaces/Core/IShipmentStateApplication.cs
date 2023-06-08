@@ -6,7 +6,7 @@ namespace PackageDelivery.Application.Contracts.Interfaces.Core
     public interface IShipmentStateApplication
     {
         ShipmentStateDTO getRecordById(int id);
-        IEnumerable<ShipmentStateDTO> getRecordsList(string filter);
+        IEnumerable<ShipmentStateDTO> getRecordsList();
         ShipmentStateDTO createRecord(ShipmentStateDTO record);
         ShipmentStateDTO updateRecord(ShipmentStateDTO record);
         bool deleteRecordById(int id);

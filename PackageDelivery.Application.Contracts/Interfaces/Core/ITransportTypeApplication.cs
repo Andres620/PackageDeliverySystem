@@ -6,7 +6,7 @@ namespace PackageDelivery.Application.Contracts.Interfaces.Core
     public interface ITransportTypeApplication
     {
         TransportTypeDTO getRecordById(int id);
-        IEnumerable<TransportTypeDTO> getRecordsList(string filter);
+        IEnumerable<TransportTypeDTO> getRecordsList();
         TransportTypeDTO createRecord(TransportTypeDTO record);
         TransportTypeDTO updateRecord(TransportTypeDTO record);
         bool deleteRecordById(int id);

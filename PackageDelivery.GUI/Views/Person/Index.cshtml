@@ -15,9 +15,10 @@
 </style>
 <h2>Persona</h2>
 
-<p>
+<div style="display: flex; justify-content: space-between;" >
     @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-primary" })
-</p>
+    @Html.ActionLink("Generate PDF", "Report", new { type = "PDF" }, new { @class = "btn btn-danger" })
+</div>
 <table class="table">
     <tr>
         <th>
@@ -42,10 +43,10 @@
             @Html.DisplayNameFor(model => model.Email)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Address)
+            @Html.DisplayNameFor(model => model.IdAddress)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.IdentificationType)
+            @Html.DisplayNameFor(model => model.IdDocumentType)
         </th>
         <th></th>
     </tr>
@@ -75,10 +76,10 @@
                 @Html.DisplayFor(modelItem => item.Email)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Address)
+                @Html.DisplayFor(modelItem => item.IdAddress)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.IdentificationType)
+                @Html.DisplayFor(modelItem => item.IdDocumentType)
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-success" }) |

@@ -44,10 +44,10 @@ namespace PackageDelivery.Application.Implementation.Implementation.Parameters
 			return mapper.DbModelToDTOMapper(dbModel);
 		}
 
-		public IEnumerable<DepartmentDTO> getRecordsList(string filter)
+		public IEnumerable<DepartmentDTO> getRecordsList()
 		{
 			DepartmentApplicationMapper mapper = new DepartmentApplicationMapper();
-			IEnumerable<DepartmentDbModel> dbModelList = _repository.getRecordsList(filter);
+			IEnumerable<DepartmentDbModel> dbModelList = _repository.getRecordsList();
 			return mapper.DbModelToDTOMapper(dbModelList);
 		}
 

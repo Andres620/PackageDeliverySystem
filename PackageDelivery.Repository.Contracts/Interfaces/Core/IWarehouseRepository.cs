@@ -6,7 +6,7 @@ namespace PackageDelivery.Repository.Contracts.Interfaces.Core
     public interface IWarehouseRepository
     {
         WarehouseDbModel getRecordById(int id);
-        IEnumerable<WarehouseDbModel> getRecordsList(string filter);
+        IEnumerable<WarehouseDbModel> getRecordsList();
         WarehouseDbModel createRecord(WarehouseDbModel record);
         WarehouseDbModel updateRecord(WarehouseDbModel record);
         bool deleteRecordById(int id);

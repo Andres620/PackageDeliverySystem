@@ -1,5 +1,6 @@
 ﻿using PackageDelivery.Application.Contracts.DTO.CoreDTO;
 using PackageDelivery.Application.Contracts.Interfaces.Core;
+using PackageDelivery.Application.Contracts.Interfaces.Parameters;
 using PackageDelivery.GUI.Helpers;
 using PackageDelivery.GUI.Mappers.Core;
 using PackageDelivery.GUI.Models.Core;
@@ -12,16 +13,18 @@ namespace PackageDelivery.GUI.Controllers.Core
     public class OfficeController : Controller
     {
 		private IOfficeApplication _app;
+		private ITownApplication _townApp;
 
-        public OfficeController(IOfficeApplication app)
+        public OfficeController(IOfficeApplication app, ITownApplication appTown)
         {
             this._app = app;
+			this._townApp = appTown;
         }
 
         // GET: Office
-        public ActionResult Index(string filter = "")
+        public ActionResult Index()
         {
-			var dtoList = _app.getRecordsList(filter);
+			var dtoList = _app.getRecordsList();
 			OfficeGUIMapper mapper = new OfficeGUIMapper();
 			IEnumerable<OfficeModel> model = mapper.DTOToModelMapper(dtoList);
 			return View(model);
@@ -46,6 +49,7 @@ namespace PackageDelivery.GUI.Controllers.Core
         // GET: Office/Create
         public ActionResult Create()
         {
+			this.getTownListToSelect();
             return View();
         }
 
@@ -72,6 +76,7 @@ namespace PackageDelivery.GUI.Controllers.Core
 			}
 			ViewBag.ClassName = ActionMessages.warningClass;
 			ViewBag.Message = ActionMessages.errorMessage;
+			this.getTownListToSelect();
 			return View(officeModel);
 		}
 
@@ -88,6 +93,7 @@ namespace PackageDelivery.GUI.Controllers.Core
 			{
 				return HttpNotFound();
 			}
+			this.getTownListToSelect();
 			return View(officeModel);
 		}
 
@@ -108,6 +114,7 @@ namespace PackageDelivery.GUI.Controllers.Core
 				}
 			}
 			ViewBag.Message = ActionMessages.errorMessage;
+			this.getTownListToSelect();
 			return View(officeModel);
 		}
 
@@ -139,6 +146,11 @@ namespace PackageDelivery.GUI.Controllers.Core
 			}
 			ViewBag.Message = ActionMessages.errorMessage;
 			return View();
+		}
+
+		private void getTownListToSelect()
+		{
+			ViewBag.idTown = new SelectList(_townApp.getRecordsList(), "Id", "name");
 		}
     }
 }

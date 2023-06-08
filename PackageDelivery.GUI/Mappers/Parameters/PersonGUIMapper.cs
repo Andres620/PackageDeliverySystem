@@ -19,8 +19,8 @@ namespace PackageDelivery.GUI.Implementation.Mappers.Parameters
                 IdentificationNumber = input.identificationNumber,
                 Cellphone = input.cellphone,
                 Email = input.email,
-                Address = (int)input.IdAddress,
-                IdentificationType = input.IdDocumentType
+                IdAddress = (int)input.IdAddress,
+                IdDocumentType = input.IdDocumentType
             };
         }
 
@@ -46,8 +46,8 @@ namespace PackageDelivery.GUI.Implementation.Mappers.Parameters
                 identificationNumber = input.IdentificationNumber,
                 cellphone = input.Cellphone,
                 email = input.Email,
-                IdAddress = input.Address,
-                IdDocumentType = input.IdentificationType
+                IdAddress = input.IdAddress,
+                IdDocumentType = input.IdDocumentType
             };
         }
 

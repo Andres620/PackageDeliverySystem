@@ -12,17 +12,19 @@ namespace PackageDelivery.GUI.Controllers.Core
     public class VehicleController : Controller
     {
         private IVehicleApplication _app;
+        private ITransportTypeApplication _appTransportType;
 
-        public VehicleController(IVehicleApplication app)
+        public VehicleController(IVehicleApplication app, ITransportTypeApplication transportType)
         {
             this._app = app;
+            this._appTransportType = transportType;
         }
 
         // GET: Vehicle
-        public ActionResult Index(string filter = "")
+        public ActionResult Index()
         {
             VehicleGUIMapper mapper = new VehicleGUIMapper();
-            IEnumerable<VehicleModel> list = mapper.DTOToModelMapper(_app.getRecordsList(filter));
+            IEnumerable<VehicleModel> list = mapper.DTOToModelMapper(_app.getRecordsList());
             return View(list);
         }
 
@@ -45,6 +47,7 @@ namespace PackageDelivery.GUI.Controllers.Core
         // GET: Vehicle/Create
         public ActionResult Create()
         {
+            this.getTransportTypeListToSelect();
             return View();
         }
 
@@ -71,6 +74,7 @@ namespace PackageDelivery.GUI.Controllers.Core
             }
             ViewBag.ClassName = ActionMessages.warningClass;
             ViewBag.Message = ActionMessages.errorMessage;
+            this.getTransportTypeListToSelect();
             return View(vehicleModel);
         }
 
@@ -87,6 +91,7 @@ namespace PackageDelivery.GUI.Controllers.Core
             {
                 return HttpNotFound();
             }
+            this.getTransportTypeListToSelect();
             return View(vehicleModel);
         }
 
@@ -110,6 +115,7 @@ namespace PackageDelivery.GUI.Controllers.Core
             }
             ViewBag.ClassName = ActionMessages.warningClass;
             ViewBag.Message = ActionMessages.errorMessage;
+            this.getTransportTypeListToSelect();
             return View(vehicleModel);
         }
 
@@ -144,6 +150,11 @@ namespace PackageDelivery.GUI.Controllers.Core
             ViewBag.ClassName = ActionMessages.warningClass;
             ViewBag.Message = ActionMessages.errorMessage;
             return View();
+        }
+
+        private void getTransportTypeListToSelect()
+        {
+            ViewBag.idTransportType = new SelectList(_appTransportType.getRecordsList(), "Id", "name");
         }
     }
 }

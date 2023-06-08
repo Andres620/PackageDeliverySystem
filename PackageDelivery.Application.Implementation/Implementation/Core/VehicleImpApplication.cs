@@ -43,10 +43,10 @@ namespace PackageDelivery.Application.Implementation.Implementation.Core
 			return mapper.DbModelToDTOMapper(dbModel);
 		}
 
-		public IEnumerable<VehicleDTO> getRecordsList(string filter)
+		public IEnumerable<VehicleDTO> getRecordsList()
 		{
 			VehicleApplicationMapper mapper = new VehicleApplicationMapper();
-			IEnumerable<VehicleDbModel> dbModelList = _repository.getRecordsList(filter);
+			IEnumerable<VehicleDbModel> dbModelList = _repository.getRecordsList();
 			return mapper.DbModelToDTOMapper(dbModelList);
 		}
 

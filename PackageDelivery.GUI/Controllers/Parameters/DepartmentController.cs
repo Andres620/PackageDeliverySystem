@@ -1,7 +1,9 @@
 ﻿using PackageDelivery.Application.Contracts.DTO.ParametersDTO;
 using PackageDelivery.Application.Contracts.Interfaces.Parameters;
 using PackageDelivery.GUI.Helpers;
+using PackageDelivery.GUI.Mappers.Core;
 using PackageDelivery.GUI.Mappers.Parameters;
+using PackageDelivery.GUI.Models.Core;
 using PackageDelivery.GUI.Models.Parameters;
 using System.Collections.Generic;
 using System.Net;
@@ -19,10 +21,10 @@ namespace PackageDelivery.GUI.Controllers.Parameters
         }
 
         // GET: Department
-        public ActionResult Index(string filter = "")
+        public ActionResult Index()
         {
             DepartmentGUIMapper mapper = new DepartmentGUIMapper();
-            IEnumerable<DepartmentModel> list = mapper.DTOToModelMapper(_app.getRecordsList(filter));
+            IEnumerable<DepartmentModel> list = mapper.DTOToModelMapper(_app.getRecordsList());
             return View(list);
         }
 
