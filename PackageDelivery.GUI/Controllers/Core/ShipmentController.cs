@@ -4,6 +4,7 @@ using PackageDelivery.Application.Contracts.Interfaces.Parameters;
 using PackageDelivery.GUI.Helpers;
 using PackageDelivery.GUI.Mappers.Core;
 using PackageDelivery.GUI.Models.Core;
+using PackageDelivery.GUI.Reportes;
 using System;
 using System.Collections.Generic;
 using System.Net;
@@ -173,6 +174,18 @@ namespace PackageDelivery.GUI.Controllers.Core
 			ViewBag.Message = ActionMessages.errorMessage;
 			return View();
 		}
+
+        public ActionResult Report(string type)
+        {
+            ShipmentGUIMapper mapper = new ShipmentGUIMapper();
+            var report = General.RenderReports(
+                Server.MapPath("~/Reportes/Envios.rdlc"),
+                new List<string> { "Envios" },
+                new List<object> { mapper.DTOToModelMapper(_app.getRecordsList()) },
+                type
+                );
+            return File(report.Item1, report.Item2);
+        }
 
         private void getPersonListToSelect()
         {

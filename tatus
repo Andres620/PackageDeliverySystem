@@ -1,0 +1,98 @@
+[1mdiff --git a/PackageDelivery.GUI/Web.config b/PackageDelivery.GUI/Web.config[m
+[1mindex c1e3986..cea99e8 100644[m
+[1m--- a/PackageDelivery.GUI/Web.config[m
+[1m+++ b/PackageDelivery.GUI/Web.config[m
+[36m@@ -4,20 +4,12 @@[m
+   https://go.microsoft.com/fwlink/?LinkId=301880[m
+   -->[m
+ <configuration>[m
+[31m-  [m
+   <configSections>[m
+     <!-- For more information on Entity Framework configuration, visit http://go.microsoft.com/fwlink/?LinkID=237468 -->[m
+     <section name="entityFramework" type="System.Data.Entity.Internal.ConfigFile.EntityFrameworkSection, EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" requirePermission="false" />[m
+   </configSections>[m
+   <connectionStrings>[m
+[31m-    <add name="DefaultConnection" connectionString="Data Source=(LocalDb)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\aspnet-PackageDeliverySystem-20230507123337.mdf;Initial Catalog=aspnet-PackageDeliverySystem-20230507123337;Integrated Security=True" providerName="System.Data.SqlClient" />[m
+[31m-    <!--Cristian-->[m
+[31m-    <add name="PackageDeliveryEntities" connectionString="metadata=res://*/DataModel.PackageDeliveryDataModel.csdl|res://*/DataModel.PackageDeliveryDataModel.ssdl|res://*/DataModel.PackageDeliveryDataModel.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=DESKTOP-ASUSROG;initial catalog=Mensajeria;persist security info=True;user id=sa;password=Admin12345;MultipleActiveResultSets=True;App=EntityFramework&quot;" providerName="System.Data.EntityClient" />[m
+[31m-    <!-- Andres -->[m
+[31m-    <!--<add name="PackageDeliveryEntities" connectionString="metadata=res://*/DataModel.PackageDeliveryDataModel.csdl|res://*/DataModel.PackageDeliveryDataModel.ssdl|res://*/DataModel.PackageDeliveryDataModel.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=.\UCALDAS;initial catalog=MENSAJERIA;persist security info=True;user id=sa;password=admin12345;MultipleActiveResultSets=True;App=EntityFramework&quot;" providerName="System.Data.EntityClient" />-->[m
+[31m-    <!-- Lucas [m
+[31m-    <add name="PackageDeliveryEntities" connectionString="metadata=res://*/DataModel.PackageDeliveryDataModel.csdl|res://*/DataModel.PackageDeliveryDataModel.ssdl|res://*/DataModel.PackageDeliveryDataModel.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=U_laptop;initial catalog=Mensajeria;persist security info=True;user id=sa;password=Root2023*;MultipleActiveResultSets=True;App=EntityFramework&quot;" providerName="System.Data.EntityClient" />[m
+[31m-    -->[m
+[32m+[m[32m    <add name="DefaultConnection" connectionString="Data Source=(LocalDb)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\aspnet-PackageDelivery.GUI-20230316110554.mdf;Initial Catalog=aspnet-PackageDelivery.GUI-20230316110554;Integrated Security=True" providerName="System.Data.SqlClient" />[m
+   </connectionStrings>[m
+   <appSettings>[m
+     <add key="webpages:Version" value="3.0.0.0" />[m
+[36m@@ -27,31 +19,20 @@[m
+   </appSettings>[m
+   <system.web>[m
+     <authentication mode="None" />[m
+[31m-    <compilation debug="true" targetFramework="4.7.2">[m
+[31m-      <buildProviders>[m
+[31m-        <add extension=".rdlc" type="Microsoft.Reporting.RdlBuildProvider, Microsoft.ReportViewer.WebForms, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845DCD8080CC91" />[m
+[31m-      </buildProviders>[m
+[31m-      <!--<assemblies>[m
+[31m-        --><!--<add assembly="Microsoft.ReportViewer.Common, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845DCD8080CC91" />--><!--[m
+[31m-        <add assembly="Microsoft.ReportViewer.WebForms, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845DCD8080CC91" />[m
+[31m-      </assemblies>-->[m
+[31m-    </compilation>[m
+[32m+[m[32m    <compilation debug="true" targetFramework="4.7.2" />[m
+     <httpRuntime targetFramework="4.7.2" />[m
+[31m-    <httpHandlers>[m
+[31m-      <add path="Reserved.ReportViewerWebControl.axd" verb="*" type="Microsoft.Reporting.WebForms.HttpHandler, Microsoft.ReportViewer.WebForms, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845DCD8080CC91" validate="false" />[m
+[31m-    </httpHandlers>[m
+   </system.web>[m
+   <system.webServer>[m
+     <modules>[m
+       <remove name="FormsAuthentication" />[m
+     </modules>[m
+[31m-    <validation validateIntegratedModeConfiguration="false" />[m
+[31m-    <handlers>[m
+[31m-      <add name="ReportViewerWebControlHandler" verb="*" path="Reserved.ReportViewerWebControl.axd" preCondition="integratedMode" type="Microsoft.Reporting.WebForms.HttpHandler, Microsoft.ReportViewer.WebForms, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845DCD8080CC91" />[m
+[31m-    </handlers>[m
+   </system.webServer>[m
+   <runtime>[m
+     <assemblyBinding xmlns="urn:schemas-microsoft-com:asm.v1">[m
+[32m+[m			[32m<dependentAssembly>[m
+[32m+[m				[32m<assemblyIdentity name="Microsoft.SqlServer.Types" publicKeyToken="89845DCD8080CC91" culture="neutral" />[m
+[32m+[m				[32m<bindingRedirect oldVersion="0.0.0.0-16.0.0.0" newVersion="16.0.0.0" />[m
+[32m+[m			[32m</dependentAssembly>[m
+       <dependentAssembly>[m
+         <assemblyIdentity name="Microsoft.Owin.Security" publicKeyToken="31bf3856ad364e35" />[m
+         <bindingRedirect oldVersion="0.0.0.0-4.2.0.0" newVersion="4.2.0.0" />[m
+[36m@@ -104,6 +85,26 @@[m
+         <assemblyIdentity name="Microsoft.SqlServer.Types" publicKeyToken="89845dcd8080cc91" culture="neutral" />[m
+         <bindingRedirect oldVersion="0.0.0.0-16.0.0.0" newVersion="16.0.0.0" />[m
+       </dependentAssembly>[m
+[32m+[m[32m      <dependentAssembly>[m
+[32m+[m[32m        <assemblyIdentity name="System.Runtime.CompilerServices.Unsafe" publicKeyToken="b03f5f7f11d50a3a" culture="neutral" />[m
+[32m+[m[32m        <bindingRedirect oldVersion="0.0.0.0-4.0.5.0" newVersion="4.0.5.0" />[m
+[32m+[m[32m      </dependentAssembly>[m
+[32m+[m[32m      <dependentAssembly>[m
+[32m+[m[32m        <assemblyIdentity name="System.Memory" publicKeyToken="cc7b13ffcd2ddd51" culture="neutral" />[m
+[32m+[m[32m        <bindingRedirect oldVersion="0.0.0.0-4.0.1.1" newVersion="4.0.1.1" />[m
+[32m+[m[32m      </dependentAssembly>[m
+[32m+[m[32m      <dependentAssembly>[m
+[32m+[m[32m        <assemblyIdentity name="System.Buffers" publicKeyToken="cc7b13ffcd2ddd51" culture="neutral" />[m
+[32m+[m[32m        <bindingRedirect oldVersion="0.0.0.0-4.0.3.0" newVersion="4.0.3.0" />[m
+[32m+[m[32m      </dependentAssembly>[m
+[32m+[m[32m      <dependentAssembly>[m
+[32m+[m[32m        <assemblyIdentity name="System.Text.Encodings.Web" publicKeyToken="cc7b13ffcd2ddd51" culture="neutral" />[m
+[32m+[m[32m        <bindingRedirect oldVersion="0.0.0.0-4.0.5.1" newVersion="4.0.5.1" />[m
+[32m+[m[32m      </dependentAssembly>[m
+[32m+[m[32m      <dependentAssembly>[m
+[32m+[m[32m        <assemblyIdentity name="System.ValueTuple" publicKeyToken="cc7b13ffcd2ddd51" culture="neutral" />[m
+[32m+[m[32m        <bindingRedirect oldVersion="0.0.0.0-4.0.3.0" newVersion="4.0.3.0" />[m
+[32m+[m[32m      </dependentAssembly>[m
+     </assemblyBinding>[m
+   </runtime>[m
+   <entityFramework>[m
+[36m@@ -117,7 +118,4 @@[m
+       <compiler language="vb;vbs;visualbasic;vbscript" extension=".vb" type="Microsoft.CodeDom.Providers.DotNetCompilerPlatform.VBCodeProvider, Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=2.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" warningLevel="4" compilerOptions="/langversion:default /nowarn:41008 /define:_MYTYPE=\&quot;Web\&quot; /optionInfer+" />[m
+     </compilers>[m
+   </system.codedom>[m
+[31m-	<system.web>[m
+[31m-		<globalization uiCulture="es" culture="es-MX" />[m
+[31m-	</system.web>[m
+ </configuration>[m

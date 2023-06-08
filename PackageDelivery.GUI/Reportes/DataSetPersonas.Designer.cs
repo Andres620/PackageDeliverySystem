@@ -279,9 +279,15 @@ namespace PackageDelivery.GUI.Reportes {
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
         public partial class PersonasDataTable : global::System.Data.TypedTableBase<PersonasRow> {
             
-            private global::System.Data.DataColumn columnId;
+            private global::System.Data.DataColumn columnIdentificationNumber;
             
-            private global::System.Data.DataColumn columnfirstName;
+            private global::System.Data.DataColumn columnFirstName;
+            
+            private global::System.Data.DataColumn columnFirstLastName;
+            
+            private global::System.Data.DataColumn columnEmail;
+            
+            private global::System.Data.DataColumn columnId;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
@@ -318,17 +324,41 @@ namespace PackageDelivery.GUI.Reportes {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public global::System.Data.DataColumn IdColumn {
+            public global::System.Data.DataColumn IdentificationNumberColumn {
                 get {
-                    return this.columnId;
+                    return this.columnIdentificationNumber;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public global::System.Data.DataColumn firstNameColumn {
+            public global::System.Data.DataColumn FirstNameColumn {
                 get {
-                    return this.columnfirstName;
+                    return this.columnFirstName;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn FirstLastNameColumn {
+                get {
+                    return this.columnFirstLastName;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn EmailColumn {
+                get {
+                    return this.columnEmail;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn IdColumn {
+                get {
+                    return this.columnId;
                 }
             }
             
@@ -369,11 +399,14 @@ namespace PackageDelivery.GUI.Reportes {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public PersonasRow AddPersonasRow(string Id, string firstName) {
+            public PersonasRow AddPersonasRow(string IdentificationNumber, string FirstName, string FirstLastName, string Email, string Id) {
                 PersonasRow rowPersonasRow = ((PersonasRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
-                        Id,
-                        firstName};
+                        IdentificationNumber,
+                        FirstName,
+                        FirstLastName,
+                        Email,
+                        Id};
                 rowPersonasRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowPersonasRow);
                 return rowPersonasRow;
@@ -396,17 +429,26 @@ namespace PackageDelivery.GUI.Reportes {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             internal void InitVars() {
+                this.columnIdentificationNumber = base.Columns["IdentificationNumber"];
+                this.columnFirstName = base.Columns["FirstName"];
+                this.columnFirstLastName = base.Columns["FirstLastName"];
+                this.columnEmail = base.Columns["Email"];
                 this.columnId = base.Columns["Id"];
-                this.columnfirstName = base.Columns["firstName"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             private void InitClass() {
+                this.columnIdentificationNumber = new global::System.Data.DataColumn("IdentificationNumber", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnIdentificationNumber);
+                this.columnFirstName = new global::System.Data.DataColumn("FirstName", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnFirstName);
+                this.columnFirstLastName = new global::System.Data.DataColumn("FirstLastName", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnFirstLastName);
+                this.columnEmail = new global::System.Data.DataColumn("Email", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnEmail);
                 this.columnId = new global::System.Data.DataColumn("Id", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnId);
-                this.columnfirstName = new global::System.Data.DataColumn("firstName", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnfirstName);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -549,6 +591,70 @@ namespace PackageDelivery.GUI.Reportes {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string IdentificationNumber {
+                get {
+                    try {
+                        return ((string)(this[this.tablePersonas.IdentificationNumberColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'IdentificationNumber\' de la tabla \'Personas\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablePersonas.IdentificationNumberColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string FirstName {
+                get {
+                    try {
+                        return ((string)(this[this.tablePersonas.FirstNameColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'FirstName\' de la tabla \'Personas\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablePersonas.FirstNameColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string FirstLastName {
+                get {
+                    try {
+                        return ((string)(this[this.tablePersonas.FirstLastNameColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'FirstLastName\' de la tabla \'Personas\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablePersonas.FirstLastNameColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string Email {
+                get {
+                    try {
+                        return ((string)(this[this.tablePersonas.EmailColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'Email\' de la tabla \'Personas\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablePersonas.EmailColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public string Id {
                 get {
                     try {
@@ -565,18 +671,50 @@ namespace PackageDelivery.GUI.Reportes {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public string firstName {
-                get {
-                    try {
-                        return ((string)(this[this.tablePersonas.firstNameColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("El valor de la columna \'firstName\' de la tabla \'Personas\' es DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tablePersonas.firstNameColumn] = value;
-                }
+            public bool IsIdentificationNumberNull() {
+                return this.IsNull(this.tablePersonas.IdentificationNumberColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetIdentificationNumberNull() {
+                this[this.tablePersonas.IdentificationNumberColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsFirstNameNull() {
+                return this.IsNull(this.tablePersonas.FirstNameColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetFirstNameNull() {
+                this[this.tablePersonas.FirstNameColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsFirstLastNameNull() {
+                return this.IsNull(this.tablePersonas.FirstLastNameColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetFirstLastNameNull() {
+                this[this.tablePersonas.FirstLastNameColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsEmailNull() {
+                return this.IsNull(this.tablePersonas.EmailColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetEmailNull() {
+                this[this.tablePersonas.EmailColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -589,18 +727,6 @@ namespace PackageDelivery.GUI.Reportes {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public void SetIdNull() {
                 this[this.tablePersonas.IdColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public bool IsfirstNameNull() {
-                return this.IsNull(this.tablePersonas.firstNameColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public void SetfirstNameNull() {
-                this[this.tablePersonas.firstNameColumn] = global::System.Convert.DBNull;
             }
         }
         
